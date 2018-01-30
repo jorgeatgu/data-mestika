@@ -60,31 +60,27 @@ d3.csv("csv/datos.csv", function(error, data) {
 
     datosJobs = data;
 
+    //Agrupamos las ciudades por la cantidad de veces que se ha publicado una oferta
     var grupoCiudad = d3.nest()
         .key(function(d) { return d.ciudad; })
         .rollup(function(v) { return v.length; })
         .entries(data);
 
+    //Descartamos las ciudades que tienen menos de 10 ofertas publicadas
     var dataFiltered = grupoCiudad.filter(function (d) { return d.value > 10})
 
-    console.log(dataFiltered)
-
-
-    // var grupoCiudad10 = data.filter(function(d) {
-    //     return grupoCiudad > 10;
-    // });
-
-    console.log(grupoCiudad)
-
+    // console.log(dataFiltered)
 
     var puestoTrabajo = d3.nest()
         .key(function(d) { return d.puesto; })
-        .rollup(function(v) { return v.length; })
+        .rollup(function(v) { return d3.sum(v, function(d) { return v.length; }); })
         .entries(data);
 
-    var filtroUX = data.filter(function(d) {
-        return d.puesto.match(/programador/);
+    var filtroUX = puestoTrabajo.filter(function(d) {
+        return d.key.match(/UX/);
     })
+
+    console.log(filtroUX)
 
     datosJobs.forEach(function(d) {
 
