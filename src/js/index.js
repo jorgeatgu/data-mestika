@@ -11,7 +11,7 @@ var element = document.getElementById('data-mestika');
 var positionInfo = element.getBoundingClientRect();
 var widthDocument = positionInfo.width;
 
-var svgRLLUMIN = d3.select('.dm-graph-city"')
+var svgJobs = d3.select('#dm-graph-city')
     .append('svg')
     .attr('class', 'chart-lluvias-recogida')
     .attr("width", widthJobs + margin.left + margin.right)
@@ -29,7 +29,7 @@ var bisectDate = d3.bisector(function(d) {
 }).left;
 
 var x = d3.scaleTime()
-    .domain([1941, 2017])
+    .domain([2008, 2017])
     .range([0, widthJobs]);
 
 var y = d3.scaleLinear()
@@ -49,8 +49,88 @@ var area = d3.area()
     .x(function(d) {
         return x(d.fecha);
     })
-    .y0(height)
+    .y0("200px")
     .y1(function(d) {
         return y(d.precipitacion_anual);
     })
     .curve(d3.curveCardinal.tension(0.6));
+
+
+d3.csv("csv/datos.csv", function(error, data) {
+
+    datosJobs = data;
+
+    var grupoCiudad = d3.nest()
+        .key(function(d) { return d.ciudad; })
+        .rollup(function(v) { return v.length; })
+        .entries(data);
+
+    var dataFiltered = grupoCiudad.filter(function (d) { return d.value > 10})
+
+    console.log(dataFiltered)
+
+
+    // var grupoCiudad10 = data.filter(function(d) {
+    //     return grupoCiudad > 10;
+    // });
+
+    console.log(grupoCiudad)
+
+
+    var puestoTrabajo = d3.nest()
+        .key(function(d) { return d.puesto; })
+        .rollup(function(v) { return v.length; })
+        .entries(data);
+
+    var filtroUX = data.filter(function(d) {
+        return d.puesto.match(/programador/);
+    })
+
+    datosJobs.forEach(function(d) {
+
+
+    });
+
+    // svgJobs.append("g")
+    //     .attr("transform", "translate(0," + heightJobs + ")")
+    //     .call(xAxisJobs);
+
+    // svgJobs.append("g")
+    //     .call(yAxisJobs);
+
+    // var areaDates = layerDates.append("path")
+    //     .data([datosJobs])
+    //     .attr("class", "area")
+    //     .attr("d", area);
+
+    // focus.append("line")
+    //     .attr("class", "x")
+    //     .attr("y1", 0)
+    //     .attr("y2", heightJobs);
+
+    // focus.append("text")
+    //     .attr("class", "y2")
+    //     .attr("dx", 8)
+    //     .attr("dy", "-.3em");
+
+    // focus.append("text")
+    //     .attr("class", "y4")
+    //     .attr("dx", 8)
+    //     .attr("dy", "1em");
+
+    // svgJobs.append("rect")
+    //     .attr("width", widthJobs)
+    //     .attr("height", heightJobs)
+    //     .style("fill", "none")
+    //     .style("pointer-events", "all")
+    //     .on("mouseover", function() {
+    //         focus.style("display", null);
+    //     })
+    //     .on("mouseout", function() {
+    //         focus.style("display", "none")
+    //         tooltipDates.style("opacity", 0)
+    //     })
+    //     .on("mousemove", mousemove);
+
+
+});
