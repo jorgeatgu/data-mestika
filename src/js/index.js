@@ -1,6 +1,9 @@
 //Agrupando puestos de trabajo
 //Lista con funciones para extraer los datos por puestos de trabajo, localidad y lenguaje
 
+
+
+
 d3.csv("csv/datos.csv", function(error, data) {
 
     datosJobs = data;
@@ -17,7 +20,7 @@ d3.csv("csv/datos.csv", function(error, data) {
     console.log(dataFiltered)
 
 
-    //El que publica la oferta tiene libertad para definir el puesto, lo cual da a lugar a unicornios y mezclas sin sentido. Vamos a acotar por puestos de trabajo en concreto
+    //El que publica la oferta tiene libertad para definir el puesto, lo cual da a lugar a unicornios y mezclas sin sentido. Vamos a acotar por puestos de trabajo en concreto. Todos los datos se vuelcan en puestos.csv
     var puestoTrabajo = d3.nest()
         .key(function(d) { return d.puesto.match(/diseñador/gi); })
         .rollup(function(v) { return {
@@ -54,7 +57,14 @@ d3.csv("csv/datos.csv", function(error, data) {
         .entries(data);
 
     var puestoTrabajoUX = d3.nest()
-        .key(function(d) { return d.puesto.match(/ux/gi); })
+        .key(function(d) { return d.puesto.match(/UX/); })
+        .rollup(function(v) { return {
+            coun: v.length
+        }})
+        .entries(data);
+
+    var puestoTrabajoFlash = d3.nest()
+        .key(function(d) { return d.puesto.match(/Flash/gi); })
         .rollup(function(v) { return {
             coun: v.length
         }})
@@ -66,12 +76,28 @@ d3.csv("csv/datos.csv", function(error, data) {
         { "puesto": "desarrolador", "total": puestoTrabajoDesarrolador },
         { "puesto": "front", "total": puestoTrabajoFront },
         { "puesto": "marketing", "total": puestoTrabajoMarketing },
-        { "puesto": "ux", "total": puestoTrabajoUX }
+        { "puesto": "ux", "total": puestoTrabajoUX },
+        { "puesto": "flash", "total": puestoTrabajoFlash }
     ];
 
     console.log(jsonCircles)
 
     console.log(puestoTrabajo)
+
+    //🦄🦄UX🦄🦄 ¿cuando se publico la primera oferta buscando UX y como ha ido creciendo a lo largo del tiempo
+
+    var parseTime = d3.timeParse("%d-%b-%y");
+
+    var unicornios = d3.nest()
+        .key(function(d) { return d.puesto.match(/UX/); })
+        .key(function(d) { return d.fecha; })
+        .key(function(d) { return d.puesto; })
+        .rollup(function(v) { return {
+            coun: v.length
+        }})
+        .entries(data);
+
+        console.log(unicornios)
 
 
 
