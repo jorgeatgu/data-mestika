@@ -69,18 +69,66 @@ d3.csv("csv/datos.csv", function(error, data) {
     //Descartamos las ciudades que tienen menos de 10 ofertas publicadas
     var dataFiltered = grupoCiudad.filter(function (d) { return d.value > 10})
 
-    // console.log(dataFiltered)
+    console.log(dataFiltered)
 
     var puestoTrabajo = d3.nest()
-        .key(function(d) { return d.puesto; })
-        .rollup(function(v) { return d3.sum(v, function(d) { return v.length; }); })
+        .key(function(d) { return d.puesto.match(/diseñador/gi); })
+        .rollup(function(v) { return {
+            coun: v.length
+        }})
         .entries(data);
 
-    var filtroUX = puestoTrabajo.filter(function(d) {
-        return d.key.match(/UX/);
-    })
+    var puestoTrabajoProgramador = d3.nest()
+        .key(function(d) { return d.puesto.match(/programador/gi); })
+        .rollup(function(v) { return {
+            coun: v.length
+        }})
+        .entries(data);
 
-    console.log(filtroUX)
+    var puestoTrabajoDesarrolador = d3.nest()
+        .key(function(d) { return d.puesto.match(/desarrollador/gi); })
+        .rollup(function(v) { return {
+            coun: v.length
+        }})
+        .entries(data);
+
+    var puestoTrabajoFront = d3.nest()
+        .key(function(d) { return d.puesto.match(/front/gi); })
+        .rollup(function(v) { return {
+            coun: v.length
+        }})
+        .entries(data);
+
+    var puestoTrabajoMarketing = d3.nest()
+        .key(function(d) { return d.puesto.match(/marketing/gi); })
+        .rollup(function(v) { return {
+            coun: v.length
+        }})
+        .entries(data);
+
+    var puestoTrabajoUX = d3.nest()
+        .key(function(d) { return d.puesto.match(/ux/gi); })
+        .rollup(function(v) { return {
+            coun: v.length
+        }})
+        .entries(data);
+
+    var jsonCircles = [
+        { "puesto": "diseñador", "total": puestoTrabajo },
+        { "puesto": "programador", "total": puestoTrabajoProgramador },
+        { "puesto": "desarrolador", "total": puestoTrabajoDesarrolador },
+        { "puesto": "front", "total": puestoTrabajoFront },
+        { "puesto": "marketing", "total": puestoTrabajoMarketing },
+        { "puesto": "ux", "total": puestoTrabajoUX }
+    ];
+
+    console.log(jsonCircles)
+
+    // var filtroUX = puestoTrabajo.filter(function(d) {
+    //     return d.key.match(/diseñador/gi);
+    // })
+
+    console.log(puestoTrabajo)
 
     datosJobs.forEach(function(d) {
 
