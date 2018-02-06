@@ -460,12 +460,14 @@ template {
     background-color: #fff;
     max-height: 100vh;
     position: relative;
+    display: flex;
 }
 
 .dm-header-container {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .dm-header-photo {
@@ -480,6 +482,7 @@ template {
     font-weight: 400;
     font-style: normal;
     font-size: 3rem;
+    letter-spacing: 0.06rem;
     color: #a70774;
     margin: 0 0 .5rem;
 }
@@ -488,7 +491,7 @@ template {
     font-family: 'Taviraj', serif;
     font-size: 1rem;
     margin-top: 0;
-    max-width: 16rem;
+    max-width: 20rem;
     line-height: 1.5;
 }
 
