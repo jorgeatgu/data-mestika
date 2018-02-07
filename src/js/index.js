@@ -2,9 +2,7 @@
 //Lista con funciones para extraer los datos por puestos de trabajo, localidad y lenguaje
 
 
-
-
-d3.csv("csv/datos.csv", function(error, data) {
+d3.csv("csv/data-ux.csv", function(error, data) {
 
     datosJobs = data;
 
@@ -17,7 +15,7 @@ d3.csv("csv/datos.csv", function(error, data) {
     //Descartamos las ciudades que tienen menos de 11 ofertas publicadas
     var dataFiltered = grupoCiudad.filter(function (d) { return d.value > 10})
 
-    console.log(dataFiltered)
+    // console.log(dataFiltered)
 
 
     //El que publica la oferta tiene libertad para definir el puesto, lo cual da a lugar a unicornios y mezclas sin sentido. Vamos a acotar por puestos de trabajo en concreto. Todos los datos se vuelcan en puestos.csv
@@ -80,22 +78,21 @@ d3.csv("csv/datos.csv", function(error, data) {
         { "puesto": "flash", "total": puestoTrabajoFlash }
     ];
 
-    console.log(jsonCircles)
+    // console.log(jsonCircles)
 
-    console.log(puestoTrabajo)
+    // console.log(puestoTrabajo)
 
     //🦄🦄UX🦄🦄 ¿cuando se publico la primera oferta buscando UX y como ha ido creciendo a lo largo del tiempo
 
     var parseTime = d3.timeParse("%d-%b-%y");
 
     var unicornios = d3.nest()
-        .key(function(d) { return d.puesto.match(/UX/); })
-        .key(function(d) { return d.fecha; })
         .key(function(d) { return d.puesto; })
+        .key(function(d) { return d.fecha; })
         .rollup(function(v) { return {
             coun: v.length
         }})
-        .entries(data);
+        .object(data);
 
         console.log(unicornios)
 

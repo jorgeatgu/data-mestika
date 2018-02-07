@@ -1,0 +1,1 @@
+d3.csv("csv/data-ux.csv",function(n,e){var t=d3.nest().key(function(n){return n.fecha}).key(function(n){return n.puesto}).rollup(function(n){return{coun:n.length}}).entries(e);console.log(t)});
