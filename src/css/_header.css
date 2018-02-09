@@ -48,3 +48,7 @@
         background-color: #2e6a63;
     }
 }
+
+body {
+    background-color: var(--bgcPrincipal);
+}
