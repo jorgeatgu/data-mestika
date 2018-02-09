@@ -34,7 +34,7 @@
 }
 
 .dm-header-text {
-    font-family: var(--taviraj);
+    font-family: var(--playfair);
     font-size: 1rem;
     margin-top: 0;
     max-width: 20rem;
@@ -49,9 +49,5 @@
         margin-bottom: .5rem;
         background-color: #2e6a63;
     }
-
-body {
-    background-color: var(--bgcPrincipal);
-}
 
 /*# sourceMappingURL=_header.css.map */

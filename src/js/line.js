@@ -1,57 +1,89 @@
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+function jobYear() {
+    //Dias de lluvia
+    var barPadding = 2;
+    var datos = [];
 
-// parse the date / time
-var parseTime = d3.timeParse("%d-%b-%y");
+    var margin = { top: 50, right: 50, bottom: 50, left: 110 },
+        width = 1200 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
-// set the ranges
-var x = d3.scaleTime().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
+    var svg = d3.select('.dm-job-year')
+        .append('svg')
+        .attr('class', 'chart-lluvias-recogida')
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + (margin.left - margin.right) + "," + margin.top + ")");
 
-// define the line
-var valueline = d3.line()
-    .x(function(d) { return x(d.fecha); })
-    .y(function(d) { return y(d.puesto); });
+    var layerDates = svg.append('g');
 
-// append the svg obgect to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+    var bisectDate = d3.bisector(function(d) {
+        return d.fecha;
+    }).left;
 
-// Get the data
-d3.csv("csv/data-ux.csv", function(error, data) {
-  if (error) throw error;
+    var x = d3.scaleTime()
+        .domain([2008, 2017])
+        .range([0, width]);
 
-  // format the data
-  data.forEach(function(d) {
-      d.fecha = +d.fecha;
-      d.puesto = +d.puesto;
-  });
+    var y = d3.scaleLinear()
+        .domain([0, 3500])
+        .range([height, 0]);
+
+    var xAxis = d3.axisBottom(x)
+        .tickFormat(d3.format("d"))
+        .ticks(10);
+
+    var yAxis = d3.axisLeft(y)
+        .tickSize(-width)
+        .tickFormat(d3.format("d"))
+        .ticks(8);
+
+    var area = d3.area()
+        .x(function(d) {
+            return x(d.fecha);
+        })
+        .y0(height)
+        .y1(function(d) {
+            return y(d.total);
+        })
+        .curve(d3.curveBasis);
 
 
-  // Scale the range of the data
-  x.domain(d3.extent(data, function(d) { return d.fecha; }));
-  y.domain([0, d3.max(data, function(d) { return d.puesto; })]);
+    d3.csv("csv/data-ofertas-anyo.csv", function(error, data) {
 
-  // Add the valueline path.
-  svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .attr("d", valueline);
+        datos = data;
 
-  // Add the X Axis
-  svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+        datos.forEach(function(d) {
+            fecha = d.fecha;
+            total = d.total;
+        });
 
-  // Add the Y Axis
-  svg.append("g")
-      .call(d3.axisLeft(y));
+        svg.append("g")
+            .attr("class","x-axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
 
-});
+        svg.append("g")
+            .attr("class","y-axis")
+            .call(yAxis);
+
+        var areaDates = layerDates.append("path")
+            .data([datos])
+            .attr("class", "area")
+            .attr("d", area)
+            .attr("fill","#A8D8C9");
+
+
+        svg.append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "none")
+            .style("pointer-events", "all");
+
+
+    });
+
+}
+
+
+jobYear();

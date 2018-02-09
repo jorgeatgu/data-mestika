@@ -2,7 +2,12 @@
   --fontSystem: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, sans-serif;
   --monospace: 'SFMono-Regular', Consolas, Menlo, Courier, monospace;
   --monoton: 'Monoton', cursive;
-  --taviraj: 'Taviraj', serif;
+  --adamina: 'Adamina', serif;
   --playfair: 'Playfair Display', serif;
   --bgcPrincipal: #D7EAF7;
+  --goldenWes: #E8CA65;
+  --redWes: #D16B55;
+  --blueWes: #A8D8C9;
+  --violetWes: #433446;
+  --greyWes: #B9B0A0;
 }

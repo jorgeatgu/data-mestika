@@ -1,0 +1,15 @@
+.x-axis,
+.y-axis {
+    path {
+        stroke: none;
+    }
+}
+
+.tick {
+    line {
+        fill: none;
+        stroke: var(--violetWes);
+        stroke-width: 1 px;
+        stroke-dasharray: 3px 3px;
+    }
+}

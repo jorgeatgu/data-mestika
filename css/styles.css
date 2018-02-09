@@ -488,7 +488,7 @@ template {
 }
 
 .dm-header-text {
-    font-family: 'Taviraj', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1rem;
     margin-top: 0;
     max-width: 20rem;
@@ -504,8 +504,15 @@ template {
         background-color: #2e6a63;
     }
 
-body {
-    background-color: #D7EAF7;
-}
+.x-axis path, .y-axis path {
+        stroke: none;
+    }
+
+.tick line {
+        fill: none;
+        stroke: #433446;
+        stroke-width: 1 px;
+        stroke-dasharray: 3px 3px;
+    }
 
 /*# sourceMappingURL=styles.css.map */
