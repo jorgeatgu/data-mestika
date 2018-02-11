@@ -39,14 +39,14 @@ function jobYear() {
         .ticks(8);
 
     var area = d3.area()
+        .curve(d3.curveBasis)
         .x(function(d) {
             return x(d.fecha);
         })
         .y0(height)
         .y1(function(d) {
             return y(d.total);
-        })
-        .curve(d3.curveBasis);
+        });
 
 
     d3.csv("csv/data-ofertas-anyo.csv", function(error, data) {
@@ -59,19 +59,19 @@ function jobYear() {
         });
 
         svg.append("g")
-            .attr("class","x-axis")
+            .attr("class", "x-axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 
         svg.append("g")
-            .attr("class","y-axis")
+            .attr("class", "y-axis")
             .call(yAxis);
 
         var areaDates = layerDates.append("path")
             .data([datos])
             .attr("class", "area")
             .attr("d", area)
-            .attr("fill","#A8D8C9");
+            .attr("fill", "#A8D8C9");
 
 
         svg.append("rect")
@@ -81,6 +81,40 @@ function jobYear() {
             .style("pointer-events", "all");
 
 
+        //Add annotations
+          var labels = [{
+            note: {
+                label: "Primera oferta de UX"              },
+            datos: { fecha: "2010", total: 100 }
+          }].map(function (l) {
+              l.note = Object.assign({}, l.note);
+              l.subject = { radius: 6 };
+            return l;
+          });
+
+
+          window.makeAnnotations = d3.annotation().annotations(labels).type(d3.annotationCalloutCircle).accessors({ x: function x(d) {
+              return x(d.fecha);
+            },
+            y: function y(d) {
+              return y(d.total);
+            }
+          }).accessorsInverse({
+            fecha: function fecha(d) {
+              return x.invert(d.x);
+            },
+            close: function close(d) {
+              return y.invert(d.y);
+            }
+          }).on('subjectover', function (annotation) {
+              annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", false);
+            }).on('subjectout', function (annotation) {
+              annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
+            });
+
+            svg.append("g").attr("class", "annotation-test").call(makeAnnotations);
+
+            svg.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
     });
 
 }

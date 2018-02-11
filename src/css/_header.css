@@ -48,3 +48,53 @@
         background-color: #2e6a63;
     }
 }
+
+:root {
+      --accent-color: #E8336D;
+    }
+
+     svg {
+        background-color: white;
+        font-family: 'Lato';
+     }
+
+     path.line {
+        fill: none;
+        stroke: lightgrey;
+        stroke-width: 1px;
+      }
+
+    .annotation path {
+      stroke: var(--accent-color);
+      fill: none;
+    }
+
+    .annotation path.connector-arrow,
+    .title text,
+    .annotation text,
+    .annotation.callout.circle .annotation-subject path {
+      fill: var(--accent-color);
+    }
+    .annotation-note-bg {
+      fill: rgba(255, 255, 255, 0);
+    }
+
+    .annotation-note-title {
+      font-weight: bold;
+    }
+
+    .annotation.xythreshold {
+      cursor: move;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    text.hover {
+      font-size: .7em;
+    }
+
+    text.title {
+      font-size: 1.1em;
+    }

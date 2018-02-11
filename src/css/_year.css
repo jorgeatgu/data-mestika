@@ -9,7 +9,8 @@
     line {
         fill: none;
         stroke: var(--violetWes);
-        stroke-width: 1 px;
+        stroke-width: 1px;
         stroke-dasharray: 3px 3px;
+        opacity: .5;
     }
 }
