@@ -504,25 +504,15 @@ template {
         background-color: #2e6a63;
     }
 
-svg {
-        background-color: white;
-        font-family: 'Lato';
-     }
-
-path.line {
-        fill: none;
-        stroke: lightgrey;
-        stroke-width: 1px;
-      }
-
 .annotation path {
       stroke: #E8336D;
       fill: none;
     }
 
 .annotation path.connector-arrow,
-    .title text, .annotation text,
-    .annotation.callout.circle .annotation-subject path{
+    .title text,
+    .annotation text,
+    .annotation.callout.circle .annotation-subject path {
       fill: #E8336D;
     }
 
@@ -534,20 +524,14 @@ path.line {
       font-weight: bold;
     }
 
-.annotation.xythreshold {
-      cursor: move;
-    }
-
-.hidden {
-      display: none;
-    }
-
-text.hover {
-      font-size: .7em;
+.annotation-note-label {
+        font-family: 'Adamina', serif;
+        font-weight: bold;
     }
 
 text.title {
-      font-size: 1.1em;
+      font-size: 1.1rem;
+      font-family: 'Adamina', serif;
     }
 
 .x-axis path, .y-axis path {
@@ -561,5 +545,10 @@ text.title {
         stroke-dasharray: 3px 3px;
         opacity: .5;
     }
+
+.line {
+    fill: none;
+    stroke: #A8D8C9;
+}
 
 /*# sourceMappingURL=styles.css.map */

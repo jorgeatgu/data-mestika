@@ -10,4 +10,9 @@
         opacity: .5;
     }
 
+.line {
+    fill: none;
+    stroke: #A8D8C9;
+}
+
 /*# sourceMappingURL=_year.css.map */
