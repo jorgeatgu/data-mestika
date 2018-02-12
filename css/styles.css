@@ -505,7 +505,7 @@ template {
     }
 
 .annotation path {
-      stroke: #E8336D;
+      stroke: #740e42;
       fill: none;
     }
 
@@ -513,7 +513,7 @@ template {
     .title text,
     .annotation text,
     .annotation.callout.circle .annotation-subject path {
-      fill: #E8336D;
+      fill: #740e42;
     }
 
 .annotation-note-bg {
@@ -532,6 +532,7 @@ template {
 text.title {
       font-size: 1.1rem;
       font-family: 'Adamina', serif;
+      font-weight: bold;
     }
 
 .x-axis path, .y-axis path {
@@ -543,12 +544,19 @@ text.title {
         stroke: #433446;
         stroke-width: 1px;
         stroke-dasharray: 3px 3px;
-        opacity: .5;
+        opacity: .7;
     }
 
 .line {
     fill: none;
-    stroke: #A8D8C9;
+    stroke: #433446;
+}
+
+.dm-job-year {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #B9B0A0;
 }
 
 /*# sourceMappingURL=styles.css.map */

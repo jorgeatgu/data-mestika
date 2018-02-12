@@ -49,12 +49,8 @@
     }
 }
 
-:root {
-      --accent-color: #E8336D;
-    }
-
     .annotation path {
-      stroke: var(--accent-color);
+      stroke: var(--alternateWes);
       fill: none;
     }
 
@@ -62,7 +58,7 @@
     .title text,
     .annotation text,
     .annotation.callout.circle .annotation-subject path {
-      fill: var(--accent-color);
+      fill: var(--alternateWes);
     }
     .annotation-note-bg {
       fill: rgba(255, 255, 255, 0);
@@ -80,4 +76,5 @@
     text.title {
       font-size: 1.1rem;
       font-family: var(--adamina);
+      font-weight: bold;
     }

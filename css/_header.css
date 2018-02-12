@@ -51,7 +51,7 @@
     }
 
 .annotation path {
-      stroke: #E8336D;
+      stroke: var(--alternateWes);
       fill: none;
     }
 
@@ -59,7 +59,7 @@
     .title text,
     .annotation text,
     .annotation.callout.circle .annotation-subject path {
-      fill: #E8336D;
+      fill: var(--alternateWes);
     }
 
 .annotation-note-bg {
@@ -78,6 +78,7 @@
 text.title {
       font-size: 1.1rem;
       font-family: var(--adamina);
+      font-weight: bold;
     }
 
 /*# sourceMappingURL=_header.css.map */
