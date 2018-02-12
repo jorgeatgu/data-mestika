@@ -8,21 +8,23 @@
 .tick {
     line {
         fill: none;
-        stroke: var(--violetWes);
+        stroke: var(--alternateWes);
         stroke-width: 1px;
         stroke-dasharray: 3px 3px;
         opacity: .7;
+    }
+    text {
+        font-family: var(--roboto);
+        font-size: 13px;
     }
 }
 
 .line {
     fill: none;
-    stroke: var(--violetWes);
+    stroke: var(--alternateWes);
 }
 
 .dm-job-year {
     min-height: 100vh;
-    width: 100%;
-    margin: 0 auto;
     background-color: var(--greyWes);
 }

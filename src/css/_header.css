@@ -49,32 +49,33 @@
     }
 }
 
-    .annotation path {
-      stroke: var(--alternateWes);
-      fill: none;
-    }
+.annotation path {
+    stroke: var(--redWes);
+    fill: none;
+}
 
-    .annotation path.connector-arrow,
-    .title text,
-    .annotation text,
-    .annotation.callout.circle .annotation-subject path {
-      fill: var(--alternateWes);
-    }
-    .annotation-note-bg {
-      fill: rgba(255, 255, 255, 0);
-    }
+.annotation path.connector-arrow,
+.title text,
+.annotation text,
+.annotation.callout.circle .annotation-subject path {
+    fill: var(--redWes);
+    font-family: var(--adamina);
+    font-size: 14px;
+}
 
-    .annotation-note-title {
-      font-weight: bold;
-    }
+.annotation-subject path {
+    fill-opacity: 1;
+}
 
-    .annotation-note-label {
-        font-family: var(--adamina);
-        font-weight: bold;
-    }
+.annotation-note-bg {
+    fill: var(--redWes);
+}
 
-    text.title {
-      font-size: 1.1rem;
-      font-family: var(--adamina);
-      font-weight: bold;
-    }
+.annotation-note-title {
+    font-weight: bold;
+}
+
+.annotation-note-label {
+    font-family: var(--adamina);
+    font-weight: bold;
+}

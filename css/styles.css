@@ -488,7 +488,7 @@ template {
 }
 
 .dm-header-text {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--playfair);
     font-size: 1rem;
     margin-top: 0;
     max-width: 20rem;
@@ -505,35 +505,35 @@ template {
     }
 
 .annotation path {
-      stroke: #740e42;
-      fill: none;
-    }
+    stroke: #9C1B12;
+    fill: none;
+}
 
 .annotation path.connector-arrow,
-    .title text,
-    .annotation text,
-    .annotation.callout.circle .annotation-subject path {
-      fill: #740e42;
-    }
+.title text,
+.annotation text,
+.annotation.callout.circle .annotation-subject path {
+    fill: #9C1B12;
+    font-family: 'Adamina', serif;
+    font-size: 0.88rem;
+}
+
+.annotation-subject path {
+    fill-opacity: 1;
+}
 
 .annotation-note-bg {
-      fill: rgba(255, 255, 255, 0);
-    }
+    fill: #9C1B12;
+}
 
 .annotation-note-title {
-      font-weight: bold;
-    }
+    font-weight: bold;
+}
 
 .annotation-note-label {
-        font-family: 'Adamina', serif;
-        font-weight: bold;
-    }
-
-text.title {
-      font-size: 1.1rem;
-      font-family: 'Adamina', serif;
-      font-weight: bold;
-    }
+    font-family: 'Adamina', serif;
+    font-weight: bold;
+}
 
 .x-axis path, .y-axis path {
         stroke: none;
@@ -541,22 +541,25 @@ text.title {
 
 .tick line {
         fill: none;
-        stroke: #433446;
+        stroke: #2D3065;
         stroke-width: 1px;
         stroke-dasharray: 3px 3px;
         opacity: .7;
     }
 
+.tick text {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 0.81rem;
+    }
+
 .line {
     fill: none;
-    stroke: #433446;
+    stroke: #2D3065;
 }
 
 .dm-job-year {
     min-height: 100vh;
-    width: 100%;
-    margin: 0 auto;
-    background-color: #B9B0A0;
+    background-color: #DDE8E0;
 }
 
 /*# sourceMappingURL=styles.css.map */
