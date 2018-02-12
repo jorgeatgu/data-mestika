@@ -488,7 +488,7 @@ template {
 }
 
 .dm-header-text {
-    font-family: 'Taviraj', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1rem;
     margin-top: 0;
     max-width: 20rem;
@@ -503,5 +503,60 @@ template {
         margin-bottom: .5rem;
         background-color: #2e6a63;
     }
+
+.annotation path {
+      stroke: #740e42;
+      fill: none;
+    }
+
+.annotation path.connector-arrow,
+    .title text,
+    .annotation text,
+    .annotation.callout.circle .annotation-subject path {
+      fill: #740e42;
+    }
+
+.annotation-note-bg {
+      fill: rgba(255, 255, 255, 0);
+    }
+
+.annotation-note-title {
+      font-weight: bold;
+    }
+
+.annotation-note-label {
+        font-family: 'Adamina', serif;
+        font-weight: bold;
+    }
+
+text.title {
+      font-size: 1.1rem;
+      font-family: 'Adamina', serif;
+      font-weight: bold;
+    }
+
+.x-axis path, .y-axis path {
+        stroke: none;
+    }
+
+.tick line {
+        fill: none;
+        stroke: #433446;
+        stroke-width: 1px;
+        stroke-dasharray: 3px 3px;
+        opacity: .7;
+    }
+
+.line {
+    fill: none;
+    stroke: #433446;
+}
+
+.dm-job-year {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #B9B0A0;
+}
 
 /*# sourceMappingURL=styles.css.map */

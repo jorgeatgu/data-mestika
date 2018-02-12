@@ -34,7 +34,7 @@
 }
 
 .dm-header-text {
-    font-family: var(--taviraj);
+    font-family: var(--playfair);
     font-size: 1rem;
     margin-top: 0;
     max-width: 20rem;
@@ -48,6 +48,37 @@
         display: block;
         margin-bottom: .5rem;
         background-color: #2e6a63;
+    }
+
+.annotation path {
+      stroke: var(--alternateWes);
+      fill: none;
+    }
+
+.annotation path.connector-arrow,
+    .title text,
+    .annotation text,
+    .annotation.callout.circle .annotation-subject path {
+      fill: var(--alternateWes);
+    }
+
+.annotation-note-bg {
+      fill: rgba(255, 255, 255, 0);
+    }
+
+.annotation-note-title {
+      font-weight: bold;
+    }
+
+.annotation-note-label {
+        font-family: var(--adamina);
+        font-weight: bold;
+    }
+
+text.title {
+      font-size: 1.1rem;
+      font-family: var(--adamina);
+      font-weight: bold;
     }
 
 /*# sourceMappingURL=_header.css.map */
