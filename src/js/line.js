@@ -2,7 +2,7 @@ function jobYear() {
 
     var barPadding = 2;
 
-    var margin = { top: 50, right: 110, bottom: 50, left: 110 },
+    var margin = { top: 48, right: 112, bottom: 48, left: 112 },
         width = 1200 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 

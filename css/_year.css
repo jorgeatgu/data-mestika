@@ -1,28 +1,21 @@
-.x-axis path, .y-axis path {
-        stroke: none;
-    }
-
-.tick line {
-        fill: none;
-        stroke: var(--alternateWes);
-        stroke-width: 1px;
-        stroke-dasharray: 3px 3px;
-        opacity: .7;
-    }
-
-.tick text {
-        font-family: var(--roboto);
-        font-size: 0.81rem;
-    }
-
-.line {
-    fill: none;
-    stroke: var(--alternateWes);
-}
-
 .dm-job-year {
     min-height: 100vh;
     background-color: var(--greyWes);
 }
+    .dm-job-year .tick line {
+            fill: none;
+            stroke: var(--alternateWes);
+            stroke-width: 1px;
+            stroke-dasharray: 3px 3px;
+            opacity: .7;
+        }
+    .dm-job-year .tick text {
+            font-family: var(--roboto);
+            font-size: 0.81rem;
+        }
+    .dm-job-year .line {
+        fill: none;
+        stroke: var(--alternateWes);
+    }
 
 /*# sourceMappingURL=_year.css.map */

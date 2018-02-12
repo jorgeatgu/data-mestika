@@ -6,5 +6,6 @@
 
 @import '_reset';
 @import '_variables';
+@import '_comun';
 @import '_header';
 @import '_year';
