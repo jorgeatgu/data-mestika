@@ -1,28 +1,28 @@
-.x-axis,
-.y-axis {
-    path {
-        stroke: none;
-    }
-}
-
-.tick {
-    line {
-        fill: none;
-        stroke: var(--violetWes);
-        stroke-width: 1px;
-        stroke-dasharray: 3px 3px;
-        opacity: .7;
-    }
-}
-
-.line {
-    fill: none;
-    stroke: var(--violetWes);
-}
-
 .dm-job-year {
-    min-height: 100vh;
-    width: 100%;
-    margin: 0 auto;
     background-color: var(--greyWes);
+    font-size: 0;
+    padding: 4rem 0;
+    .tick {
+        line {
+            fill: none;
+            stroke: var(--alternateWes);
+            stroke-width: 1px;
+            stroke-dasharray: 3px 3px;
+            opacity: .7;
+        }
+        text {
+            font-family: var(--roboto);
+            font-size: 13px;
+        }
+    }
+    .annotation-subject {
+        display: none;
+    }
+    .line {
+        fill: none;
+        stroke: var(--alternateWes);
+    }
+    .circles {
+        fill: var(--alternateWes);
+    }
 }

@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+    var gulp = require('gulp');
 postcss = require('gulp-postcss');
 autoprefixer = require('gulp-autoprefixer');
 sourcemaps = require('gulp-sourcemaps');
@@ -127,7 +127,7 @@ gulp.task('css', function() {
         }),
         autoprefixer
     ];
-    return gulp.src(watch.css)
+    return gulp.src('./src/css/styles.css')
 
     .pipe(sourcemaps.init())
         .pipe(postcss(processors))

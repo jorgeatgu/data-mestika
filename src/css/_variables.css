@@ -3,12 +3,14 @@
   --monospace: 'SFMono-Regular', Consolas, Menlo, Courier, monospace;
   --monoton: 'Monoton', cursive;
   --adamina: 'Adamina', serif;
-  --playfair: 'Playfair Display', serif;
-  --bgcPrincipal: #D7EAF7;
-  --goldenWes: #E8CA65;
-  --redWes: #D16B55;
-  --blueWes: #A8D8C9;
-  --violetWes: #433446;
-  --greyWes: #B9B0A0;
-  --alternateWes: #740e42;
+  --roboto: 'Roboto Condensed', sans-serif;
+  --bgcPrincipal: #D1E6F3;
+  --goldenWes: #F8DFAB;
+  --redWes: #9C1B12;
+  --blueWes: #759CA7;
+  --violetWes: #CEBAC6;
+  --greyWes: #DDE8E0;
+  --alternateWes: #2D3065;
+  --white: #fff;
+  --black: #111;
 }
