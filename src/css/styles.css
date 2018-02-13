@@ -4,8 +4,8 @@
   Estructura básica para iniciar cualquier proyecto con postCSS
 */
 
-@import '_reset';
-@import '_variables';
-@import '_comun';
-@import '_header';
-@import '_year';
+@import '_reset.css';
+@import '_variables.css';
+@import '_comun.css';
+@import '_header.css';
+@import '_year.css';

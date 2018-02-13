@@ -3,7 +3,7 @@ function jobYear() {
     var barPadding = 2;
 
     var margin = { top: 48, right: 112, bottom: 48, left: 112 },
-        width = 1200 - margin.left - margin.right,
+        width = 1000 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select('.dm-job-year')
@@ -47,16 +47,16 @@ function jobYear() {
             .attr("stroke-width", "2")
             .attr("fill", "none");
 
-            var totalLength = path.node().getTotalLength();
+        var totalLength = path.node().getTotalLength();
 
 
         path
-        .attr("stroke-dasharray", totalLength + " " + totalLength)
-        .attr("stroke-dashoffset", totalLength)
-        .transition()
-        .duration(1500)
-        .ease(d3.easePolyInOut)
-        .attr("stroke-dashoffset", 0);
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(1500)
+            .ease(d3.easePolyInOut)
+            .attr("stroke-dashoffset", 0);
 
 
         svg.append("g")
@@ -68,7 +68,15 @@ function jobYear() {
             .attr("class", "y-axis")
             .call(yAxis);
 
-        setTimeout(function(){
+        svg.selectAll("dot")
+            .data(data)
+            .enter().append("circle")
+            .attr("cx", function(d) { return x(d.fecha); })
+            .attr("cy", function(d) { return y(d.total); })
+            .attr("class", "circles")
+            .attr("r", 3);
+
+        setTimeout(function() {
             //Add annotations
             var labels = [{
                 note: {

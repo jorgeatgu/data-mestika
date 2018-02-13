@@ -11,7 +11,7 @@
 
 .dm-header-container {
     position: absolute;
-    top: 30%;
+    top: 10rem;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -29,24 +29,16 @@
     font-style: normal;
     font-size: 3rem;
     letter-spacing: 1px;
-    color: #a70774;
+    color: var(--redWes);
     margin: 0 0 .5rem;
 }
 
 .dm-header-text {
-    font-family: var(--playfair);
+    font-family: var(--adamina);
     font-size: 1rem;
+    color: var(--alternateWes);
     margin-top: 0;
-    max-width: 20rem;
-    line-height: 1.5;
-    &:before {
-        content: '';
-        width: 5rem;
-        height: 1px;
-        display: block;
-        margin-bottom: .5rem;
-        background-color: #2e6a63;
-    }
+    max-width: 28rem;
 }
 
 .annotation path {
@@ -59,7 +51,7 @@
 .annotation text,
 .annotation.callout.circle .annotation-subject path {
     fill: var(--redWes);
-    font-family: var(--adamina);
+    font-family: var(--roboto);
     font-size: 14px;
 }
 

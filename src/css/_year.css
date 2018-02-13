@@ -1,6 +1,7 @@
 .dm-job-year {
-    min-height: 100vh;
     background-color: var(--greyWes);
+    font-size: 0;
+    padding: 4rem 0;
     .tick {
         line {
             fill: none;
@@ -14,9 +15,14 @@
             font-size: 13px;
         }
     }
-
+    .annotation-subject {
+        display: none;
+    }
     .line {
         fill: none;
         stroke: var(--alternateWes);
+    }
+    .circles {
+        fill: var(--alternateWes);
     }
 }
