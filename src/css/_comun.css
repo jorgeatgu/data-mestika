@@ -16,7 +16,11 @@
     margin: 0;
     background-color: var(--alternateWes);
     color: var(--goldenWes);
-    padding: 2rem 7rem;
+    padding: 1rem 2rem;
+    display: inline-block;
+    position: absolute;
+    left: 7rem;
+    top: -2rem;
     &:before {
         content: '';
         display: inline-block;

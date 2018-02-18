@@ -44,7 +44,7 @@ function jobYear() {
             .data([data])
             .attr("class", "line")
             .attr("d", valueline)
-            .attr("stroke-width", "2")
+            .attr("stroke-width", "1.5")
             .attr("fill", "none");
 
         var totalLength = path.node().getTotalLength();
@@ -77,6 +77,9 @@ function jobYear() {
             .attr("r", 3);
 
         setTimeout(function() {
+
+            svg.selectAll("dot")
+            .attr("opacity","1");
             //Add annotations
             var labels = [{
                 note: {
@@ -85,8 +88,8 @@ function jobYear() {
                     wrap: 430,
                     align: "middle"
                 },
-                y: 320,
-                x: 120,
+                y: 335,
+                x: 85,
                 dy: -240,
                 dx: 0,
             }].map(function(l) {

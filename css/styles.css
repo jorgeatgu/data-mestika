@@ -467,7 +467,11 @@ template {
     margin: 0;
     background-color: #2D3065;
     color: #F8DFAB;
-    padding: 2rem 7rem;
+    padding: 1rem 2rem;
+    display: inline-block;
+    position: absolute;
+    left: 7rem;
+    top: -2rem;
 }
 
 .dm-title:before {
@@ -575,6 +579,7 @@ template {
     background-color: #DDE8E0;
     font-size: 0;
     padding: 4rem 0;
+    position: relative;
 }
 
 .dm-job-year .tick line {
