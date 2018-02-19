@@ -79,7 +79,7 @@ function jobYear() {
         setTimeout(function() {
 
             svg.selectAll("dot")
-            .attr("opacity","1");
+                .attr("opacity", "1");
             //Add annotations
             var labels = [{
                 note: {
@@ -129,4 +129,74 @@ function jobYear() {
 }
 
 
+function centralizame() {
+    var margin = { top: 50, right: 50, bottom: 50, left: 250 },
+        width = 650 - margin.left - margin.right,
+        height = 700 - margin.top - margin.bottom;
+
+    var svg = d3.select('.dm-job-city-graph')
+        .append('svg')
+        .attr('class', 'dm-job-city-chart')
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + (margin.left - margin.right) + "," + margin.top + ")");
+
+    var x = d3.scaleLinear()
+        .range([0, width]);
+
+    var y = d3.scaleBand()
+        .range([height, 0]);
+
+    var xAxis = d3.axisBottom(x)
+    .ticks(10);
+
+    var yAxis = d3.axisLeft(y);
+
+    d3.csv('csv/data-ciudades-porcentaje.csv', function(err, data) {
+
+        data.forEach(function(d) {
+            d.ciudad = d.ciudad;
+            d.cantidad = +d.cantidad;
+        });
+
+        x.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
+
+        console.log(x)
+
+        y.domain(data.map(function(d) { return d.ciudad; }))
+            .paddingInner(0.1)
+            .paddingOuter(0.5);
+
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis)
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", "translate(" + width + ",0)")
+            .attr("y", -5)
+            .style("text-anchor", "end")
+            .text("Frequency");
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+        svg.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", 0)
+            .attr("height", y.bandwidth())
+            .attr("y", function(d) { return y(d.ciudad); })
+            .attr("width", function(d) { return x(d.cantidad); });
+
+    });
+
+}
+
+
 jobYear();
+centralizame();
