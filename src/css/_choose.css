@@ -1,0 +1,28 @@
+.dm-job-city {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.dm-job-city-photo {
+    max-width: 40vw;
+    position: relative;
+    img {
+        height: 100vh;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+.dm-job-city-text {
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
+    background-color: rgba(0, 0, 0, .6);
+    padding: 2rem 3rem;
+}
+
+.dm-job-city-text-title {
+    font-size: 1.5rem;
+    font-family: var(--roboto);
+    color: var(--white);
+}
