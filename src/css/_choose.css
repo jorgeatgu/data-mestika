@@ -5,34 +5,32 @@
     background-color: var(--goldenWesLow);
 }
 
-.dm-job-city-photo {
-    max-width: 40%;
-    position: relative;
+.dm-job-city-header {
+    width: 100%;
     display: inline-block;
-    img {
-        height: 100vh;
-        width: 100%;
-        object-fit: contain;
-    }
+    background-color: var(--alternateWes);
+    vertical-align: top;
+    position: relative;
 }
 
 .dm-job-city-graph {
-    width: 60%;
+    width: 100%;
     display: inline-block;
 }
 
 .dm-job-city-text {
-    position: absolute;
-    top: 2rem;
-    left: 10%;
     padding: 2rem;
-    max-width: 80%;
+    max-width: 90%;
 }
 
 .dm-job-city-text-title {
     font-size: 1.5rem;
     font-family: var(--roboto);
     color: var(--alternateWes);
+    display: inline-block;
+    background-color: var(--goldenWes);
+    padding: 1rem 2rem;
+    vertical-align: top;
     &:before {
         content: '';
         display: inline-block;
@@ -47,10 +45,33 @@
 .dm-job-city-text-paragraph {
     font-size: 1rem;
     font-family: var(--adamina);
-    color: var(--black);
-    max-width: 80%;
+    color: var(--goldenWes);
+    display: inline-block;
+    max-width: 20rem;
+    margin-top: 6rem;
+    margin-left: 1rem;
+    &:before {
+        content: '';
+        width: 12rem;
+        background-color: var(--goldenWes);
+        height: 1px;
+        display: block;
+        margin-bottom: 1rem;
+    }
 }
+
+.dm-job-icon {
+    width: 7rem;
+    height: 7rem;
+    display: inline-block;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+
 /* stylelint-disable */
+
 .dm-job-city-chart {
     .xAxis {
         .tick {
@@ -79,4 +100,6 @@
         fill: var(--alternateWes);
     }
 }
+
+
 /* stylelint-enable */

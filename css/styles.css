@@ -627,35 +627,32 @@ p {
     background-color: rgba(248, 223, 171, .6);
 }
 
-.dm-job-city-photo {
-    max-width: 40%;
-    position: relative;
+.dm-job-city-header {
+    width: 100%;
     display: inline-block;
+    background-color: #2D3065;
+    vertical-align: top;
+    position: relative;
 }
 
-.dm-job-city-photo img {
-        height: 100vh;
-        width: 100%;
-        object-fit: contain;
-    }
-
 .dm-job-city-graph {
-    width: 60%;
+    width: 100%;
     display: inline-block;
 }
 
 .dm-job-city-text {
-    position: absolute;
-    top: 2rem;
-    left: 10%;
     padding: 2rem;
-    max-width: 80%;
+    max-width: 90%;
 }
 
 .dm-job-city-text-title {
     font-size: 1.5rem;
     font-family: 'Roboto Condensed', sans-serif;
     color: #2D3065;
+    display: inline-block;
+    background-color: #F8DFAB;
+    padding: 1rem 2rem;
+    vertical-align: top;
 }
 
 .dm-job-city-text-title:before {
@@ -671,8 +668,29 @@ p {
 .dm-job-city-text-paragraph {
     font-size: 1rem;
     font-family: 'Adamina', serif;
-    color: #111;
-    max-width: 80%;
+    color: #F8DFAB;
+    display: inline-block;
+    max-width: 20rem;
+    margin-top: 6rem;
+    margin-left: 1rem;
+}
+
+.dm-job-city-text-paragraph:before {
+        content: '';
+        width: 12rem;
+        background-color: #F8DFAB;
+        height: 1px;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+.dm-job-icon {
+    width: 7rem;
+    height: 7rem;
+    display: inline-block;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
 }
 
 /* stylelint-disable */

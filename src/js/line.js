@@ -129,8 +129,8 @@ function jobYear() {
 
 function centralizame() {
     var margin = { top: 50, right: 50, bottom: 50, left: 250 },
-        width = 750 - margin.left - margin.right,
-        height = 700 - margin.top - margin.bottom;
+        width = 1250 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
 
     var svg = d3.select('.dm-job-city-graph')
         .append('svg')
