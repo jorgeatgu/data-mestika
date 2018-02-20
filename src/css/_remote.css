@@ -1,0 +1,51 @@
+.dm-job-remote {
+    width: 100%;
+    background-color: var(--redWes);
+    min-height: 100vh;
+}
+
+.dm-job-remote-title {
+    font-size: 1.5rem;
+    font-family: var(--roboto);
+    color: var(--goldenWes);
+    display: inline-block;
+    padding: 1rem 2rem;
+}
+
+/* stylelint-disable */
+.dm-job-remote-chart {
+    .line {
+        stroke: var(--black);
+    }
+    .circles {
+        fill: var(--goldenWes);
+    }
+    .xAxis,
+    .yAxis {
+        .tick {
+            line {
+                fill: none;
+                stroke: var(--black);
+                stroke-width: 1px;
+                stroke-dasharray: 3px 3px;
+                opacity: .7;
+            }
+        }
+    }
+    .xAxis,
+    .yAxis {
+        .tick {
+            text {
+                font-family: var(--roboto);
+                font-size: 13px;
+            }
+        }
+        .domain {
+            stroke: none;
+        }
+    }
+    .bar {
+        fill: var(--alternateWes);
+    }
+}
+/* stylelint-enable */

@@ -204,6 +204,88 @@ function centralizame() {
 
 }
 
+function remote() {
+
+    var barPadding = 2;
+
+    var margin = { top: 48, right: 112, bottom: 48, left: 112 },
+        width = 1200 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+    var svg = d3.select('.dm-job-remote')
+        .append('svg')
+        .attr('class', 'dm-job-remote-chart')
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var parseTime = d3.timeParse("%d-%b-%y");
+
+    var x = d3.scaleTime().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
+
+    var valueline = d3.line()
+        .x(function(d) { return x(d.fecha); })
+        .y(function(d) { return y(d.total); });
+
+    var yAxis = d3.axisLeft(y)
+        .tickSize(-width)
+        .tickFormat(d3.format("d"))
+        .ticks(10);
+
+    d3.csv("csv/data-remoto-mes.csv", function(error, data) {
+        if (error) throw error;
+
+        data.forEach(function(d) {
+            d.fecha = parseTime(d.fecha);
+            d.total = +d.total;
+        });
+
+        x.domain(d3.extent(data, function(d) { return d.fecha; }));
+        y.domain([0, d3.max(data, function(d) { return d.total; })]);
+
+        var path = svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline)
+            .attr("stroke-width", "1.5")
+            .attr("fill", "none");
+
+        var totalLength = path.node().getTotalLength();
+
+
+        path
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(2500)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0);
+
+
+        svg.append("g")
+            .attr("class", "xAxis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        svg.append("g")
+            .attr("class", "yAxis")
+            .call(yAxis);
+
+        svg.selectAll("dot")
+            .data(data)
+            .enter().append("circle")
+            .attr("cx", function(d) { return x(d.fecha); })
+            .attr("cy", function(d) { return y(d.total); })
+            .attr("class", "circles")
+            .attr("r", 3);
+
+    });
+
+}
+
 
 jobYear();
 centralizame();
+remote();
