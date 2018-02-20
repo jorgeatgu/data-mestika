@@ -2,6 +2,7 @@
     width: 100%;
     min-height: 100vh;
     font-size: 0;
+    background-color: var(--goldenWesLow);
 }
 
 .dm-job-city-photo {
@@ -22,7 +23,7 @@
 
 .dm-job-city-text {
     position: absolute;
-    top: 1vh;
+    top: 2rem;
     left: 10%;
     padding: 2rem;
     max-width: 80%;
@@ -46,6 +47,36 @@
 .dm-job-city-text-paragraph {
     font-size: 1rem;
     font-family: var(--adamina);
-    color: var(--white);
+    color: var(--black);
     max-width: 80%;
 }
+/* stylelint-disable */
+.dm-job-city-chart {
+    .xAxis {
+        .tick {
+            line {
+                fill: none;
+                stroke: var(--alternateWes);
+                stroke-width: 1px;
+                stroke-dasharray: 3px 3px;
+                opacity: .7;
+            }
+        }
+    }
+    .xAxis,
+    .yAxis {
+        .tick {
+            text {
+                font-family: var(--roboto);
+                font-size: 13px;
+            }
+        }
+        .domain {
+            stroke: none;
+        }
+    }
+    .bar {
+        fill: var(--alternateWes);
+    }
+}
+/* stylelint-enable */

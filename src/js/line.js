@@ -3,7 +3,7 @@ function jobYear() {
     var barPadding = 2;
 
     var margin = { top: 48, right: 112, bottom: 48, left: 112 },
-        width = 1000 - margin.left - margin.right,
+        width = 1200 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select('.dm-job-year')
@@ -20,7 +20,6 @@ function jobYear() {
     var y = d3.scaleLinear().range([height, 0]);
 
     var valueline = d3.line()
-        .curve(d3.curveCardinal)
         .x(function(d) { return x(d.fecha); })
         .y(function(d) { return y(d.total); });
 
@@ -54,8 +53,8 @@ function jobYear() {
             .attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
             .transition()
-            .duration(1500)
-            .ease(d3.easePolyInOut)
+            .duration(2500)
+            .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0);
 
 
@@ -128,10 +127,9 @@ function jobYear() {
 
 }
 
-
 function centralizame() {
     var margin = { top: 50, right: 50, bottom: 50, left: 250 },
-        width = 650 - margin.left - margin.right,
+        width = 750 - margin.left - margin.right,
         height = 700 - margin.top - margin.bottom;
 
     var svg = d3.select('.dm-job-city-graph')
@@ -148,8 +146,13 @@ function centralizame() {
     var y = d3.scaleBand()
         .range([height, 0]);
 
+    var formatPercent = d3.format(".0%");
+    var formatChange = function(x) { return formatPercent(x / 100); };
+
     var xAxis = d3.axisBottom(x)
-    .ticks(10);
+        .tickSize(-height)
+        .tickFormat(formatChange)
+        .ticks(10);
 
     var yAxis = d3.axisLeft(y);
 
@@ -160,17 +163,19 @@ function centralizame() {
             d.cantidad = +d.cantidad;
         });
 
+        data.sort(function(a, b) {
+            return b.cantidad - a.cantidad;
+        });
+
         x.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
 
-        console.log(x)
-
         y.domain(data.map(function(d) { return d.ciudad; }))
-            .paddingInner(0.1)
+            .paddingInner(0.2)
             .paddingOuter(0.5);
 
 
         svg.append("g")
-            .attr("class", "x axis")
+            .attr("class", "xAxis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
             .append("text")
@@ -181,7 +186,7 @@ function centralizame() {
             .text("Frequency");
 
         svg.append("g")
-            .attr("class", "y axis")
+            .attr("class", "yAxis")
             .call(yAxis);
 
         svg.selectAll(".bar")
@@ -191,8 +196,10 @@ function centralizame() {
             .attr("x", 0)
             .attr("height", y.bandwidth())
             .attr("y", function(d) { return y(d.ciudad); })
+            .transition()
+            .duration(1500)
+            .ease(d3.easePolyInOut)
             .attr("width", function(d) { return x(d.cantidad); });
-
     });
 
 }

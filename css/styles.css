@@ -457,6 +457,18 @@ template {
     line-height: 1.5;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
 .x-axis path, .y-axis path {
         stroke: none;
     }
@@ -612,6 +624,7 @@ template {
     width: 100%;
     min-height: 100vh;
     font-size: 0;
+    background-color: rgba(248, 223, 171, .6);
 }
 
 .dm-job-city-photo {
@@ -633,7 +646,7 @@ template {
 
 .dm-job-city-text {
     position: absolute;
-    top: 1vh;
+    top: 2rem;
     left: 10%;
     padding: 2rem;
     max-width: 80%;
@@ -658,8 +671,33 @@ template {
 .dm-job-city-text-paragraph {
     font-size: 1rem;
     font-family: 'Adamina', serif;
-    color: #fff;
+    color: #111;
     max-width: 80%;
 }
+
+/* stylelint-disable */
+
+.dm-job-city-chart .xAxis .tick line {
+                fill: none;
+                stroke: #2D3065;
+                stroke-width: 1px;
+                stroke-dasharray: 3px 3px;
+                opacity: .7;
+            }
+
+.dm-job-city-chart .xAxis .tick text, .dm-job-city-chart .yAxis .tick text {
+                font-family: 'Roboto Condensed', sans-serif;
+                font-size: 0.81rem;
+            }
+
+.dm-job-city-chart .xAxis .domain, .dm-job-city-chart .yAxis .domain {
+            stroke: none;
+        }
+
+.dm-job-city-chart .bar {
+        fill: #2D3065;
+    }
+
+/* stylelint-enable */
 
 /*# sourceMappingURL=styles.css.map */
