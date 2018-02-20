@@ -3,6 +3,18 @@
     line-height: 1.5;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
 .x-axis,
 .y-axis {
     path {
@@ -16,7 +28,11 @@
     margin: 0;
     background-color: var(--alternateWes);
     color: var(--goldenWes);
-    padding: 2rem 7rem;
+    padding: 1rem 2rem;
+    display: inline-block;
+    position: absolute;
+    left: 7rem;
+    top: -2rem;
     &:before {
         content: '';
         display: inline-block;
