@@ -2,13 +2,13 @@ function jobYear() {
 
     var barPadding = 2;
 
-    var margin = { top: 48, right: 112, bottom: 48, left: 112 },
-        width = 1200 - margin.left - margin.right,
+    var margin = { top: 48, right: 48, bottom: 48, left: 48 },
+        width = 850 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    var svg = d3.select('.dm-job-year')
+    var svg = d3.select('.dm-job-year-graph')
         .append('svg')
-        .attr('class', 'chart-lluvias-recogida')
+        .attr('class', 'dm-job-year-graph')
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -128,8 +128,8 @@ function jobYear() {
 }
 
 function centralizame() {
-    var margin = { top: 50, right: 50, bottom: 50, left: 250 },
-        width = 1250 - margin.left - margin.right,
+    var margin = { top: 50, right: 50, bottom: 50, left: 200 },
+        width = 950 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
     var svg = d3.select('.dm-job-city-graph')
@@ -164,7 +164,7 @@ function centralizame() {
         });
 
         data.sort(function(a, b) {
-            return b.cantidad - a.cantidad;
+            return a.cantidad - b.cantidad;
         });
 
         x.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
@@ -289,3 +289,55 @@ function remote() {
 jobYear();
 centralizame();
 remote();
+
+function multiple() {
+
+    var margin = { top: 48, right: 48, bottom: 48, left: 48 },
+        width = 850 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+    var x = d3.scaleTime().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
+
+    var priceline = d3.line()
+        .x(function(d) { return x(d.fecha); })
+        .y(function(d) { return y(d.cantidad); });
+
+    var svg = d3.select("body")
+        .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+            .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+
+    // Get the data
+    d3.csv("csv/data-line-puestos.csv", function(error, data) {
+        data.forEach(function(d) {
+            d.cantidad = +d.cantidad;
+        });
+
+        x.domain(d3.extent(data, function(d) { return d.fecha; }));
+        y.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
+
+        var dataComb = d3.nest()
+            .key(function(d) {return d.puesto;})
+            .entries(data);
+
+        dataComb.forEach(function(d) {
+            svg.append("path")
+                .attr("class", "line")
+                .attr("d", priceline(d.values));
+        });
+
+        svg.append("g")
+          .attr("class", "xAxis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
+
+        svg.append("g")
+          .attr("class", "yAxis")
+          .call(d3.axisLeft(y));
+
+    });
+}

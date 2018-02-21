@@ -1,15 +1,36 @@
 .dm-job-remote {
     width: 100%;
-    background-color: var(--redWes);
+    background-color: var(--blueWes);
     min-height: 100vh;
 }
 
 .dm-job-remote-title {
     font-size: 1.5rem;
     font-family: var(--roboto);
-    color: var(--goldenWes);
+    color: var(--alternateWes);
+    background-color: var(--goldenWes);
     display: inline-block;
     padding: 1rem 2rem;
+}
+
+.dm-job-remote-paragraph {
+    font-size: 1rem;
+    font-family: var(--adamina);
+    color: var(--black);
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 25rem;
+    margin-left: 2rem;
+    &:after,
+    &:before {
+        content: '';
+        width: 12rem;
+        background-color: var(--alternateWes);
+        height: 1px;
+        display: block;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
 }
 
 /* stylelint-disable */
