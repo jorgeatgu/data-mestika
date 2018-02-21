@@ -30,9 +30,6 @@ p {
     color: var(--goldenWes);
     padding: 1rem 2rem;
     display: inline-block;
-    position: absolute;
-    left: 7rem;
-    top: -2rem;
     &:before {
         content: '';
         display: inline-block;
@@ -59,4 +56,13 @@ p {
     color: var(--alternateWes);
     background-color: var(--goldenWes);
     padding: 2rem;
+}
+
+.dm-container {
+    margin: 0 auto;
+    max-width: 64rem;
+}
+
+.dm-job-generic {
+    padding: 5rem 0;
 }
