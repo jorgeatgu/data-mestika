@@ -515,6 +515,10 @@ p {
     max-width: 64rem;
 }
 
+.dm-job-generic {
+    padding: 5rem 0;
+}
+
 * {
     box-sizing: border-box;
 }

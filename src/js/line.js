@@ -212,7 +212,7 @@ function remote() {
         width = 1200 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    var svg = d3.select('.dm-job-remote')
+    var svg = d3.select('.dm-job-remote-graph')
         .append('svg')
         .attr('class', 'dm-job-remote-chart')
         .attr("width", width + margin.left + margin.right)
@@ -285,16 +285,19 @@ function remote() {
 
 }
 
-
-jobYear();
-centralizame();
-remote();
-
 function multiple() {
 
     var margin = { top: 48, right: 48, bottom: 48, left: 48 },
         width = 850 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
+
+    var svg = d3.select('.dm-job-multiple-graph')
+        .append('svg')
+        .attr('class', 'dm-job-multiple-chart')
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var x = d3.scaleTime().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
@@ -303,19 +306,7 @@ function multiple() {
         .x(function(d) { return x(d.fecha); })
         .y(function(d) { return y(d.cantidad); });
 
-    var svg = d3.select("body")
-        .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-            .attr("transform",
-                  "translate(" + margin.left + "," + margin.top + ")");
-
-    // Get the data
     d3.csv("csv/data-line-puestos.csv", function(error, data) {
-        data.forEach(function(d) {
-            d.cantidad = +d.cantidad;
-        });
 
         x.domain(d3.extent(data, function(d) { return d.fecha; }));
         y.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
@@ -323,6 +314,8 @@ function multiple() {
         var dataComb = d3.nest()
             .key(function(d) {return d.puesto;})
             .entries(data);
+
+            console.log(dataComb)
 
         dataComb.forEach(function(d) {
             svg.append("path")
@@ -341,3 +334,10 @@ function multiple() {
 
     });
 }
+
+
+
+jobYear();
+centralizame();
+remote();
+multiple();
