@@ -208,8 +208,8 @@ function remote() {
 
     var barPadding = 2;
 
-    var margin = { top: 48, right: 112, bottom: 48, left: 112 },
-        width = 1200 - margin.left - margin.right,
+    var margin = { top: 48, right: 48, bottom: 48, left: 48 },
+        width = 900 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select('.dm-job-remote-graph')

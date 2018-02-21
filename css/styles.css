@@ -681,7 +681,7 @@ p {
 .dm-job-city-text-paragraph:after,
     .dm-job-city-text-paragraph:before {
         content: '';
-        width: 12rem;
+        width: 100%;
         background-color: #2D3065;
         height: 1px;
         display: block;
@@ -750,8 +750,10 @@ p {
     font-family: 'Roboto Condensed', sans-serif;
     color: #2D3065;
     background-color: #F8DFAB;
-    display: inline-block;
+    display: block;
     padding: 1rem 2rem;
+    max-width: 21rem;
+    margin: 0;
 }
 
 .dm-job-remote-paragraph {
@@ -759,16 +761,15 @@ p {
     font-family: 'Adamina', serif;
     color: #111;
     display: inline-block;
-    vertical-align: middle;
     max-width: 25rem;
-    margin-left: 2rem;
+    margin-right: 2rem;
+    vertical-align: top;
 }
 
-.dm-job-remote-paragraph:after,
-    .dm-job-remote-paragraph:before {
+.dm-job-remote-paragraph:before {
         content: '';
-        width: 12rem;
-        background-color: #2D3065;
+        width: 100%;
+        background-color: #F8DFAB;
         height: 1px;
         display: block;
         margin-bottom: 1rem;

@@ -9,8 +9,10 @@
     font-family: var(--roboto);
     color: var(--alternateWes);
     background-color: var(--goldenWes);
-    display: inline-block;
+    display: block;
     padding: 1rem 2rem;
+    max-width: 21rem;
+    margin: 0;
 }
 
 .dm-job-remote-paragraph {
@@ -18,14 +20,13 @@
     font-family: var(--adamina);
     color: var(--black);
     display: inline-block;
-    vertical-align: middle;
     max-width: 25rem;
-    margin-left: 2rem;
-    &:after,
+    margin-right: 2rem;
+    vertical-align: top;
     &:before {
         content: '';
-        width: 12rem;
-        background-color: var(--alternateWes);
+        width: 100%;
+        background-color: var(--goldenWes);
         height: 1px;
         display: block;
         margin-bottom: 1rem;
