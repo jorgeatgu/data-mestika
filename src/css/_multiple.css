@@ -1,0 +1,37 @@
+.dm-job-multiple {
+    background-color: var(--goldenWesLow);
+}
+
+.dm-job-multiple-graph {
+    .tick {
+        line {
+            fill: none;
+            stroke: var(--alternateWes);
+            stroke-width: 1px;
+            stroke-dasharray: 3px 3px;
+            opacity: .7;
+        }
+        text {
+            font-family: var(--roboto);
+            font-size: 13px;
+        }
+    }
+    .annotation-subject {
+        display: none;
+    }
+    .line {
+        fill: none;
+        stroke: var(--alternateWes);
+        stroke-width: 2px;
+    }
+    .circles {
+        fill: var(--alternateWes);
+    }
+    .xAxis,
+    .yAxis {
+        .domain {
+            stroke: none;
+        }
+    }
+
+}

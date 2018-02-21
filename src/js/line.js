@@ -288,7 +288,7 @@ function remote() {
 function multiple() {
 
     var margin = { top: 48, right: 48, bottom: 48, left: 48 },
-        width = 850 - margin.left - margin.right,
+        width = 1100 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select('.dm-job-multiple-graph')
@@ -299,6 +299,8 @@ function multiple() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    var parseDate = d3.timeParse("%Y");
+
     var x = d3.scaleTime().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
 
@@ -306,31 +308,46 @@ function multiple() {
         .x(function(d) { return x(d.fecha); })
         .y(function(d) { return y(d.cantidad); });
 
+    var yAxis = d3.axisLeft(y)
+        .tickSize(-width)
+        .tickFormat(d3.format("d"))
+        .ticks(10);
+
     d3.csv("csv/data-line-puestos.csv", function(error, data) {
+
+        data.forEach(function(d) {
+            d.fecha = parseDate(d.fecha);
+            d.cantidad = +d.cantidad;
+        });
 
         x.domain(d3.extent(data, function(d) { return d.fecha; }));
         y.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
 
         var dataComb = d3.nest()
-            .key(function(d) {return d.puesto;})
+            .key(function(d) { return d.puesto; })
             .entries(data);
 
-            console.log(dataComb)
+        var colors = ["#769CA6","#9C1B12","#759CA7","#CEBAC6","#2D3065"]
+
+        var color = d3.scaleOrdinal(colors);
 
         dataComb.forEach(function(d) {
             svg.append("path")
                 .attr("class", "line")
+                .style("stroke", function() {
+                    return d.color = color(d.key);
+                })
                 .attr("d", priceline(d.values));
         });
 
         svg.append("g")
-          .attr("class", "xAxis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
+            .attr("class", "xAxis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
 
         svg.append("g")
-          .attr("class", "yAxis")
-          .call(d3.axisLeft(y));
+            .attr("class", "yAxis")
+            .call(yAxis);
 
     });
 }
