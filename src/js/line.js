@@ -306,7 +306,8 @@ function multiple() {
 
     var priceline = d3.line()
         .x(function(d) { return x(d.fecha); })
-        .y(function(d) { return y(d.cantidad); });
+        .y(function(d) { return y(d.cantidad); })
+        .curve(d3.curveMonotoneX);
 
     var yAxis = d3.axisLeft(y)
         .tickSize(-width)
@@ -335,10 +336,11 @@ function multiple() {
             svg.append("path")
                 .attr("class", "line")
                 .style("stroke", function() {
-                    return d.color = color(d.key);
+                    return d.color = color(d.key)
                 })
                 .attr("d", priceline(d.values));
         });
+
 
         svg.append("g")
             .attr("class", "xAxis")
@@ -351,8 +353,6 @@ function multiple() {
 
     });
 }
-
-
 
 jobYear();
 centralizame();
