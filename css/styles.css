@@ -839,7 +839,7 @@ p {
 }
 
 .dm-job-multiple-legend-element:not(:last-child) {
-        margin-right: 3rem;
+        margin-right: 2rem;
     }
 
 .dm-job-multiple-legend-element-square {

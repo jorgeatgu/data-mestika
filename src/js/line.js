@@ -80,16 +80,36 @@ function jobYear() {
             //Add annotations
             var labels = [{
                 note: {
-                    label: "1/10/09",
-                    title: "Primera oferta de UX",
+                    title: "Primera oferta de UX: 1/10/09",
                     wrap: 430,
                     align: "middle"
                 },
-                y: 335,
-                x: 85,
+                y: 365,
+                x: 95,
                 dy: -240,
                 dx: 0,
-            }].map(function(l) {
+            },{
+                note: {
+                    title: "Primera oferta de Angular: 3/2/14",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 330,
+                x: 470,
+                dy: -240,
+                dx: 0,
+            },{
+                note: {
+                    title: "Primera oferta de React: 10/2/16",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 230,
+                x: 630,
+                dy: -190,
+                dx: 0,
+            }
+            ].map(function(l) {
                 l.note = Object.assign({}, l.note);
                 l.subject = { radius: 6 };
                 return l;
@@ -346,7 +366,7 @@ function multiple() {
                 .transition()
                 .duration(4000)
                 .delay(200 * i)
-                .ease(d3.easeLinear)
+                .ease(d3.easeExpIn)
                 .attr("stroke-dashoffset", 0)
                 .style("stroke-width", 2)
         })
