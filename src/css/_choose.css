@@ -50,7 +50,7 @@
     &:after,
     &:before {
         content: '';
-        width: 12rem;
+        width: 100%;
         background-color: var(--alternateWes);
         height: 1px;
         display: block;
@@ -100,21 +100,3 @@
 
 
 /* stylelint-enable */
-
-.dm-job-city-final {
-    background-color: var(--redWes);
-    border-radius: 100%;
-    height: 20rem;
-    width: 20rem;
-    display: flex;
-    margin: 0 auto;
-}
-
-.dm-job-city-final-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    font-family: var(--roboto);
-    color: var(--white);
-    text-align: center;
-    margin: auto;
-}

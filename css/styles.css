@@ -519,6 +519,10 @@ p {
     padding: 5rem 0;
 }
 
+.dm-container-graph {
+    text-align: center;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -681,7 +685,7 @@ p {
 .dm-job-city-text-paragraph:after,
     .dm-job-city-text-paragraph:before {
         content: '';
-        width: 12rem;
+        width: 100%;
         background-color: #2D3065;
         height: 1px;
         display: block;
@@ -721,24 +725,6 @@ p {
 
 /* stylelint-enable */
 
-.dm-job-city-final {
-    background-color: #9C1B12;
-    border-radius: 100%;
-    height: 20rem;
-    width: 20rem;
-    display: flex;
-    margin: 0 auto;
-}
-
-.dm-job-city-final-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    font-family: 'Roboto Condensed', sans-serif;
-    color: #fff;
-    text-align: center;
-    margin: auto;
-}
-
 .dm-job-remote {
     width: 100%;
     background-color: #759CA7;
@@ -750,8 +736,10 @@ p {
     font-family: 'Roboto Condensed', sans-serif;
     color: #2D3065;
     background-color: #F8DFAB;
-    display: inline-block;
+    display: block;
     padding: 1rem 2rem;
+    max-width: 21rem;
+    margin: 0;
 }
 
 .dm-job-remote-paragraph {
@@ -759,16 +747,15 @@ p {
     font-family: 'Adamina', serif;
     color: #111;
     display: inline-block;
-    vertical-align: middle;
     max-width: 25rem;
-    margin-left: 2rem;
+    margin-right: 2rem;
+    vertical-align: top;
 }
 
-.dm-job-remote-paragraph:after,
-    .dm-job-remote-paragraph:before {
+.dm-job-remote-paragraph:before {
         content: '';
-        width: 12rem;
-        background-color: #2D3065;
+        width: 100%;
+        background-color: #F8DFAB;
         height: 1px;
         display: block;
         margin-bottom: 1rem;
@@ -777,7 +764,7 @@ p {
 
 /* stylelint-disable */
 
-.dm-job-remote-chart .line {
+.dm-job-remote-chart .lines {
         stroke: #111;
     }
 
@@ -807,5 +794,88 @@ p {
     }
 
 /* stylelint-enable */
+
+.dm-job-multiple {
+    background-color: #eee;
+}
+
+.dm-job-multiple-graph .tick line {
+            fill: none;
+            stroke: #2D3065;
+            stroke-width: 1px;
+            stroke-dasharray: 3px 3px;
+            opacity: .7;
+        }
+
+.dm-job-multiple-graph .tick text {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 0.81rem;
+        }
+
+.dm-job-multiple-graph .annotation-subject {
+        display: none;
+    }
+
+.dm-job-multiple-graph .line {
+        fill: none;
+        stroke-width: 2px;
+    }
+
+.dm-job-multiple-graph .circles {
+        fill: #2D3065;
+    }
+
+.dm-job-multiple-graph .xAxis .domain, .dm-job-multiple-graph .yAxis .domain {
+            stroke: none;
+        }
+
+.dm-job-multiple-legend {
+    width: 100%;
+    text-align: center;
+}
+
+.dm-job-multiple-legend-element {
+    display: inline-block;
+}
+
+.dm-job-multiple-legend-element:not(:last-child) {
+        margin-right: 2rem;
+    }
+
+.dm-job-multiple-legend-element-square {
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.dm-job-multiple-legend-element-text {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #2D3065;
+}
+
+.dsn {
+    background-color: #b114c0;
+}
+
+.mkt {
+    background-color: #759CA7;
+}
+
+.frt {
+    background-color: #CEBAC6;
+}
+
+.prg {
+    background-color: #9C1B12;
+}
+
+.ux {
+    background-color: #2D3065;
+}
 
 /*# sourceMappingURL=styles.css.map */

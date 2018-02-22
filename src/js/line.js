@@ -1,10 +1,8 @@
+var margin = { top: 48, right: 48, bottom: 48, left: 48 },
+    width = 900 - margin.left - margin.right,
+    height = 550 - margin.top - margin.bottom;
+
 function jobYear() {
-
-    var barPadding = 2;
-
-    var margin = { top: 48, right: 48, bottom: 48, left: 48 },
-        width = 850 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select('.dm-job-year-graph')
         .append('svg')
@@ -82,16 +80,36 @@ function jobYear() {
             //Add annotations
             var labels = [{
                 note: {
-                    label: "1/10/09",
-                    title: "Primera oferta de UX",
+                    title: "Primera oferta de UX: 1/10/09",
                     wrap: 430,
                     align: "middle"
                 },
-                y: 335,
-                x: 85,
+                y: 365,
+                x: 95,
                 dy: -240,
                 dx: 0,
-            }].map(function(l) {
+            },{
+                note: {
+                    title: "Primera oferta de Angular: 3/2/14",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 330,
+                x: 470,
+                dy: -240,
+                dx: 0,
+            },{
+                note: {
+                    title: "Primera oferta de React: 10/2/16",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 230,
+                x: 630,
+                dy: -190,
+                dx: 0,
+            }
+            ].map(function(l) {
                 l.note = Object.assign({}, l.note);
                 l.subject = { radius: 6 };
                 return l;
@@ -128,9 +146,8 @@ function jobYear() {
 }
 
 function centralizame() {
-    var margin = { top: 50, right: 50, bottom: 50, left: 200 },
-        width = 950 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+
+    var margin = { top: 50, right: 50, bottom: 50, left: 200 };
 
     var svg = d3.select('.dm-job-city-graph')
         .append('svg')
@@ -206,12 +223,6 @@ function centralizame() {
 
 function remote() {
 
-    var barPadding = 2;
-
-    var margin = { top: 48, right: 112, bottom: 48, left: 112 },
-        width = 1200 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
-
     var svg = d3.select('.dm-job-remote-graph')
         .append('svg')
         .attr('class', 'dm-job-remote-chart')
@@ -247,7 +258,7 @@ function remote() {
 
         var path = svg.append("path")
             .data([data])
-            .attr("class", "line")
+            .attr("class", "lines")
             .attr("d", valueline)
             .attr("stroke-width", "1.5")
             .attr("fill", "none");
@@ -287,10 +298,6 @@ function remote() {
 
 function multiple() {
 
-    var margin = { top: 48, right: 48, bottom: 48, left: 48 },
-        width = 850 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
-
     var svg = d3.select('.dm-job-multiple-graph')
         .append('svg')
         .attr('class', 'dm-job-multiple-chart')
@@ -299,43 +306,73 @@ function multiple() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    var parseDate = d3.timeParse("%Y");
+
     var x = d3.scaleTime().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
 
     var priceline = d3.line()
         .x(function(d) { return x(d.fecha); })
-        .y(function(d) { return y(d.cantidad); });
+        .y(function(d) { return y(d.cantidad); })
+        .curve(d3.curveMonotoneX);
+
+    var yAxis = d3.axisLeft(y)
+        .tickSize(-width)
+        .tickFormat(d3.format("d"))
+        .ticks(10);
 
     d3.csv("csv/data-line-puestos.csv", function(error, data) {
+
+        data.forEach(function(d) {
+            d.fecha = parseDate(d.fecha);
+            d.cantidad = +d.cantidad;
+        });
 
         x.domain(d3.extent(data, function(d) { return d.fecha; }));
         y.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
 
         var dataComb = d3.nest()
-            .key(function(d) {return d.puesto;})
+            .key(function(d) { return d.puesto; })
             .entries(data);
 
-            console.log(dataComb)
+        var colors = ["#b114c0", "#9C1B12", "#759CA7", "#CEBAC6", "#2D3065"]
+
+        var color = d3.scaleOrdinal(colors);
 
         dataComb.forEach(function(d) {
             svg.append("path")
                 .attr("class", "line")
+                .style("stroke", function() {
+                    return d.color = color(d.key)
+                })
                 .attr("d", priceline(d.values));
         });
 
-        svg.append("g")
-          .attr("class", "xAxis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
 
         svg.append("g")
-          .attr("class", "yAxis")
-          .call(d3.axisLeft(y));
+            .attr("class", "xAxis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        svg.append("g")
+            .attr("class", "yAxis")
+            .call(yAxis);
+
+        d3.selectAll(".line").each(function(d, i) {
+            var totalLength = d3.select('.line').node().getTotalLength();
+
+            d3.selectAll('.line').attr("stroke-dasharray", totalLength + " " + totalLength)
+                .attr("stroke-dashoffset", totalLength)
+                .transition()
+                .duration(4000)
+                .delay(200 * i)
+                .ease(d3.easeExpIn)
+                .attr("stroke-dashoffset", 0)
+                .style("stroke-width", 2)
+        })
 
     });
 }
-
-
 
 jobYear();
 centralizame();
