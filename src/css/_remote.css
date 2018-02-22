@@ -36,7 +36,7 @@
 
 /* stylelint-disable */
 .dm-job-remote-chart {
-    .line {
+    .lines {
         stroke: var(--black);
     }
     .circles {

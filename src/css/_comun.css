@@ -66,3 +66,7 @@ p {
 .dm-job-generic {
     padding: 5rem 0;
 }
+
+.dm-container-graph {
+    text-align: center;
+}

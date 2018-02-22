@@ -519,6 +519,10 @@ p {
     padding: 5rem 0;
 }
 
+.dm-container-graph {
+    text-align: center;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -721,24 +725,6 @@ p {
 
 /* stylelint-enable */
 
-.dm-job-city-final {
-    background-color: #9C1B12;
-    border-radius: 100%;
-    height: 20rem;
-    width: 20rem;
-    display: flex;
-    margin: 0 auto;
-}
-
-.dm-job-city-final-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    font-family: 'Roboto Condensed', sans-serif;
-    color: #fff;
-    text-align: center;
-    margin: auto;
-}
-
 .dm-job-remote {
     width: 100%;
     background-color: #759CA7;
@@ -778,7 +764,7 @@ p {
 
 /* stylelint-disable */
 
-.dm-job-remote-chart .line {
+.dm-job-remote-chart .lines {
         stroke: #111;
     }
 
@@ -810,7 +796,7 @@ p {
 /* stylelint-enable */
 
 .dm-job-multiple {
-    background-color: rgba(248, 223, 171, .6);
+    background-color: #eee;
 }
 
 .dm-job-multiple-graph .tick line {
@@ -832,7 +818,6 @@ p {
 
 .dm-job-multiple-graph .line {
         fill: none;
-        stroke: #2D3065;
         stroke-width: 2px;
     }
 
@@ -843,5 +828,54 @@ p {
 .dm-job-multiple-graph .xAxis .domain, .dm-job-multiple-graph .yAxis .domain {
             stroke: none;
         }
+
+.dm-job-multiple-legend {
+    width: 100%;
+    text-align: center;
+}
+
+.dm-job-multiple-legend-element {
+    display: inline-block;
+}
+
+.dm-job-multiple-legend-element:not(:last-child) {
+        margin-right: 3rem;
+    }
+
+.dm-job-multiple-legend-element-square {
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.dm-job-multiple-legend-element-text {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #2D3065;
+}
+
+.dsn {
+    background-color: #b114c0;
+}
+
+.mkt {
+    background-color: #759CA7;
+}
+
+.frt {
+    background-color: #CEBAC6;
+}
+
+.prg {
+    background-color: #9C1B12;
+}
+
+.ux {
+    background-color: #2D3065;
+}
 
 /*# sourceMappingURL=styles.css.map */

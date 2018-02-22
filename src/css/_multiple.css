@@ -1,5 +1,5 @@
 .dm-job-multiple {
-    background-color: var(--goldenWesLow);
+    background-color: var(--grey);
 }
 
 .dm-job-multiple-graph {
@@ -21,7 +21,6 @@
     }
     .line {
         fill: none;
-        stroke: var(--alternateWes);
         stroke-width: 2px;
     }
     .circles {
@@ -33,5 +32,52 @@
             stroke: none;
         }
     }
+}
 
+.dm-job-multiple-legend {
+    width: 100%;
+    text-align: center;
+}
+
+.dm-job-multiple-legend-element {
+    display: inline-block;
+    &:not(:last-child) {
+        margin-right: 3rem;
+    }
+}
+
+.dm-job-multiple-legend-element-square {
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.dm-job-multiple-legend-element-text {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+    font-family: var(--roboto);
+    color: var(--alternateWes);
+}
+
+.dsn {
+    background-color: #b114c0;
+}
+
+.mkt {
+    background-color: var(--blueWes);
+}
+
+.frt {
+    background-color: var(--violetWes);
+}
+
+.prg {
+    background-color: var(--redWes);
+}
+
+.ux {
+    background-color: var(--alternateWes);
 }
