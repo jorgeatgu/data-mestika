@@ -1,14 +1,10 @@
 var margin = { top: 48, right: 48, bottom: 48, left: 48 },
-    width = 900 - margin.left - margin.right,
-    height = 550 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 650 - margin.top - margin.bottom;
 
 function jobYear() {
 
     var svg = d3.select('.dm-job-year-graph')
-        .append('svg')
-        .attr('class', 'dm-job-year-graph')
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -150,10 +146,7 @@ function centralizame() {
     var margin = { top: 50, right: 50, bottom: 50, left: 200 };
 
     var svg = d3.select('.dm-job-city-graph')
-        .append('svg')
         .attr('class', 'dm-job-city-chart')
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + (margin.left - margin.right) + "," + margin.top + ")");
 
@@ -224,10 +217,7 @@ function centralizame() {
 function remote() {
 
     var svg = d3.select('.dm-job-remote-graph')
-        .append('svg')
         .attr('class', 'dm-job-remote-chart')
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -299,10 +289,7 @@ function remote() {
 function multiple() {
 
     var svg = d3.select('.dm-job-multiple-graph')
-        .append('svg')
         .attr('class', 'dm-job-multiple-chart')
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
