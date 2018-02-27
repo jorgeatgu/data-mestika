@@ -1,4 +1,4 @@
-function(){
+(function(){
 
     var width,height
     var chartWidth, chartHeight
@@ -143,4 +143,4 @@ function(){
             .call(xAxis);
 
     }
-}();
+}());
