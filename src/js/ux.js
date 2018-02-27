@@ -1,5 +1,4 @@
-(function(){
-    "use strict"
+function(){
 
     var width,height
     var chartWidth, chartHeight
@@ -37,7 +36,6 @@
 
     function setReSizeEvent(data) {
             var resizeTimer;
-            var interval = Math.floor(1000 / 60 * 10);
 
             window.addEventListener('resize', function (event) {
 
@@ -46,7 +44,7 @@
                 }
                 resizeTimer = setTimeout(function () {
                     update(data)
-                }, interval);
+                });
             });
         }
 
@@ -105,7 +103,7 @@
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
 
-        chartLayer.selectAll("dot")
+        chartLayer.selectAll("circles")
             .data(data)
             .enter().append("circle")
             .attr("cx", function(d) { return x(d.fecha); })
@@ -145,4 +143,4 @@
             .call(xAxis);
 
     }
-}());
+}();
