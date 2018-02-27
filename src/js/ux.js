@@ -1,224 +1,148 @@
-(function() {
+(function(){
+    "use strict"
 
-    //VARS
-    var scales = {};
-    var margin = { top:10, bottom:25, left:50, right:10 };
-    var width = 0;
-    var height = 0;
+    var width,height
+    var chartWidth, chartHeight
+    var margin
+    var svg = d3.select(".dm-container-graph").append("svg")
+    var axisLayer = svg.append("g").classed("axisLayer", true)
+    var chartLayer = svg.append("g").classed("chartLayer", true)
 
-    var chart = d3.select('.chart__gender');
-    var svg = chart.select('svg');
+    var x = d3.scaleTime()
+    var y = d3.scaleLinear()
 
-    // LOAD THE DATA
-    function loadData(cb) {
-        d3.tsv('assets/gender_count.tsv', cleaRow, function(err, data) {
-            genderData = data
-            cb()
-        });
+    var parseTime = d3.timeParse("%d-%b-%y");
+
+
+    d3.csv("csv/data-ofertas-anyo.csv", cast,  main)
+
+
+    function cast(d) {
+        d.fecha = parseTime(d.fecha);
+        d.total = +d.total;
+        return d
     }
 
-    //SETUP
-    //GENDER HELPERS
-    function setupScales() {
-        var maxCount = d3.max(genderData,function(d) { return d.total; });
-
-        var countX = d3.scaleTime()
-            .domain(d3.extent(genderData, function(d) { return d.date; }));
-
-        var countY = d3.scaleLinear()
-            .domain([0, maxCount]);
-
-        scales.count = { x: countX,  y: countY };
-
-        var percentX = d3.scaleTime()
-            .domain(d3.extent(genderData, function(d) { return d.date; }));
-
-        var percentY = d3.scaleLinear();
-
-        scales.percent = { x: percentX,  y: percentY };
-
-        scales.color = d3.scaleOrdinal()
-            .domain(['male_count', 'female_count'])
-            .range(colors);
-
-    }
-
-    function setupElements() {
-        var g = svg.select('.container');
-
-        g.append('g').attr('class', 'axis axis--x');
-
-        g.append('g').attr('class', 'axis axis--y');
-
-        g.append('g').attr('class', 'area-container');
-
-        g.append("rect")
-            .attr("class", "vertical")
-            .attr("width", 1)
-            .attr("x", 0)
-
-        svg.append("text")
-            .attr("class","label--y")
-            .attr("text-anchor","middle")
-
-        svg.append("text")
-            .attr("class","label--x")
-            .attr("text-anchor","middle")
-
-        g.append("text")
-            .attr("class","area__label area__label--men")
-            .style("text-anchor", "end")
-            .style('fill', d3.color(colorM).darker(1.5))
-            .text("Men");
-
-        g.append("text")
-            .attr("class","area__label area__label--women")
-            .style("text-anchor", "end")
-            .style('fill', d3.color(colorF).brighter(2))
-            .text("Women");
-
-        g.append("line")
-            .attr("class","fifty-percent fifty-percent-line")
-
-        g.append("text")
-            .attr("class","fifty-percent fifty-percent-label")
-            .attr('alignment-baseline', 'baseline')
-            .attr('text-anchor', 'middle')
-            .text("Gender Equality (50%)")
-
-        g.append('rect')
-            .attr('x', 0)
-            .attr('y', 0)
-            .attr('class', 'interaction')
-
-    }
-
-    //UPDATE
-    function updateScales(width, height){
-        scales.count.x.range([0, width]);
-        scales.percent.x.range([0, width]);
-        scales.count.y.range([height, 0]);
-        scales.percent.y.range([height, 0]);
+    function main(data) {
+        update(data)
+        setReSizeEvent(data)
     }
 
 
-    function drawAxes(g) {
-        var tickCount = mobile ? 5 : 10
+    function update(data) {
+        setSize(data)
+        drawAxis()
+        drawChart(data)
+    }
 
-        var axisX = d3.axisBottom(scales[state].x)
-            .ticks(tickCount)
+    function setReSizeEvent(data) {
+            var resizeTimer;
+            var interval = Math.floor(1000 / 60 * 10);
 
-        g.select(".axis--x")
-            .attr("transform", "translate(0," + height + ")")
-            .call(axisX)
+            window.addEventListener('resize', function (event) {
 
-        var formatter = state === "percent" ? '%' : 'r'
-        var axisY = d3.axisLeft(scales[state].y)
-            .ticks(tickCount, formatter)
-            .tickSizeInner(-width)
+                if (resizeTimer !== false) {
+                    clearTimeout(resizeTimer);
+                }
+                resizeTimer = setTimeout(function () {
+                    update(data)
+                }, interval);
+            });
+        }
 
-        g.select(".axis--y")
+
+    function setSize(data) {
+
+        width = document.querySelector(".dm-container-graph").clientWidth
+        height = document.querySelector(".dm-container-graph").clientHeight
+
+        margin = {
+            top: 48,
+            left: 48,
+            bottom: 48,
+            right: 48
+        }
+
+        chartWidth = width - (margin.left+margin.right)
+        chartHeight = height - (margin.top+margin.bottom)
+
+        svg.attr("width", width).attr("height", height)
+        axisLayer.attr("width", width).attr("height", height)
+
+        chartLayer
+            .attr("width", chartWidth)
+            .attr("height", chartHeight)
+            .attr("transform", "translate("+[margin.left, margin.top]+")")
+
+        x.domain(d3.extent(data, function(d) { return d.fecha })).range([0, chartWidth])
+        y.domain([0, d3.max(data, function(d) { return d.total })]).range([chartHeight, 0])
+
+    }
+
+    function drawChart(data) {
+
+        var valueline = d3.line()
+            .x(function(d) { return x(d.fecha); })
+            .y(function(d) { return y(d.total); });
+
+        var selectedLineElm = chartLayer.selectAll(".line")
+            .data([data])
+
+        var newLineElm = selectedLineElm.enter().append("path")
+            .attr("class", "line")
+            .attr("stroke-width", "1.5")
+
+        selectedLineElm.merge(newLineElm)
+            .attr("d", valueline)
+
+        var totalLength = newLineElm.node().getTotalLength();
+
+            newLineElm
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
             .transition()
-            .duration(transitionDuration)
-            .call(axisY)
-    }
+            .duration(2500)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0)
 
-    function drawLabels(g) {
-        svg.select('.label--y')
-            .text(labels[state])
-        .transition()
-            .duration(transitionDuration)
-            .attr("transform", "translate("+ (margin.left/4) +","+(height/2)+")rotate(-90)")
-
-        var yMen = setLabelY("male", width,height)
-        var yWomen = setLabelY("female", width,height)
-
-        g.select(".area__label--women")
-            .transition()
-            .duration(transitionDuration)
-            .attr("x", .95 * width)
-            .attr("y", yWomen)
-            .style("text-anchor", "end")
-
-        g.select(".area__label--men")
-            .transition()
-            .duration(transitionDuration)
-            .attr("x", .95 * width)
-            .attr("y", yMen)
-            .style("text-anchor", "end")
-    }
-
-    function updateChart() {
-        var w = chart.node().offsetWidth;
-        var h = Math.floor(w / ratio);
-
-        width = w - margin.left - margin.right;
-        height = h - margin.top - margin.bottom;
-
-        svg
-            .attr('width', w)
-            .attr('height', h);
-
-        var translate = "translate(" + margin.left + "," + margin.top + ")";
-
-        var g = svg.select('.container')
-
-        g.attr("transform", translate)
-
-        updateScales(width, height)
-
-        var area = d3.area()
-            .x(function(d) { return scales[state].x(d.data.date); })
-            .y0(function(d) { return scales[state].y(d[0]); })
-            .y1(function(d) { return scales[state].y(d[1]); })
-            .curve(d3.curveMonotoneX)
-
-        var container = chart.select('.area-container')
-
-        var layer = container.selectAll('.area')
-            .data(stackedData)
-
-        layer.exit().remove()
-
-        var enterLayer = layer.enter()
-            .append('path')
-            .attr('class', 'area')
-
-        drawAxes(g)
-        drawLabels(g)
-
-        vertical = g.select(".vertical")
-            .attr("height", height)
-            .attr("y", 0)
-
-        layer.merge(enterLayer)
-            .transition()
-            .duration(transitionDuration)
-            .attr('d', area)
-            .style("fill", function(d) {
-                var key = d.key.split('_')[0]
-                return scales.color(key);
-            })
-
-        //drawFiftyPercent()
+        chartLayer.selectAll("dot")
+            .data(data)
+            .enter().append("circle")
+            .attr("cx", function(d) { return x(d.fecha); })
+            .attr("cy", function(d) { return y(d.total); })
+            .attr("class", "circles")
+            .attr("r", 3)
 
     }
 
-    function resize() {
-        var breakpoint = 600;
-        var w = d3.select('body').node().offsetWidth;
-        mobile = w < breakpoint;
-        updateChart()
-    }
+    function drawAxis(){
 
-    function init() {
-        loadData(function() {
-            setupElements()
-            setupScales()
-            resize() // draw chart
-            window.addEventListener('resize', resize)
-        })
-    }
+        var yAxis = d3.axisLeft(y)
+            .tickSizeInner(-chartWidth)
+            .tickFormat(d3.format("d"))
+            .ticks(10)
 
-    init()
-})()
+        var selectedYAxisElm = axisLayer.selectAll(".y")
+            .data(["dummy"])
+
+        var newYAxisElm = selectedYAxisElm.enter().append("g")
+            .attr("class", "axis y")
+
+        selectedYAxisElm.merge(newYAxisElm)
+            .attr("transform", "translate("+[margin.left, margin.top]+")")
+            .call(yAxis);
+
+        var xAxis = d3.axisBottom(x)
+
+        var selectedXAxisElm = axisLayer.selectAll(".x")
+            .data(["dummy"])
+
+        var newXAxisElm = selectedXAxisElm.enter().append("g")
+            .attr("class", "axis x")
+
+        selectedXAxisElm.merge(newXAxisElm)
+            .attr("transform", "translate("+[margin.left, chartHeight+margin.top]+")")
+            .call(xAxis);
+
+    }
+}());

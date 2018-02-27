@@ -521,6 +521,7 @@ p {
 
 .dm-container-graph {
     text-align: center;
+    min-height: 80vh;
 }
 
 * {
@@ -799,7 +800,7 @@ p {
     background-color: #eee;
 }
 
-.dm-job-multiple-graph .tick line {
+.dm-job-multiple-chart .tick line {
             fill: none;
             stroke: #2D3065;
             stroke-width: 1px;
@@ -807,25 +808,25 @@ p {
             opacity: .7;
         }
 
-.dm-job-multiple-graph .tick text {
+.dm-job-multiple-chart .tick text {
             font-family: 'Roboto Condensed', sans-serif;
             font-size: 0.81rem;
         }
 
-.dm-job-multiple-graph .annotation-subject {
+.dm-job-multiple-chart .annotation-subject {
         display: none;
     }
 
-.dm-job-multiple-graph .line {
+.dm-job-multiple-chart .line {
         fill: none;
         stroke-width: 2px;
     }
 
-.dm-job-multiple-graph .circles {
+.dm-job-multiple-chart .circles {
         fill: #2D3065;
     }
 
-.dm-job-multiple-graph .xAxis .domain, .dm-job-multiple-graph .yAxis .domain {
+.dm-job-multiple-chart .xAxis .domain, .dm-job-multiple-chart .yAxis .domain {
             stroke: none;
         }
 

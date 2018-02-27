@@ -2,7 +2,7 @@
     background-color: var(--grey);
 }
 
-.dm-job-multiple-graph {
+.dm-job-multiple-chart {
     .tick {
         line {
             fill: none;
