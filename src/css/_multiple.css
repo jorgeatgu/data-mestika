@@ -2,7 +2,19 @@
     background-color: var(--grey);
 }
 
-.dm-job-multiple-graph {
+.dm-job-title {
+    font-size: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: var(--alternateWes);
+    color: var(--goldenWes);
+    display: block;
+    padding: 1rem 2rem;
+    width: max-content;
+    margin: 0;
+    margin-bottom: 3rem;
+}
+
+.dm-job-multiple-chart {
     .tick {
         line {
             fill: none;

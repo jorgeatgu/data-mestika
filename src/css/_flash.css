@@ -1,0 +1,43 @@
+.dm-job-flash-title {
+    font-size: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: var(--goldenWes);
+    background-color: var(--redWes);
+    display: block;
+    padding: 1rem 2rem;
+    max-width: max-content;
+    margin: 0;
+}
+
+.dm-job-flash-paragraph {
+    font-size: 1rem;
+    font-family: var(--adamina);
+    color: var(--alternateWes);
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 25rem;
+}
+
+.dm-job-flash-graph {
+    .line {
+        fill: none;
+        stroke: var(--redWes);
+        stroke-width: 2px;
+    }
+    .domain {
+        stroke: none;
+    }
+    text {
+        font-family: var(--roboto);
+        font-size: 13px;
+    }
+    .y {
+        .tick {
+            fill: none;
+            stroke: var(--alternateWes);
+            stroke-width: 1px;
+            stroke-dasharray: 3px 3px;
+            opacity: .7;
+        }
+    }
+}
