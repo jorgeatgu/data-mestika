@@ -800,6 +800,18 @@ p {
     background-color: #eee;
 }
 
+.dm-job-title {
+    font-size: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #2D3065;
+    color: #F8DFAB;
+    display: block;
+    padding: 1rem 2rem;
+    width: max-content;
+    margin: 0;
+    margin-bottom: 3rem;
+}
+
 .dm-job-multiple-chart .tick line {
             fill: none;
             stroke: #2D3065;
@@ -877,6 +889,26 @@ p {
 
 .ux {
     background-color: #2D3065;
+}
+
+.dm-job-flash-title {
+    font-size: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #F8DFAB;
+    background-color: #9C1B12;
+    display: block;
+    padding: 1rem 2rem;
+    max-width: max-content;
+    margin: 0;
+}
+
+.dm-job-flash-paragraph {
+    font-size: 1rem;
+    font-family: 'Adamina', serif;
+    color: #2D3065;
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 25rem;
 }
 
 /*# sourceMappingURL=styles.css.map */
