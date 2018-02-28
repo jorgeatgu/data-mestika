@@ -911,4 +911,27 @@ p {
     max-width: 25rem;
 }
 
+.dm-job-flash-graph .line {
+        fill: none;
+        stroke: #9C1B12;
+        stroke-width: 2px;
+    }
+
+.dm-job-flash-graph .domain {
+        stroke: none;
+    }
+
+.dm-job-flash-graph text {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 0.81rem;
+    }
+
+.dm-job-flash-graph .y .tick {
+            fill: none;
+            stroke: #2D3065;
+            stroke-width: 1px;
+            stroke-dasharray: 3px 3px;
+            opacity: .7;
+        }
+
 /*# sourceMappingURL=styles.css.map */

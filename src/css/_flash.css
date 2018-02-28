@@ -17,3 +17,27 @@
     vertical-align: middle;
     max-width: 25rem;
 }
+
+.dm-job-flash-graph {
+    .line {
+        fill: none;
+        stroke: var(--redWes);
+        stroke-width: 2px;
+    }
+    .domain {
+        stroke: none;
+    }
+    text {
+        font-family: var(--roboto);
+        font-size: 13px;
+    }
+    .y {
+        .tick {
+            fill: none;
+            stroke: var(--alternateWes);
+            stroke-width: 1px;
+            stroke-dasharray: 3px 3px;
+            opacity: .7;
+        }
+    }
+}
