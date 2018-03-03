@@ -1,0 +1,17 @@
+.madrid-dendogram-link {
+    fill: none;
+    stroke: rgb(204, 204, 204);
+    stroke-width: 1px;
+}
+
+.madrid-dendogram-circle {
+    fill: rgb(238, 238, 238);
+    stroke: rgb(153, 153, 153);
+    stroke-width: 1px;
+}
+
+.madrid-dendogram-text {
+    font-size: 11px;
+    font-family: var(--roboto);
+    text-anchor: start;
+}

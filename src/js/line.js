@@ -309,8 +309,7 @@ function multiple() {
 
     var priceline = d3.line()
         .x(function(d) { return x(d.fecha); })
-        .y(function(d) { return y(d.cantidad); })
-        .curve(d3.curveMonotoneX);
+        .y(function(d) { return y(d.cantidad); });
 
     var yAxis = d3.axisLeft(y)
         .tickSize(-width)

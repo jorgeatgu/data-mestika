@@ -641,6 +641,7 @@ p {
 
 .dm-job-city-header {
     width: 100%;
+
 }
 
 .dm-job-city-graph {
@@ -933,5 +934,23 @@ p {
             stroke-dasharray: 3px 3px;
             opacity: .7;
         }
+
+.madrid-dendogram-link {
+    fill: none;
+    stroke: rgb(204, 204, 204);
+    stroke-width: 1px;
+}
+
+.madrid-dendogram-circle {
+    fill: rgb(238, 238, 238);
+    stroke: rgb(153, 153, 153);
+    stroke-width: 1px;
+}
+
+.madrid-dendogram-text {
+    font-size: 0.69rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-anchor: start;
+}
 
 /*# sourceMappingURL=styles.css.map */
