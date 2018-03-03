@@ -107,13 +107,82 @@ function jobYear(){
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
 
-        chartLayer.selectAll("circles")
+        var dots = chartLayer.selectAll(".circles");
+
+        dots
             .data(data)
             .enter().append("circle")
             .attr("cx", function(d) { return x(d.fecha); })
             .attr("cy", function(d) { return y(d.total); })
             .attr("class", "circles")
             .attr("r", 3)
+
+        setTimeout(function() {
+
+            svg.selectAll("dot")
+                .attr("opacity", "1");
+            //Add annotations
+            var labels = [{
+                note: {
+                    title: "Primera oferta de UX: 1/10/09",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 445,
+                x: 157,
+                dy: -240,
+                dx: 0,
+            },{
+                note: {
+                    title: "Primera oferta de Angular: 3/2/14",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 400,
+                x: 600,
+                dy: -240,
+                dx: 0,
+            },{
+                note: {
+                    title: "Primera oferta de React: 10/2/16",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 275,
+                x: 790,
+                dy: -190,
+                dx: 0,
+            }
+            ].map(function(l) {
+                l.note = Object.assign({}, l.note);
+                l.subject = { radius: 6 };
+                return l;
+            });
+
+            window.makeAnnotations = d3.annotation().annotations(labels).type(d3.annotationCalloutCircle).accessors({
+                x: function x(d) {
+                    return x(d.fecha);
+                },
+                y: function y(d) {
+                    return y(d.total);
+                }
+            }).accessorsInverse({
+                fecha: function fecha(d) {
+                    return x.invert(d.x);
+                },
+                total: function total(d) {
+                    return y.invert(d.y);
+                }
+            }).on('subjectover', function(annotation) {
+                annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", false);
+            }).on('subjectout', function(annotation) {
+                annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
+            });
+
+            svg.append("g").attr("class", "annotation-test").call(makeAnnotations);
+
+            svg.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
+        }, 1000)
 
     }
 
