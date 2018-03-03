@@ -1,0 +1,1 @@
+var madridTimeline=anime.timeline(),madridDuration=600;madridTimeline.add({targets:".mdl-two",strokeDashoffset:[anime.setDashoffset,0],easing:"easeInOutSine",delay:function(e,a){return 250*a},duration:madridDuration}).add({targets:".mdl-three",strokeDashoffset:[anime.setDashoffset,0],easing:"easeInOutSine",delay:function(e,a){return 250*a},duration:madridDuration});

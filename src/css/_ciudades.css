@@ -1,6 +1,6 @@
 .madrid-dendogram-link {
     fill: none;
-    stroke: rgb(204, 204, 204);
+    stroke: var(--black);
     stroke-width: 1px;
 }
 

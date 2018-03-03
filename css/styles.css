@@ -937,7 +937,7 @@ p {
 
 .madrid-dendogram-link {
     fill: none;
-    stroke: rgb(204, 204, 204);
+    stroke: #111;
     stroke-width: 1px;
 }
 
