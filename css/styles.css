@@ -937,20 +937,38 @@ p {
 
 .madrid-dendogram-link {
     fill: none;
-    stroke: #111;
+    stroke: #9C1B12;
     stroke-width: 1px;
 }
 
 .madrid-dendogram-circle {
-    fill: rgb(238, 238, 238);
-    stroke: rgb(153, 153, 153);
+    stroke: #111;
     stroke-width: 1px;
+}
+
+.madrid-dendogram-circle-start,
+.madrid-dendogram-circle-middle {
+    fill: #F8DFAB;
+}
+
+.madrid-dendogram-circle-final {
+    fill: #759CA7;
+    stroke: #2D3065;
 }
 
 .madrid-dendogram-text {
     font-size: 0.69rem;
     font-family: 'Roboto Condensed', sans-serif;
     text-anchor: start;
+}
+
+.madrid-dendogram-text-job,
+.madrid-dendogram-text-percentage {
+    opacity: 0;
+}
+
+.madrid-dendogram-text-percentage {
+    font-size: 1rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

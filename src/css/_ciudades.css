@@ -1,17 +1,35 @@
 .madrid-dendogram-link {
     fill: none;
-    stroke: var(--black);
+    stroke: var(--redWes);
     stroke-width: 1px;
 }
 
 .madrid-dendogram-circle {
-    fill: rgb(238, 238, 238);
-    stroke: rgb(153, 153, 153);
+    stroke: var(--black);
     stroke-width: 1px;
+}
+
+.madrid-dendogram-circle-start,
+.madrid-dendogram-circle-middle {
+    fill: var(--goldenWes);
+}
+
+.madrid-dendogram-circle-final {
+    fill: var(--blueWes);
+    stroke: var(--alternateWes);
 }
 
 .madrid-dendogram-text {
     font-size: 11px;
     font-family: var(--roboto);
     text-anchor: start;
+}
+
+.madrid-dendogram-text-job,
+.madrid-dendogram-text-percentage {
+    opacity: 0;
+}
+
+.madrid-dendogram-text-percentage {
+    font-size: 1rem;
 }
