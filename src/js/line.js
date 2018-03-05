@@ -1,7 +1,7 @@
 //d3js magic
 var margin = { top: 48, right: 48, bottom: 48, left: 48 },
     width = 1000 - margin.left - margin.right,
-    height = 650 - margin.top - margin.bottom;
+    height = 550 - margin.top - margin.bottom;
 
 function jobYear(){
 
@@ -622,9 +622,6 @@ function animateDendogram() {
         });
 }
 
-animateDendogram();
-
-
 //Scrollmagic
 function scrollMagic() {
             var container = document.querySelector('#scroll');
@@ -660,7 +657,7 @@ function scrollMagic() {
                 scroller.setup({
                     step: '.dm-job-generic',
                     debug: false,
-                    offset: 0.8
+                    offset: 0.2
                 })
                     .onStepEnter(handleStepEnter)
                     .onStepExit(handleStepExit);
