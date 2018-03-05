@@ -1,3 +1,4 @@
+//d3js magic
 var margin = { top: 48, right: 48, bottom: 48, left: 48 },
     width = 1000 - margin.left - margin.right,
     height = 650 - margin.top - margin.bottom;
@@ -621,9 +622,52 @@ function animateDendogram() {
         });
 }
 
-jobYear();
-centralizame();
-remote();
-multiple();
-flashJob();
 animateDendogram();
+
+
+//Scrollmagic
+function scrollMagic() {
+            var container = document.querySelector('#scroll');
+            var steps = container.querySelectorAll('.dm-job-generic');
+            // initialize the scrollama
+            var scroller = scrollama();
+            // scrollama event handlers
+            function handleStepEnter(response) {
+                // response = { element, direction, index }
+                if (response.index === 0) {
+                    jobYear();
+                } else if (response.index === 1) {
+                    centralizame();
+                } else if (response.index === 2) {
+                    remote();
+                } else if (response.index === 3) {
+                    multiple();
+                } else if (response.index === 4) {
+                    flashJob();
+                } else if (response.index === 5) {
+                    animateDendogram();
+                }
+            }
+            function init() {
+                // set random padding for different step heights (not required)
+                // steps.forEach(function (step) {
+                //     var v = 100 + Math.floor(Math.random() * window.innerHeight / 4);
+                //     step.style.padding = v + 'px 0px';
+                // });
+                // 1. setup the scroller with the bare-bones options
+                // this will also initialize trigger observations
+                // 3. bind scrollama event handlers (this can be chained like below)
+                scroller.setup({
+                    step: '.dm-job-generic',
+                    debug: false,
+                    offset: 0.8
+                })
+                    .onStepEnter(handleStepEnter)
+                    .onStepExit(handleStepExit);
+                // setup resize event
+                window.addEventListener('resize', scroller.resize);
+            }
+            // kick things off
+            init();};
+
+scrollMagic();
