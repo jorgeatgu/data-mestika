@@ -1,3 +1,4 @@
+//d3js magic
 var margin = { top: 48, right: 48, bottom: 48, left: 48 },
     width = 1000 - margin.left - margin.right,
     height = 650 - margin.top - margin.bottom;
@@ -107,13 +108,82 @@ function jobYear(){
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
 
-        chartLayer.selectAll("circles")
+        var dots = chartLayer.selectAll(".circles");
+
+        dots
             .data(data)
             .enter().append("circle")
             .attr("cx", function(d) { return x(d.fecha); })
             .attr("cy", function(d) { return y(d.total); })
             .attr("class", "circles")
             .attr("r", 3)
+
+        setTimeout(function() {
+
+            svg.selectAll("dot")
+                .attr("opacity", "1");
+            //Add annotations
+            var labels = [{
+                note: {
+                    title: "Primera oferta de UX: 1/10/09",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 445,
+                x: 157,
+                dy: -240,
+                dx: 0,
+            },{
+                note: {
+                    title: "Primera oferta de Angular: 3/2/14",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 400,
+                x: 600,
+                dy: -240,
+                dx: 0,
+            },{
+                note: {
+                    title: "Primera oferta de React: 10/2/16",
+                    wrap: 430,
+                    align: "middle"
+                },
+                y: 275,
+                x: 790,
+                dy: -190,
+                dx: 0,
+            }
+            ].map(function(l) {
+                l.note = Object.assign({}, l.note);
+                l.subject = { radius: 6 };
+                return l;
+            });
+
+            window.makeAnnotations = d3.annotation().annotations(labels).type(d3.annotationCalloutCircle).accessors({
+                x: function x(d) {
+                    return x(d.fecha);
+                },
+                y: function y(d) {
+                    return y(d.total);
+                }
+            }).accessorsInverse({
+                fecha: function fecha(d) {
+                    return x.invert(d.x);
+                },
+                total: function total(d) {
+                    return y.invert(d.y);
+                }
+            }).on('subjectover', function(annotation) {
+                annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", false);
+            }).on('subjectout', function(annotation) {
+                annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
+            });
+
+            svg.append("g").attr("class", "annotation-test").call(makeAnnotations);
+
+            svg.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
+        }, 1000)
 
     }
 
@@ -309,8 +379,7 @@ function multiple() {
 
     var priceline = d3.line()
         .x(function(d) { return x(d.fecha); })
-        .y(function(d) { return y(d.cantidad); })
-        .curve(d3.curveMonotoneX);
+        .y(function(d) { return y(d.cantidad); });
 
     var yAxis = d3.axisLeft(y)
         .tickSize(-width)
@@ -501,8 +570,104 @@ function flashJob(){
 
 }
 
-jobYear();
-centralizame();
-remote();
-multiple();
-flashJob();
+function animateDendogram() {
+    var madridTimeline = anime.timeline();
+    var madridDuration = 600;
+    var madridDelay = function(el, i) { return i * 200 };
+
+    madridTimeline
+        .add({
+            targets: '.mdl-two',
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        })
+        .add({
+            targets: '.madrid-dendogram-circle-middle',
+            r: [0, 5],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: 300
+        })
+        .add({
+            targets: '.madrid-dendogram-text-job',
+            opacity: [0, 1],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: 300
+        })
+        .add({
+            targets: '.mdl-three',
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        })
+        .add({
+            targets: '.madrid-dendogram-circle-final',
+            r: function(el) {
+                return el.getAttribute('mydata:id') * 1.25;
+            },
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        })
+        .add({
+            targets: '.madrid-dendogram-text-percentage',
+            opacity: [0, 1],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: 300
+        });
+}
+
+animateDendogram();
+
+
+//Scrollmagic
+function scrollMagic() {
+            var container = document.querySelector('#scroll');
+            var steps = container.querySelectorAll('.dm-job-generic');
+            // initialize the scrollama
+            var scroller = scrollama();
+            // scrollama event handlers
+            function handleStepEnter(response) {
+                // response = { element, direction, index }
+                if (response.index === 0) {
+                    jobYear();
+                } else if (response.index === 1) {
+                    centralizame();
+                } else if (response.index === 2) {
+                    remote();
+                } else if (response.index === 3) {
+                    multiple();
+                } else if (response.index === 4) {
+                    flashJob();
+                } else if (response.index === 5) {
+                    animateDendogram();
+                }
+            }
+            function init() {
+                // set random padding for different step heights (not required)
+                // steps.forEach(function (step) {
+                //     var v = 100 + Math.floor(Math.random() * window.innerHeight / 4);
+                //     step.style.padding = v + 'px 0px';
+                // });
+                // 1. setup the scroller with the bare-bones options
+                // this will also initialize trigger observations
+                // 3. bind scrollama event handlers (this can be chained like below)
+                scroller.setup({
+                    step: '.dm-job-generic',
+                    debug: false,
+                    offset: 0.8
+                })
+                    .onStepEnter(handleStepEnter)
+                    .onStepExit(handleStepExit);
+                // setup resize event
+                window.addEventListener('resize', scroller.resize);
+            }
+            // kick things off
+            init();};
+
+scrollMagic();

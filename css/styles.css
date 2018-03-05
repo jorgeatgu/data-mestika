@@ -641,6 +641,7 @@ p {
 
 .dm-job-city-header {
     width: 100%;
+
 }
 
 .dm-job-city-graph {
@@ -933,5 +934,41 @@ p {
             stroke-dasharray: 3px 3px;
             opacity: .7;
         }
+
+.madrid-dendogram-link {
+    fill: none;
+    stroke: #9C1B12;
+    stroke-width: 1px;
+}
+
+.madrid-dendogram-circle {
+    stroke: #111;
+    stroke-width: 1px;
+}
+
+.madrid-dendogram-circle-start,
+.madrid-dendogram-circle-middle {
+    fill: #F8DFAB;
+}
+
+.madrid-dendogram-circle-final {
+    fill: #759CA7;
+    stroke: #2D3065;
+}
+
+.madrid-dendogram-text {
+    font-size: 0.69rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-anchor: start;
+}
+
+.madrid-dendogram-text-job,
+.madrid-dendogram-text-percentage {
+    opacity: 0;
+}
+
+.madrid-dendogram-text-percentage {
+    font-size: 1rem;
+}
 
 /*# sourceMappingURL=styles.css.map */
