@@ -27,11 +27,15 @@
     }
     .y {
         .tick {
-            fill: none;
-            stroke: var(--alternateWes);
-            stroke-width: 1px;
-            stroke-dasharray: 3px 3px;
-            opacity: .7;
+            /* stylelint-disable */
+            line {
+                fill: none;
+                stroke: var(--alternateWes);
+                stroke-width: 1px;
+                stroke-dasharray: 3px 3px;
+                opacity: .7;
+            /* stylelint-enable */
+            }
         }
     }
 }
