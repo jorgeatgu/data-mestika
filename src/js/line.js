@@ -623,7 +623,7 @@ function animateDendogram() {
 }
 
 //Scrollmagic
-function scrollMagic() {
+function scrolama() {
             var container = document.querySelector('#scroll');
             var steps = container.querySelectorAll('.dm-job-generic');
             // initialize the scrollama
@@ -636,13 +636,13 @@ function scrollMagic() {
                 } else if (response.index === 1) {
                     centralizame();
                 } else if (response.index === 2) {
-                    remote();
-                } else if (response.index === 3) {
-                    multiple();
-                } else if (response.index === 4) {
-                    flashJob();
-                } else if (response.index === 5) {
                     animateDendogram();
+                } else if (response.index === 3) {
+                    remote();
+                } else if (response.index === 4) {
+                    multiple();
+                } else if (response.index === 5) {
+                    flashJob();
                 }
             }
             function init() {
@@ -659,12 +659,11 @@ function scrollMagic() {
                     debug: false,
                     offset: 0.2
                 })
-                    .onStepEnter(handleStepEnter)
-                    .onStepExit(handleStepExit);
+                    .onStepEnter(handleStepEnter);
                 // setup resize event
                 window.addEventListener('resize', scroller.resize);
             }
             // kick things off
             init();};
 
-scrollMagic();
+scrolama();

@@ -27,3 +27,8 @@
         fill: var(--alternateWes);
     }
 }
+
+.dm-job-title-year {
+    background-color: var(--alternateWes);
+    color: var(--goldenWes);
+}

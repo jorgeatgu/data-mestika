@@ -473,17 +473,36 @@ p {
         stroke: none;
     }
 
-.dm-title {
-    font-family: 'Roboto Condensed', sans-serif;
+.dm-job-title {
     font-size: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
     margin: 0;
-    background-color: #2D3065;
-    color: #F8DFAB;
     padding: 1rem 2rem;
-    display: inline-block;
+    display: block;
+    width: max-content;
 }
 
-.dm-title:before {
+.dm-job-title:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 2rem;
+        margin-right: .5rem;
+        background-color: #F8DFAB;
+        height: 1px;
+    }
+
+.dm-job-city-text-title {
+    font-size: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #F8DFAB;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #2D3065;
+    padding: 1rem 2rem;
+}
+
+.dm-job-city-text-title:before {
         content: '';
         display: inline-block;
         vertical-align: middle;
@@ -631,6 +650,11 @@ p {
         fill: #2D3065;
     }
 
+.dm-job-title-year {
+    background-color: #2D3065;
+    color: #F8DFAB;
+}
+
 .dm-job-city {
     width: 100%;
     min-height: 100vh;
@@ -655,23 +679,13 @@ p {
 }
 
 .dm-job-city-text-title {
-    font-size: 1.5rem;
     font-family: 'Roboto Condensed', sans-serif;
     color: #F8DFAB;
-    display: inline-block;
-    vertical-align: middle;
     background-color: #2D3065;
-    padding: 1rem 2rem;
 }
 
 .dm-job-city-text-title:before {
-        content: '';
-        display: inline-block;
-        vertical-align: middle;
-        width: 2rem;
-        margin-right: .5rem;
         background-color: #F8DFAB;
-        height: 1px;
     }
 
 .dm-job-city-text-paragraph {
@@ -734,15 +748,13 @@ p {
 }
 
 .dm-job-remote-title {
-    font-size: 1.5rem;
-    font-family: 'Roboto Condensed', sans-serif;
     color: #2D3065;
     background-color: #F8DFAB;
-    display: block;
-    padding: 1rem 2rem;
-    max-width: 21rem;
-    margin: 0;
 }
+
+.dm-job-remote-title:before {
+        background-color: #2D3065;
+    }
 
 .dm-job-remote-paragraph {
     font-size: 1rem;
@@ -801,16 +813,9 @@ p {
     background-color: #eee;
 }
 
-.dm-job-title {
-    font-size: 1.5rem;
-    font-family: 'Roboto Condensed', sans-serif;
+.dm-job-title-multiple {
     background-color: #2D3065;
     color: #F8DFAB;
-    display: block;
-    padding: 1rem 2rem;
-    width: max-content;
-    margin: 0;
-    margin-bottom: 3rem;
 }
 
 .dm-job-multiple-chart .tick line {
@@ -893,14 +898,8 @@ p {
 }
 
 .dm-job-flash-title {
-    font-size: 1.5rem;
-    font-family: 'Roboto Condensed', sans-serif;
     color: #F8DFAB;
     background-color: #9C1B12;
-    display: block;
-    padding: 1rem 2rem;
-    max-width: max-content;
-    margin: 0;
 }
 
 .dm-job-flash-paragraph {

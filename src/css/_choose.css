@@ -22,21 +22,11 @@
 }
 
 .dm-job-city-text-title {
-    font-size: 1.5rem;
     font-family: var(--roboto);
     color: var(--goldenWes);
-    display: inline-block;
-    vertical-align: middle;
     background-color: var(--alternateWes);
-    padding: 1rem 2rem;
     &:before {
-        content: '';
-        display: inline-block;
-        vertical-align: middle;
-        width: 2rem;
-        margin-right: .5rem;
         background-color: var(--goldenWes);
-        height: 1px;
     }
 }
 
