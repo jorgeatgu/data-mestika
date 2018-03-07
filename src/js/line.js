@@ -573,35 +573,35 @@ function flashJob(){
 function animateDendogram() {
     var madridTimeline = anime.timeline();
     var madridDuration = 150;
-    var madridEasing = 'easeOutCubic';
+    var madridEasing = 'easeInOutSine';
     var madridDelay = function(el, i) { return i * 200 };
 
     madridTimeline
         .add({
             targets: '.mdl-two',
             strokeDashoffset: [anime.setDashoffset, 0],
-            easing: madridEasing,
+            easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
             targets: '.madrid-dendogram-circle-middle',
             r: [0, 5],
-            easing: madridEasing,
+            easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
             targets: '.madrid-dendogram-text-job',
             opacity: [0, 1],
-            easing: madridEasing,
+            easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
             targets: '.mdl-three',
             strokeDashoffset: [anime.setDashoffset, 0],
-            easing: madridEasing,
+            easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
@@ -610,14 +610,14 @@ function animateDendogram() {
             r: function(el) {
                 return el.getAttribute('mydata:id') * 1.25;
             },
-            easing: madridEasing,
+            easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
             targets: '.madrid-dendogram-text-percentage',
             opacity: [0, 1],
-            easing: madridEasing,
+            easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         });
