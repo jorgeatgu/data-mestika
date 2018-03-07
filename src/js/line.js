@@ -623,6 +623,82 @@ function animateDendogram() {
         });
 }
 
+var btnMadrid = document.getElementsByClassName('.js-dm-job-dendogram-btn-m');
+var btnBarcelona = document.getElementsByClassName('.js-dm-job-dendogram-btn-b');
+var btnRemoto = document.getElementsByClassName('.js-dm-job-dendogram-btn-r');
+
+
+
+function dendogramMadrid() {
+
+    var specificUnitValue = anime({
+      targets: '.madrid-dendogram',
+      translateX: '0',
+      opacity: [0, 1]
+    });
+
+    var specificUnitValue = anime({
+      targets: '.remoto-dendogram',
+      translateX: '200%',
+      opacity: [1, 0]
+    });
+
+    var specificUnitValue = anime({
+      targets: '.barcelona-dendogram',
+      translateX: '200%',
+      opacity: [1, 0]
+    });
+
+}
+
+function dendogramBarcelona() {
+
+    var specificUnitValue = anime({
+      targets: '.barcelona-dendogram',
+      translateX: '0',
+      opacity: [0, 1]
+    });
+
+    var specificUnitValue = anime({
+      targets: '.madrid-dendogram',
+      translateX: '200%',
+      opacity: [1, 0]
+    });
+
+    var specificUnitValue = anime({
+      targets: '.remoto-dendogram',
+      translateX: '200%',
+      opacity: [1, 0]
+    });
+
+}
+
+function dendogramRemoto() {
+
+    var specificUnitValue = anime({
+      targets: '.remoto-dendogram',
+      translateX: '0',
+      opacity: [0, 1]
+    });
+
+    var specificUnitValue = anime({
+      targets: '.madrid-dendogram',
+      translateX: '200%',
+      opacity: [1, 0]
+    });
+
+    var specificUnitValue = anime({
+      targets: '.barcelona-dendogram',
+      translateX: '200%',
+      opacity: [1, 0]
+    });
+
+}
+
+document.querySelector('.js-dm-job-dendogram-btn-m').addEventListener('click', dendogramMadrid);
+document.querySelector('.js-dm-job-dendogram-btn-b').addEventListener('click', dendogramBarcelona);
+document.querySelector('.js-dm-job-dendogram-btn-r').addEventListener('click', dendogramRemoto);
+
 //Scrollmagic
 function scrolama() {
             var container = document.querySelector('#scroll');
