@@ -815,6 +815,10 @@ p {
     max-width: 25rem;
 }
 
+.dendo-hide {
+    opacity: 0;
+}
+
 .dm-job-remote {
     width: 100%;
     background-color: #759CA7;

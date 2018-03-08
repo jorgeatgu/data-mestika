@@ -623,43 +623,37 @@ function animateDendogram() {
         });
 }
 
-.madrid-dendogram {
-}
-.barcelona-dendogram {
-}
-.remote-dendogram {
-}
-
 function dendogram() {
 
-    var dendoMadrid = document.getElementsByClassName('.js-dm-job-dendogram-btn-m');
-    var dendoBarcelona = document.getElementsByClassName('.js-dm-job-dendogram-btn-b');
-    var dendoRemoto = document.getElementsByClassName('.js-dm-job-dendogram-btn-r');
+    var dendoMadrid = document.querySelector('#madrid-dendogram');
+    var dendoBarcelona = document.querySelector('#barcelona-dendogram');
+    var dendoRemote = document.querySelector('#remote-dendogram');
 
-    function classToggle() {
-        burger.classList.toggle('clicked');
-        overlay.classList.toggle('show');
-        navigation.classList.toggle('show');
-        body.classList.toggle('overflow');
+    function madridOpacity() {
+        lunar.removeClass(dendoMadrid, "dendo-hide");
+        lunar.addClass(dendoBarcelona, 'dendo-hide')
+        lunar.addClass(dendoRemote, 'dendo-hide');
     }
 
-    document.querySelector('.burger').addEventListener('click', classToggle);
-    document.querySelector('.overlay').addEventListener('click', classToggle);
-    document.querySelector('.overlay').addEventListener('click', classToggle);
-
-    for(i=0; i<elementBtn.length; i++){
-        elementBtn[i].addEventListener("click", function(){
-            removeClass();
-        });
+    function barcelonaOpacity() {
+        lunar.removeClass(dendoBarcelona, "dendo-hide");
+        lunar.addClass(dendoMadrid, 'dendo-hide')
+        lunar.addClass(dendoRemote, 'dendo-hide');
     }
 
-    function removeClass() {
-        overlay.classList.remove("show");
-        navigation.classList.remove("show");
-        burger.classList.remove("clicked");
-
+    function remoteOpacity() {
+        lunar.removeClass(dendoRemote, "dendo-hide");
+        lunar.addClass(dendoBarcelona, 'dendo-hide')
+        lunar.addClass(dendoMadrid, 'dendo-hide');
     }
+
+    document.querySelector('.js-dm-job-dendogram-btn-m').addEventListener('click', madridOpacity);
+    document.querySelector('.js-dm-job-dendogram-btn-b').addEventListener('click', barcelonaOpacity);
+    document.querySelector('.js-dm-job-dendogram-btn-r').addEventListener('click', remoteOpacity);
+
 }
+
+dendogram();
 
 
 //Scrollmagic

@@ -67,3 +67,7 @@
     display: inline-block;
     max-width: 25rem;
 }
+
+.dendo-hide {
+    opacity: 0;
+}
