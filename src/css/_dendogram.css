@@ -67,10 +67,3 @@
     display: inline-block;
     max-width: 25rem;
 }
-
-.barcelona-dendogram,
-.remoto-dendogram {
-    opacity: 0;
-    transform: translateY(-100%);
-}
-

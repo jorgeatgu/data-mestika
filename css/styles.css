@@ -815,12 +815,6 @@ p {
     max-width: 25rem;
 }
 
-.barcelona-dendogram,
-.remoto-dendogram {
-    opacity: 0;
-    transform: translateY(-100%);
-}
-
 .dm-job-remote {
     width: 100%;
     background-color: #759CA7;
