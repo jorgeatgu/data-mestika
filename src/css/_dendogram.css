@@ -71,6 +71,6 @@
 .barcelona-dendogram,
 .remoto-dendogram {
     opacity: 0;
-    transform: translateX(200%);
+    transform: translateY(-100%);
 }
 

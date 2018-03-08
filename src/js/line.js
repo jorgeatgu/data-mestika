@@ -623,81 +623,44 @@ function animateDendogram() {
         });
 }
 
-var btnMadrid = document.getElementsByClassName('.js-dm-job-dendogram-btn-m');
-var btnBarcelona = document.getElementsByClassName('.js-dm-job-dendogram-btn-b');
-var btnRemoto = document.getElementsByClassName('.js-dm-job-dendogram-btn-r');
-
-
-
-function dendogramMadrid() {
-
-    var specificUnitValue = anime({
-      targets: '.madrid-dendogram',
-      translateX: '0',
-      opacity: [0, 1]
-    });
-
-    var specificUnitValue = anime({
-      targets: '.remoto-dendogram',
-      translateX: '200%',
-      opacity: [1, 0]
-    });
-
-    var specificUnitValue = anime({
-      targets: '.barcelona-dendogram',
-      translateX: '200%',
-      opacity: [1, 0]
-    });
-
+.madrid-dendogram {
+}
+.barcelona-dendogram {
+}
+.remote-dendogram {
 }
 
-function dendogramBarcelona() {
+function dendogram() {
 
-    var specificUnitValue = anime({
-      targets: '.barcelona-dendogram',
-      translateX: '0',
-      opacity: [0, 1]
-    });
+    var dendoMadrid = document.getElementsByClassName('.js-dm-job-dendogram-btn-m');
+    var dendoBarcelona = document.getElementsByClassName('.js-dm-job-dendogram-btn-b');
+    var dendoRemoto = document.getElementsByClassName('.js-dm-job-dendogram-btn-r');
 
-    var specificUnitValue = anime({
-      targets: '.madrid-dendogram',
-      translateX: '200%',
-      opacity: [1, 0]
-    });
+    function classToggle() {
+        burger.classList.toggle('clicked');
+        overlay.classList.toggle('show');
+        navigation.classList.toggle('show');
+        body.classList.toggle('overflow');
+    }
 
-    var specificUnitValue = anime({
-      targets: '.remoto-dendogram',
-      translateX: '200%',
-      opacity: [1, 0]
-    });
+    document.querySelector('.burger').addEventListener('click', classToggle);
+    document.querySelector('.overlay').addEventListener('click', classToggle);
+    document.querySelector('.overlay').addEventListener('click', classToggle);
 
+    for(i=0; i<elementBtn.length; i++){
+        elementBtn[i].addEventListener("click", function(){
+            removeClass();
+        });
+    }
+
+    function removeClass() {
+        overlay.classList.remove("show");
+        navigation.classList.remove("show");
+        burger.classList.remove("clicked");
+
+    }
 }
 
-function dendogramRemoto() {
-
-    var specificUnitValue = anime({
-      targets: '.remoto-dendogram',
-      translateX: '0',
-      opacity: [0, 1]
-    });
-
-    var specificUnitValue = anime({
-      targets: '.madrid-dendogram',
-      translateX: '200%',
-      opacity: [1, 0]
-    });
-
-    var specificUnitValue = anime({
-      targets: '.barcelona-dendogram',
-      translateX: '200%',
-      opacity: [1, 0]
-    });
-
-}
-
-document.querySelector('.js-dm-job-dendogram-btn-m').addEventListener('click', dendogramMadrid);
-document.querySelector('.js-dm-job-dendogram-btn-b').addEventListener('click', dendogramBarcelona);
-document.querySelector('.js-dm-job-dendogram-btn-r').addEventListener('click', dendogramRemoto);
 
 //Scrollmagic
 function scrolama() {
