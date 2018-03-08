@@ -22,14 +22,32 @@ p {
     }
 }
 
-.dm-title {
-    font-family: var(--roboto);
+.dm-job-title {
     font-size: 1.5rem;
+    font-family: var(--roboto);
     margin: 0;
-    background-color: var(--alternateWes);
-    color: var(--goldenWes);
     padding: 1rem 2rem;
+    display: block;
+    width: max-content;
+    &:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 2rem;
+        margin-right: .5rem;
+        background-color: var(--goldenWes);
+        height: 1px;
+    }
+}
+
+.dm-job-city-text-title {
+    font-size: 1.5rem;
+    font-family: var(--roboto);
+    color: var(--goldenWes);
     display: inline-block;
+    vertical-align: middle;
+    background-color: var(--alternateWes);
+    padding: 1rem 2rem;
     &:before {
         content: '';
         display: inline-block;
@@ -64,7 +82,7 @@ p {
 }
 
 .dm-job-generic {
-    padding: 5rem 0;
+    padding: 3rem 0;
 }
 
 .dm-container-graph {

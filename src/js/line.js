@@ -1,7 +1,7 @@
 //d3js magic
 var margin = { top: 48, right: 48, bottom: 48, left: 48 },
     width = 1000 - margin.left - margin.right,
-    height = 650 - margin.top - margin.bottom;
+    height = 550 - margin.top - margin.bottom;
 
 function jobYear(){
 
@@ -572,7 +572,8 @@ function flashJob(){
 
 function animateDendogram() {
     var madridTimeline = anime.timeline();
-    var madridDuration = 600;
+    var madridDuration = 150;
+    var madridEasing = 'easeInOutSine';
     var madridDelay = function(el, i) { return i * 200 };
 
     madridTimeline
@@ -588,14 +589,14 @@ function animateDendogram() {
             r: [0, 5],
             easing: 'easeInOutSine',
             delay: madridDelay,
-            duration: 300
+            duration: madridDuration
         })
         .add({
             targets: '.madrid-dendogram-text-job',
             opacity: [0, 1],
             easing: 'easeInOutSine',
             delay: madridDelay,
-            duration: 300
+            duration: madridDuration
         })
         .add({
             targets: '.mdl-three',
@@ -618,15 +619,45 @@ function animateDendogram() {
             opacity: [0, 1],
             easing: 'easeInOutSine',
             delay: madridDelay,
-            duration: 300
+            duration: madridDuration
         });
 }
 
-animateDendogram();
+function dendogram() {
+
+    var dendoMadrid = document.querySelector('#madrid-dendogram');
+    var dendoBarcelona = document.querySelector('#barcelona-dendogram');
+    var dendoRemote = document.querySelector('#remote-dendogram');
+
+    function madridOpacity() {
+        lunar.removeClass(dendoMadrid, "dendo-hide");
+        lunar.addClass(dendoBarcelona, 'dendo-hide')
+        lunar.addClass(dendoRemote, 'dendo-hide');
+    }
+
+    function barcelonaOpacity() {
+        lunar.removeClass(dendoBarcelona, "dendo-hide");
+        lunar.addClass(dendoMadrid, 'dendo-hide')
+        lunar.addClass(dendoRemote, 'dendo-hide');
+    }
+
+    function remoteOpacity() {
+        lunar.removeClass(dendoRemote, "dendo-hide");
+        lunar.addClass(dendoBarcelona, 'dendo-hide')
+        lunar.addClass(dendoMadrid, 'dendo-hide');
+    }
+
+    document.querySelector('.js-dm-job-dendogram-btn-m').addEventListener('click', madridOpacity);
+    document.querySelector('.js-dm-job-dendogram-btn-b').addEventListener('click', barcelonaOpacity);
+    document.querySelector('.js-dm-job-dendogram-btn-r').addEventListener('click', remoteOpacity);
+
+}
+
+dendogram();
 
 
 //Scrollmagic
-function scrollMagic() {
+function scrolama() {
             var container = document.querySelector('#scroll');
             var steps = container.querySelectorAll('.dm-job-generic');
             // initialize the scrollama
@@ -639,13 +670,13 @@ function scrollMagic() {
                 } else if (response.index === 1) {
                     centralizame();
                 } else if (response.index === 2) {
-                    remote();
-                } else if (response.index === 3) {
-                    multiple();
-                } else if (response.index === 4) {
-                    flashJob();
-                } else if (response.index === 5) {
                     animateDendogram();
+                } else if (response.index === 3) {
+                    remote();
+                } else if (response.index === 4) {
+                    multiple();
+                } else if (response.index === 5) {
+                    flashJob();
                 }
             }
             function init() {
@@ -660,14 +691,13 @@ function scrollMagic() {
                 scroller.setup({
                     step: '.dm-job-generic',
                     debug: false,
-                    offset: 0.8
+                    offset: 0.2
                 })
-                    .onStepEnter(handleStepEnter)
-                    .onStepExit(handleStepExit);
+                    .onStepEnter(handleStepEnter);
                 // setup resize event
                 window.addEventListener('resize', scroller.resize);
             }
             // kick things off
             init();};
 
-scrollMagic();
+scrolama();

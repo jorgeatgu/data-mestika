@@ -1,12 +1,6 @@
 .dm-job-flash-title {
-    font-size: 1.5rem;
-    font-family: 'Roboto Condensed', sans-serif;
     color: var(--goldenWes);
     background-color: var(--redWes);
-    display: block;
-    padding: 1rem 2rem;
-    max-width: max-content;
-    margin: 0;
 }
 
 .dm-job-flash-paragraph {
@@ -33,11 +27,15 @@
     }
     .y {
         .tick {
-            fill: none;
-            stroke: var(--alternateWes);
-            stroke-width: 1px;
-            stroke-dasharray: 3px 3px;
-            opacity: .7;
+            /* stylelint-disable */
+            line {
+                fill: none;
+                stroke: var(--alternateWes);
+                stroke-width: 1px;
+                stroke-dasharray: 3px 3px;
+                opacity: .7;
+            /* stylelint-enable */
+            }
         }
     }
 }
