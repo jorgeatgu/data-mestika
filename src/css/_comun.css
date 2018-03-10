@@ -89,3 +89,9 @@ p {
     text-align: center;
     min-height: 80vh;
 }
+
+.legend {
+    font-size: 14px;
+    font-family: var(--roboto);
+    color: var(--black);
+}

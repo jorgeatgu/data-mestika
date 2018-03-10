@@ -84,6 +84,14 @@ function jobYear(){
 
     function drawChart(data) {
 
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "1em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
+
         var valueline = d3.line()
             .x(function(d) { return x(d.fecha); })
             .y(function(d) { return y(d.total); });
@@ -608,7 +616,7 @@ function animateDendogram() {
         .add({
             targets: '#madrid-dendogram .madrid-dendogram-circle-final',
             r: function(el) {
-                return el.getAttribute('mydata:id') * 1.25;
+                return el.getAttribute('mydata:id');
             },
             easing: 'easeInOutSine',
             delay: madridDelay,
@@ -668,19 +676,19 @@ function scrolama() {
                 if (response.index === 0 && !response.element.classList.contains('scrollaunch')) {
                     jobYear();
                     response.element.classList.add('scrollaunch');
-                } else if (response.index === 1) {
+                } else if (response.index === 1 && !response.element.classList.contains('scrollaunch')) {
                     centralizame();
                     response.element.classList.add('scrollaunch');
-                } else if (response.index === 2) {
+                } else if (response.index === 2 && !response.element.classList.contains('scrollaunch')) {
                     animateDendogram();
                     response.element.classList.add('scrollaunch');
-                } else if (response.index === 3) {
+                } else if (response.index === 3 && !response.element.classList.contains('scrollaunch')) {
                     remote();
                     response.element.classList.add('scrollaunch');
-                } else if (response.index === 4) {
+                } else if (response.index === 4 && !response.element.classList.contains('scrollaunch')) {
                     multiple();
                     response.element.classList.add('scrollaunch');
-                } else if (response.index === 5) {
+                } else if (response.index === 5 && !response.element.classList.contains('scrollaunch')) {
                     flashJob();
                     response.element.classList.add('scrollaunch');
                 }

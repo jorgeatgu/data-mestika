@@ -543,6 +543,12 @@ p {
     min-height: 80vh;
 }
 
+.legend {
+    font-size: 0.88rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #111;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -654,6 +660,10 @@ p {
     background-color: #2D3065;
     color: #F8DFAB;
 }
+
+.dm-job-year-graph .axis .domain {
+            stroke: none;
+        }
 
 .dm-job-city {
     width: 100%;
