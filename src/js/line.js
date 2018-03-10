@@ -578,35 +578,35 @@ function animateDendogram() {
 
     madridTimeline
         .add({
-            targets: '.mdl-two',
+            targets: '#madrid-dendogram .mdl-two',
             strokeDashoffset: [anime.setDashoffset, 0],
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.madrid-dendogram-circle-middle',
+            targets: '#madrid-dendogram .madrid-dendogram-circle-middle',
             r: [0, 5],
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.madrid-dendogram-text-job',
+            targets: '#madrid-dendogram .madrid-dendogram-text-job',
             opacity: [0, 1],
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.mdl-three',
+            targets: '#madrid-dendogram .mdl-three',
             strokeDashoffset: [anime.setDashoffset, 0],
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.madrid-dendogram-circle-final',
+            targets: '#madrid-dendogram .madrid-dendogram-circle-final',
             r: function(el) {
                 return el.getAttribute('mydata:id') * 1.25;
             },
@@ -615,7 +615,7 @@ function animateDendogram() {
             duration: madridDuration
         })
         .add({
-            targets: '.madrid-dendogram-text-percentage',
+            targets: '#madrid-dendogram .madrid-dendogram-text-percentage',
             opacity: [0, 1],
             easing: 'easeInOutSine',
             delay: madridDelay,
@@ -665,18 +665,24 @@ function scrolama() {
             // scrollama event handlers
             function handleStepEnter(response) {
                 // response = { element, direction, index }
-                if (response.index === 0) {
+                if (response.index === 0 && !response.element.classList.contains('scrollaunch')) {
                     jobYear();
+                    response.element.classList.add('scrollaunch');
                 } else if (response.index === 1) {
                     centralizame();
+                    response.element.classList.add('scrollaunch');
                 } else if (response.index === 2) {
                     animateDendogram();
+                    response.element.classList.add('scrollaunch');
                 } else if (response.index === 3) {
                     remote();
+                    response.element.classList.add('scrollaunch');
                 } else if (response.index === 4) {
                     multiple();
+                    response.element.classList.add('scrollaunch');
                 } else if (response.index === 5) {
                     flashJob();
+                    response.element.classList.add('scrollaunch');
                 }
             }
             function init() {
