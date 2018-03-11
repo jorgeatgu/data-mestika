@@ -270,6 +270,12 @@ function centralizame() {
             .paddingInner(0.2)
             .paddingOuter(0.5);
 
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("y", "77%")
+            .attr("x", "50%")
+            .style("text-anchor", "end")
+            .text("Porcetanje de ofertas");
 
         svg.append("g")
             .attr("class", "xAxis")
@@ -351,6 +357,13 @@ function remote() {
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0);
 
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "-2em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
 
         svg.append("g")
             .attr("class", "xAxis")
@@ -421,6 +434,13 @@ function multiple() {
                 .attr("d", priceline(d.values));
         });
 
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "-2em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
 
         svg.append("g")
             .attr("class", "xAxis")
@@ -542,6 +562,14 @@ function flashJob(){
 
         selectedLineElm.merge(newLineElm)
             .attr("d", valueline)
+
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "1.5em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
 
     }
 
