@@ -541,6 +541,7 @@ p {
 .dm-container-graph {
     text-align: center;
     min-height: 80vh;
+    position: relative;
 }
 
 .legend {
@@ -680,7 +681,6 @@ p {
 
 .dm-job-city-header {
     width: 100%;
-
 }
 
 .dm-job-city-graph {
@@ -755,6 +755,31 @@ p {
     }
 
 /* stylelint-enable */
+
+.tooltip-container {
+    position: absolute;
+    display: block;
+    width: max-content;
+    background-color: #fff;
+    border: 1px solid #9C1B12;
+    padding: .5rem 1rem;
+    top: 0;
+    left: 0;
+}
+
+.tooltip-centralizame {
+    font-size: 0.88rem;
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.tooltip-centralizame p + p {
+        display: none;
+    }
+
+.tooltip-contralizame-ciudad {
+    font-weight: bold;
+}
 
 .dm-job-dendogram-title {
     color: #F8DFAB;
