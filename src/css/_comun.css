@@ -95,3 +95,8 @@ p {
     font-family: var(--roboto);
     color: var(--black);
 }
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}

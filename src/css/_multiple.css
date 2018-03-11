@@ -37,6 +37,15 @@
             stroke: none;
         }
     }
+    .lengend-circle-text {
+        font-family: var(--roboto);
+        font-size: 13px;
+    }
+    .mouse-line {
+        stroke: var(--black);
+        stroke-width: 1px;
+        opacity: 0;
+    }
 }
 
 .dm-job-multiple-legend {
