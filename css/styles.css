@@ -541,6 +541,18 @@ p {
 .dm-container-graph {
     text-align: center;
     min-height: 80vh;
+    position: relative;
+}
+
+.legend {
+    font-size: 0.88rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #111;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
 }
 
 * {
@@ -655,17 +667,19 @@ p {
     color: #F8DFAB;
 }
 
+.dm-job-year-graph .axis .domain {
+            stroke: none;
+        }
+
 .dm-job-city {
     width: 100%;
     min-height: 100vh;
     font-size: 0;
     background-color: rgba(248, 223, 171, .6);
-    padding: 5rem 0;
 }
 
 .dm-job-city-header {
     width: 100%;
-
 }
 
 .dm-job-city-graph {
@@ -741,6 +755,31 @@ p {
 
 /* stylelint-enable */
 
+.tooltip-container {
+    position: absolute;
+    display: block;
+    width: max-content;
+    background-color: #fff;
+    border: 1px solid #9C1B12;
+    padding: .5rem 1rem;
+    top: 0;
+    left: 0;
+}
+
+.tooltip-centralizame {
+    font-size: 0.88rem;
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.tooltip-centralizame p + p {
+        display: none;
+    }
+
+.tooltip-contralizame-ciudad {
+    font-weight: bold;
+}
+
 .dm-job-dendogram-title {
     color: #F8DFAB;
     background-color: #2D3065;
@@ -814,6 +853,10 @@ p {
     display: inline-block;
     max-width: 25rem;
 }
+
+.dm-job-city-dendogram .node .madrid-dendogram-text {
+            font-size: 1rem;
+        }
 
 .dendo-hide {
     opacity: 0;
@@ -925,6 +968,17 @@ p {
 .dm-job-multiple-chart .xAxis .domain, .dm-job-multiple-chart .yAxis .domain {
             stroke: none;
         }
+
+.dm-job-multiple-chart .lengend-circle-text {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 0.81rem;
+    }
+
+.dm-job-multiple-chart .mouse-line {
+        stroke: #111;
+        stroke-width: 1px;
+        opacity: 0;
+    }
 
 .dm-job-multiple-legend {
     width: 100%;

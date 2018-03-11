@@ -88,4 +88,16 @@ p {
 .dm-container-graph {
     text-align: center;
     min-height: 80vh;
+    position: relative;
+}
+
+.legend {
+    font-size: 14px;
+    font-family: var(--roboto);
+    color: var(--black);
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
 }

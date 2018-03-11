@@ -32,3 +32,11 @@
     background-color: var(--alternateWes);
     color: var(--goldenWes);
 }
+
+.dm-job-year-graph {
+    .axis {
+        .domain {
+            stroke: none;
+        }
+    }
+}

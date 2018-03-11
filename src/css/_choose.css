@@ -3,12 +3,10 @@
     min-height: 100vh;
     font-size: 0;
     background-color: var(--goldenWesLow);
-    padding: 5rem 0;
 }
 
 .dm-job-city-header {
     width: 100%;
-
 }
 
 .dm-job-city-graph {
@@ -56,8 +54,6 @@
     display: inline-block;
     vertical-align: middle;
 }
-
-
 /* stylelint-disable */
 
 .dm-job-city-chart {
@@ -88,6 +84,27 @@
         fill: var(--alternateWes);
     }
 }
-
-
 /* stylelint-enable */
+.tooltip-container {
+    position: absolute;
+    display: block;
+    width: max-content;
+    background-color: var(--white);
+    border: 1px solid var(--redWes);
+    padding: .5rem 1rem;
+    top: 0;
+    left: 0;
+}
+
+.tooltip-centralizame {
+    font-size: 14px;
+    margin: 0;
+    font-family: var(--roboto);
+    p + p {
+        display: none;
+    }
+}
+
+.tooltip-contralizame-ciudad {
+    font-weight: bold;
+}

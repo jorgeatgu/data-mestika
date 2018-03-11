@@ -68,6 +68,14 @@
     max-width: 25rem;
 }
 
+.dm-job-city-dendogram {
+    .node {
+        .madrid-dendogram-text {
+            font-size: 1rem;
+        }
+    }
+}
+
 .dendo-hide {
     opacity: 0;
 }

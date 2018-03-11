@@ -3,9 +3,9 @@ var margin = { top: 48, right: 48, bottom: 48, left: 48 },
     width = 1000 - margin.left - margin.right,
     height = 550 - margin.top - margin.bottom;
 
-function jobYear(){
+function jobYear() {
 
-    var width,height
+    var width, height
     var chartWidth, chartHeight
     var margin
     var svg = d3.select(".dm-job-year-graph")
@@ -18,7 +18,7 @@ function jobYear(){
     var parseTime = d3.timeParse("%d-%b-%y");
 
 
-    d3.csv("csv/data-ofertas-anyo.csv", cast,  main)
+    d3.csv("csv/data-ofertas-anyo.csv", cast, main)
 
 
     function cast(d) {
@@ -40,18 +40,18 @@ function jobYear(){
     }
 
     function setReSizeEvent(data) {
-            var resizeTimer;
+        var resizeTimer;
 
-            window.addEventListener('resize', function (event) {
+        window.addEventListener('resize', function(event) {
 
-                if (resizeTimer !== false) {
-                    clearTimeout(resizeTimer);
-                }
-                resizeTimer = setTimeout(function () {
-                    update(data)
-                });
+            if (resizeTimer !== false) {
+                clearTimeout(resizeTimer);
+            }
+            resizeTimer = setTimeout(function() {
+                update(data)
             });
-        }
+        });
+    }
 
 
     function setSize(data) {
@@ -66,8 +66,8 @@ function jobYear(){
             right: 48
         }
 
-        chartWidth = width - (margin.left+margin.right)
-        chartHeight = height - (margin.top+margin.bottom)
+        chartWidth = width - (margin.left + margin.right)
+        chartHeight = height - (margin.top + margin.bottom)
 
         svg.attr("width", width).attr("height", height)
         axisLayer.attr("width", width).attr("height", height)
@@ -75,7 +75,7 @@ function jobYear(){
         chartLayer
             .attr("width", chartWidth)
             .attr("height", chartHeight)
-            .attr("transform", "translate("+[margin.left, margin.top]+")")
+            .attr("transform", "translate(" + [margin.left, margin.top] + ")")
 
         x.domain(d3.extent(data, function(d) { return d.fecha })).range([0, chartWidth])
         y.domain([0, d3.max(data, function(d) { return d.total })]).range([chartHeight, 0])
@@ -83,6 +83,14 @@ function jobYear(){
     }
 
     function drawChart(data) {
+
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "1em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
 
         var valueline = d3.line()
             .x(function(d) { return x(d.fecha); })
@@ -100,7 +108,7 @@ function jobYear(){
 
         var totalLength = newLineElm.node().getTotalLength();
 
-            newLineElm
+        newLineElm
             .attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
             .transition()
@@ -133,7 +141,7 @@ function jobYear(){
                 x: 157,
                 dy: -240,
                 dx: 0,
-            },{
+            }, {
                 note: {
                     title: "Primera oferta de Angular: 3/2/14",
                     wrap: 430,
@@ -143,7 +151,7 @@ function jobYear(){
                 x: 600,
                 dy: -240,
                 dx: 0,
-            },{
+            }, {
                 note: {
                     title: "Primera oferta de React: 10/2/16",
                     wrap: 430,
@@ -153,8 +161,7 @@ function jobYear(){
                 x: 790,
                 dy: -190,
                 dx: 0,
-            }
-            ].map(function(l) {
+            }].map(function(l) {
                 l.note = Object.assign({}, l.note);
                 l.subject = { radius: 6 };
                 return l;
@@ -187,7 +194,7 @@ function jobYear(){
 
     }
 
-    function drawAxis(){
+    function drawAxis() {
 
         var yAxis = d3.axisLeft(y)
             .tickSizeInner(-chartWidth)
@@ -201,7 +208,7 @@ function jobYear(){
             .attr("class", "axis y")
 
         selectedYAxisElm.merge(newYAxisElm)
-            .attr("transform", "translate("+[margin.left, margin.top]+")")
+            .attr("transform", "translate(" + [margin.left, margin.top] + ")")
             .call(yAxis);
 
         var xAxis = d3.axisBottom(x)
@@ -213,7 +220,7 @@ function jobYear(){
             .attr("class", "axis x")
 
         selectedXAxisElm.merge(newXAxisElm)
-            .attr("transform", "translate("+[margin.left, chartHeight+margin.top]+")")
+            .attr("transform", "translate(" + [margin.left, chartHeight + margin.top] + ")")
             .call(xAxis);
 
     }
@@ -245,6 +252,12 @@ function centralizame() {
 
     var yAxis = d3.axisLeft(y);
 
+    var tooltip = d3.select(".dm-job-city .dm-container-graph")
+        .append("div")
+        .attr("class", "tooltip-container")
+        .style("opacity", 0);
+
+
     d3.csv('csv/data-ciudades-porcentaje.csv', function(err, data) {
 
         data.forEach(function(d) {
@@ -262,6 +275,12 @@ function centralizame() {
             .paddingInner(0.2)
             .paddingOuter(0.5);
 
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("y", "77%")
+            .attr("x", "50%")
+            .style("text-anchor", "end")
+            .text("Porcetanje de ofertas");
 
         svg.append("g")
             .attr("class", "xAxis")
@@ -285,6 +304,11 @@ function centralizame() {
             .attr("x", 0)
             .attr("height", y.bandwidth())
             .attr("y", function(d) { return y(d.ciudad); })
+            .on("mouseover", function(d) {
+                tooltip.transition().duration(300).style("opacity", 1);
+                tooltip
+                    .html('<p class="tooltip-centralizame">Ofertas de trabajo en ' + '<span class="tooltip-contralizame-ciudad">' + d.ciudad + ' </span>' + d.ofertas + '<p/>')
+            })
             .transition()
             .duration(1500)
             .ease(d3.easePolyInOut)
@@ -343,6 +367,13 @@ function remote() {
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0);
 
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "-2em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
 
         svg.append("g")
             .attr("class", "xAxis")
@@ -377,6 +408,8 @@ function multiple() {
     var x = d3.scaleTime().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
 
+    var bisectDate = d3.bisector(function(d) { return d.fecha; }).left;
+
     var priceline = d3.line()
         .x(function(d) { return x(d.fecha); })
         .y(function(d) { return y(d.cantidad); });
@@ -403,16 +436,27 @@ function multiple() {
         var colors = ["#b114c0", "#9C1B12", "#759CA7", "#CEBAC6", "#2D3065"]
 
         var color = d3.scaleOrdinal(colors);
+        var focus = svg.append("g")
+            .attr("class", "focus")
+            .style("display", "none");
 
         dataComb.forEach(function(d) {
             svg.append("path")
-                .attr("class", "line")
+                .attr("class", "line " + d.key)
                 .style("stroke", function() {
                     return d.color = color(d.key)
                 })
                 .attr("d", priceline(d.values));
+
         });
 
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "-2em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
 
         svg.append("g")
             .attr("class", "xAxis")
@@ -436,12 +480,100 @@ function multiple() {
                 .style("stroke-width", 2)
         })
 
+
+        //d3 mouseover multi-line chart https://bl.ocks.org/larsenmtl/e3b8b7c2ca4787f77d78f58d41c3da91
+        var mouseG = svg.append("g")
+            .attr("class", "mouse-over-effects");
+
+        mouseG.append("path") // this is the black vertical line to follow mouse
+            .attr("class", "mouse-line");
+
+        var lines = document.getElementsByClassName('line');
+
+        var mousePerLine = mouseG.selectAll('.mouse-per-line')
+            .data(dataComb)
+            .enter()
+            .append("g")
+            .attr("class", "mouse-per-line");
+
+        mousePerLine.append("circle")
+            .attr("r", 7)
+            .style("fill", "none")
+            .attr("stroke", function(d, i) {
+                return color(i);
+            })
+            .style("stroke-width", "2px")
+            .style("opacity", "0");
+
+        mousePerLine.append("text")
+            .attr("class", "lengend-circle-text")
+            .attr("transform", "translate(10,3)");
+
+        mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
+            .attr('width', width) // can't catch mouse events on a g element
+            .attr('height', height)
+            .attr('fill', 'none')
+            .attr('pointer-events', 'all')
+            .on('mouseout', function() { // on mouse out hide line, circles and text
+                d3.select(".mouse-line")
+                    .style("opacity", "0");
+                d3.selectAll(".mouse-per-line circle")
+                    .style("opacity", "0");
+                d3.selectAll(".mouse-per-line text")
+                    .style("opacity", "0");
+            })
+            .on('mouseover', function() { // on mouse in show line, circles and text
+                d3.select(".mouse-line")
+                    .style("opacity", "1");
+                d3.selectAll(".mouse-per-line circle")
+                    .style("opacity", "1");
+                d3.selectAll(".mouse-per-line text")
+                    .style("opacity", "1");
+            })
+            .on('mousemove', function() { // mouse moving over canvas
+                var mouse = d3.mouse(this);
+                d3.select(".mouse-line")
+                    .attr("d", function() {
+                        var d = "M" + mouse[0] + "," + height;
+                        d += " " + mouse[0] + "," + 0;
+                        return d;
+                    });
+
+                d3.selectAll(".mouse-per-line")
+                    .attr("transform", function(d, i) {
+                        var xDate = x.invert(mouse[0]),
+                            bisect = d3.bisector(function(d) { return d.fecha; }).right;
+                        idx = bisect(d.values, xDate);
+
+                        var beginning = 0,
+                            end = lines[i].getTotalLength(),
+                            target = null;
+
+                        while (true) {
+                            target = Math.floor((beginning + end) / 2);
+                            pos = lines[i].getPointAtLength(target);
+                            if ((target === end || target === beginning) && pos.x !== mouse[0]) {
+                                break;
+                            }
+                            if (pos.x > mouse[0]) end = target;
+                            else if (pos.x < mouse[0]) beginning = target;
+                            else break; //position found
+                        }
+
+                        d3.select(this).select('text')
+                            .text(y.invert(pos.y).toFixed(0));
+
+                        return "translate(" + mouse[0] + "," + pos.y + ")";
+                    });
+            });
+
+
     });
 }
 
-function flashJob(){
+function flashJob() {
 
-    var width,height
+    var width, height
     var chartWidth, chartHeight
     var margin
     var svg = d3.select(".dm-job-flash-graph")
@@ -454,7 +586,7 @@ function flashJob(){
     var parseTime = d3.timeParse("%d-%b-%y");
 
 
-    d3.csv("csv/data-flash-mes.csv", cast,  main)
+    d3.csv("csv/data-flash-mes.csv", cast, main)
 
 
     function cast(d) {
@@ -477,18 +609,18 @@ function flashJob(){
     }
 
     function setReSizeEvent(data) {
-            var resizeTimer;
+        var resizeTimer;
 
-            window.addEventListener('resize', function (event) {
+        window.addEventListener('resize', function(event) {
 
-                if (resizeTimer !== false) {
-                    clearTimeout(resizeTimer);
-                }
-                resizeTimer = setTimeout(function () {
-                    update(data)
-                });
+            if (resizeTimer !== false) {
+                clearTimeout(resizeTimer);
+            }
+            resizeTimer = setTimeout(function() {
+                update(data)
             });
-        }
+        });
+    }
 
 
     function setSize(data) {
@@ -503,8 +635,8 @@ function flashJob(){
             right: 48
         }
 
-        chartWidth = width - (margin.left+margin.right)
-        chartHeight = height - (margin.top+margin.bottom)
+        chartWidth = width - (margin.left + margin.right)
+        chartHeight = height - (margin.top + margin.bottom)
 
         svg.attr("width", width).attr("height", height)
         axisLayer.attr("width", width).attr("height", height)
@@ -512,7 +644,7 @@ function flashJob(){
         chartLayer
             .attr("width", chartWidth)
             .attr("height", chartHeight)
-            .attr("transform", "translate("+[margin.left, margin.top]+")")
+            .attr("transform", "translate(" + [margin.left, margin.top] + ")")
 
         x.domain(d3.extent(data, function(d) { return d.fecha })).range([0, chartWidth])
         y.domain([0, d3.max(data, function(d) { return d.total })]).range([chartHeight, 0])
@@ -535,9 +667,17 @@ function flashJob(){
         selectedLineElm.merge(newLineElm)
             .attr("d", valueline)
 
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "1.5em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
+
     }
 
-    function drawAxis(){
+    function drawAxis() {
 
         var yAxis = d3.axisLeft(y)
             .tickSizeInner(-chartWidth)
@@ -551,7 +691,7 @@ function flashJob(){
             .attr("class", "axis y")
 
         selectedYAxisElm.merge(newYAxisElm)
-            .attr("transform", "translate("+[margin.left, margin.top]+")")
+            .attr("transform", "translate(" + [margin.left, margin.top] + ")")
             .call(yAxis);
 
         var xAxis = d3.axisBottom(x)
@@ -563,7 +703,7 @@ function flashJob(){
             .attr("class", "axis x")
 
         selectedXAxisElm.merge(newXAxisElm)
-            .attr("transform", "translate("+[margin.left, chartHeight+margin.top]+")")
+            .attr("transform", "translate(" + [margin.left, chartHeight + margin.top] + ")")
             .call(xAxis);
 
     }
@@ -578,44 +718,44 @@ function animateDendogram() {
 
     madridTimeline
         .add({
-            targets: '.mdl-two',
+            targets: '#madrid-dendogram .mdl-two',
             strokeDashoffset: [anime.setDashoffset, 0],
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.madrid-dendogram-circle-middle',
+            targets: '#madrid-dendogram .madrid-dendogram-circle-middle',
             r: [0, 5],
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.madrid-dendogram-text-job',
+            targets: '#madrid-dendogram .madrid-dendogram-text-job',
             opacity: [0, 1],
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.mdl-three',
+            targets: '#madrid-dendogram .mdl-three',
             strokeDashoffset: [anime.setDashoffset, 0],
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.madrid-dendogram-circle-final',
+            targets: '#madrid-dendogram .madrid-dendogram-circle-final',
             r: function(el) {
-                return el.getAttribute('mydata:id') * 1.25;
+                return el.getAttribute('mydata:id');
             },
             easing: 'easeInOutSine',
             delay: madridDelay,
             duration: madridDuration
         })
         .add({
-            targets: '.madrid-dendogram-text-percentage',
+            targets: '#madrid-dendogram .madrid-dendogram-text-percentage',
             opacity: [0, 1],
             easing: 'easeInOutSine',
             delay: madridDelay,
@@ -658,46 +798,54 @@ dendogram();
 
 //Scrollmagic
 function scrolama() {
-            var container = document.querySelector('#scroll');
-            var steps = container.querySelectorAll('.dm-job-generic');
-            // initialize the scrollama
-            var scroller = scrollama();
-            // scrollama event handlers
-            function handleStepEnter(response) {
-                // response = { element, direction, index }
-                if (response.index === 0) {
-                    jobYear();
-                } else if (response.index === 1) {
-                    centralizame();
-                } else if (response.index === 2) {
-                    animateDendogram();
-                } else if (response.index === 3) {
-                    remote();
-                } else if (response.index === 4) {
-                    multiple();
-                } else if (response.index === 5) {
-                    flashJob();
-                }
-            }
-            function init() {
-                // set random padding for different step heights (not required)
-                // steps.forEach(function (step) {
-                //     var v = 100 + Math.floor(Math.random() * window.innerHeight / 4);
-                //     step.style.padding = v + 'px 0px';
-                // });
-                // 1. setup the scroller with the bare-bones options
-                // this will also initialize trigger observations
-                // 3. bind scrollama event handlers (this can be chained like below)
-                scroller.setup({
-                    step: '.dm-job-generic',
-                    debug: false,
-                    offset: 0.2
-                })
-                    .onStepEnter(handleStepEnter);
-                // setup resize event
-                window.addEventListener('resize', scroller.resize);
-            }
-            // kick things off
-            init();};
+    var container = document.querySelector('#scroll');
+    var steps = container.querySelectorAll('.dm-job-generic');
+    // initialize the scrollama
+    var scroller = scrollama();
+    // scrollama event handlers
+    function handleStepEnter(response) {
+        // response = { element, direction, index }
+        if (response.index === 0 && !response.element.classList.contains('scrollaunch')) {
+            jobYear();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 1 && !response.element.classList.contains('scrollaunch')) {
+            centralizame();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 2 && !response.element.classList.contains('scrollaunch')) {
+            animateDendogram();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 3 && !response.element.classList.contains('scrollaunch')) {
+            remote();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 4 && !response.element.classList.contains('scrollaunch')) {
+            multiple();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 5 && !response.element.classList.contains('scrollaunch')) {
+            flashJob();
+            response.element.classList.add('scrollaunch');
+        }
+    }
+
+    function init() {
+        // set random padding for different step heights (not required)
+        // steps.forEach(function (step) {
+        //     var v = 100 + Math.floor(Math.random() * window.innerHeight / 4);
+        //     step.style.padding = v + 'px 0px';
+        // });
+        // 1. setup the scroller with the bare-bones options
+        // this will also initialize trigger observations
+        // 3. bind scrollama event handlers (this can be chained like below)
+        scroller.setup({
+                step: '.dm-job-generic',
+                debug: false,
+                offset: 0.2
+            })
+            .onStepEnter(handleStepEnter);
+        // setup resize event
+        window.addEventListener('resize', scroller.resize);
+    }
+    // kick things off
+    init();
+};
 
 scrolama();
