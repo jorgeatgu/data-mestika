@@ -19,7 +19,21 @@
             <p class="dm-header-text">Una visualización de datos sobre las ofertas de trabajo publicadas en <strong>DOMESTIKA</strong>.</p>
         </div>
     </nav>
-    <p class="dm-intro">En mi búsqueda de pastos laborales más verdes suelo visitar con cierta frecuencia las ofertas de trabajo publicadas en <strong>Domestika</strong>. Un día me pico la curiosidad y me puse a buscar cuantas ofertas se habían publicado en <strong>Zaragoza</strong> o en <strong>remoto</strong>. La búsqueda no fue fácil. Así que conseguí todas las ofertas publicadas <strong>desde 2008 hasta el 8 de febrero de 2018</strong>. Y aquí esta el resultado.</p>
+    <div class="burger">
+        <span></span>
+    </div>
+    <nav class="navegacion menu--inola">
+        <a href="#maximas" class="navegacion-btn menu__item"><span class="menu__item-name">GRÁFICAS</span></a>
+        <a href="#heladas" class="navegacion-btn menu__item"><span class="menu__item-name">HELADAS</span></a>
+        <a href="#tropicales" class="navegacion-btn menu__item"><span class="menu__item-name">N. TROPICALES</span></a>
+        <a href="#dias-lluvia-recogida" class="navegacion-btn menu__item"><span class="menu__item-name">LLUVIAS</span></a>
+        <a href="#dias-lluvia-recogida" class="navegacion-btn menu__item"><span class="menu__item-name">TEMP. ANUAL</span></a>
+        <a href="#record-maximas" class="navegacion-btn menu__item"><span class="menu__item-name">MÁXIMAS</span></a>
+        <a href="#record-minimas" class="navegacion-btn menu__item"><span class="menu__item-name">MÍNIMAS</span></a>
+        <a href="#tabla-records" class="navegacion-btn menu__item"><span class="menu__item-name">RECORDS</span></a>
+    </nav>
+    <div class="overlay"></div>
+    <p class="dm-intro">En mi búsqueda de pastos laborales más verdes suelo visitar con cierta frecuencia las ofertas de trabajo publicadas en <strong>Domestika</strong>. Un día me pico la curiosidad y me puse a buscar cuantas ofertas se habían publicado en <strong>Zaragoza</strong> o en <strong>remoto</strong>. La búsqueda no fue fácil. Así que analice todas las ofertas publicadas <strong>desde 2008 hasta el 8 de febrero de 2018</strong>. Y aquí esta el resultado.</p>
     <section id="scroll">
         <section data-step='1' class="dm-job-year dm-job-generic">
             <div class="dm-container">
@@ -433,7 +447,24 @@
             </div>
         </section>
     </section>
-    <footer>
+    <section class="dm-job-methodology dm-container">
+        <h3 class="dm-job-title">METODOLOGÍA</h3>
+        <p class="dm-job-methodology-text">En diseño por ejemplo he agrupado todas las ofertas que contienen diseño, designer, diseñador. En programadores he agrupado todas las ofertas que contienen programador, desarrolador.</p>
+        <p class="dm-job-methodology-text">Para limpiar y dividir los datos he usado <a href="https://github.com/jorgeatgu/tritura-datos">tritura-datos</a> y la inestimable ayuda de <a href="http://twitter.com/RPallas_92">Ricardo Pallás.</a></p>
+        <p class="dm-job-methodology-text">Dendogram hecho con <a href="DensityDesign">rawgraphs</a> e inspirado por <a href="">DensityDesign</a></p>
+        <h3 class="dm-job-title">CRÉDITOS</h3>
+        <p class="dm-job-methodology-text">El icono que representa a España esta hecho por <a href="https://thenounproject.com/lroussy/">Roussy Lucas</a></p>
+        <p class="dm-job-methodology-text">La fotografía de la portada es de <a href="https://unsplash.com/photos/PkE6yQwE-6Y">Joel Filipe</a>.</p>
+        <p class="dm-job-methodology-text">La paleta de colores esta sacada de <a href="https://wesandersonpalettes.tumblr.com/post/110716093015/ash-should-we-dance">Wes Anderson</a>.</p>
+
+
+    </section>
+    <footer class="footer">
+        <div class="dm-container">
+            <p class="footer-texto">Hecho en Zaragoza con mucha maña por un <a class="footer-links" href="http://jorgeatgu.com" target="_blank">maño</a> - MMXVII</p>
+            <p class="footer-texto">Cualquier consulta escribid a: contacto@jorgeatgu.com</p>
+            <a class="footer-links" href="http://github.com/jorgeatgu/forno">GitHub</a>
+        </div>
     </footer>
     <script src="js/d3.min.js"></script>
     <script src="js/scrollama.min.js"></script>
