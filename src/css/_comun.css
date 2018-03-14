@@ -138,3 +138,21 @@ p {
         display: none;
     }
 }
+
+.axis .domain {
+    stroke: none;
+}
+
+.tick {
+    line {
+        fill: none;
+        stroke: #2D3065;
+        stroke-width: 1px;
+        stroke-dasharray: 3px 3px;
+        opacity: .7;
+    }
+    text {
+        font-family: var(--roboto);
+        font-size: 13px;
+    }
+}

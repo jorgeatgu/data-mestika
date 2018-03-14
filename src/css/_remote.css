@@ -32,39 +32,13 @@
 }
 
 /* stylelint-disable */
-.dm-job-remote-chart {
+.dm-job-remote-graph {
     .lines {
         stroke: var(--black);
+        fill: none;
     }
     .circles {
         fill: var(--goldenWes);
-    }
-    .xAxis,
-    .yAxis {
-        .tick {
-            line {
-                fill: none;
-                stroke: var(--black);
-                stroke-width: 1px;
-                stroke-dasharray: 3px 3px;
-                opacity: .7;
-            }
-        }
-    }
-    .xAxis,
-    .yAxis {
-        .tick {
-            text {
-                font-family: var(--roboto);
-                font-size: 13px;
-            }
-        }
-        .domain {
-            stroke: none;
-        }
-    }
-    .bar {
-        fill: var(--alternateWes);
     }
 }
 /* stylelint-enable */

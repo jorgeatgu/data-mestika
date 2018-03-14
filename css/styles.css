@@ -593,6 +593,23 @@ p {
         display: none;
     }
 
+.axis .domain {
+    stroke: none;
+}
+
+.tick line {
+        fill: none;
+        stroke: #2D3065;
+        stroke-width: 1px;
+        stroke-dasharray: 3px 3px;
+        opacity: .7;
+    }
+
+.tick text {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 0.81rem;
+    }
+
 * {
     box-sizing: border-box;
 }
@@ -1166,33 +1183,13 @@ p {
 
 /* stylelint-disable */
 
-.dm-job-remote-chart .lines {
+.dm-job-remote-graph .lines {
         stroke: #111;
+        fill: none;
     }
 
-.dm-job-remote-chart .circles {
+.dm-job-remote-graph .circles {
         fill: #F8DFAB;
-    }
-
-.dm-job-remote-chart .xAxis .tick line, .dm-job-remote-chart .yAxis .tick line {
-                fill: none;
-                stroke: #111;
-                stroke-width: 1px;
-                stroke-dasharray: 3px 3px;
-                opacity: .7;
-            }
-
-.dm-job-remote-chart .xAxis .tick text, .dm-job-remote-chart .yAxis .tick text {
-                font-family: 'Roboto Condensed', sans-serif;
-                font-size: 0.81rem;
-            }
-
-.dm-job-remote-chart .xAxis .domain, .dm-job-remote-chart .yAxis .domain {
-            stroke: none;
-        }
-
-.dm-job-remote-chart .bar {
-        fill: #2D3065;
     }
 
 /* stylelint-enable */

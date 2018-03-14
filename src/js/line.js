@@ -1,3 +1,5 @@
+var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
 function menu() {
     var overlay = document.querySelector('.overlay');
     var navigation = document.querySelector('.navegacion');
@@ -28,8 +30,6 @@ function menu() {
 
     }
 }
-
-menu();
 
 //d3js magic
 var margin = { top: 48, right: 48, bottom: 48, left: 48 },
@@ -159,71 +159,75 @@ function jobYear() {
             .attr("class", "circles")
             .attr("r", 3)
 
-        setTimeout(function() {
+            if (width > 767) {
 
-            svg.selectAll("dot")
-                .attr("opacity", "1");
-            //Add annotations
-            var labels = [{
-                note: {
-                    title: "Primera oferta de UX: 1/10/09",
-                    wrap: 430,
-                    align: "middle"
-                },
-                y: 445,
-                x: 157,
-                dy: -240,
-                dx: 0,
-            }, {
-                note: {
-                    title: "Primera oferta de Angular: 3/2/14",
-                    wrap: 430,
-                    align: "middle"
-                },
-                y: 400,
-                x: 600,
-                dy: -240,
-                dx: 0,
-            }, {
-                note: {
-                    title: "Primera oferta de React: 10/2/16",
-                    wrap: 430,
-                    align: "middle"
-                },
-                y: 275,
-                x: 790,
-                dy: -190,
-                dx: 0,
-            }].map(function(l) {
-                l.note = Object.assign({}, l.note);
-                l.subject = { radius: 6 };
-                return l;
-            });
+                setTimeout(function() {
 
-            window.makeAnnotations = d3.annotation().annotations(labels).type(d3.annotationCalloutCircle).accessors({
-                x: function x(d) {
-                    return x(d.fecha);
-                },
-                y: function y(d) {
-                    return y(d.total);
-                }
-            }).accessorsInverse({
-                fecha: function fecha(d) {
-                    return x.invert(d.x);
-                },
-                total: function total(d) {
-                    return y.invert(d.y);
-                }
-            }).on('subjectover', function(annotation) {
-                annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", false);
-            }).on('subjectout', function(annotation) {
-                annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
-            });
+                    svg.selectAll("dot")
+                        .attr("opacity", "1");
+                    //Add annotations
+                    var labels = [{
+                        note: {
+                            title: "Primera oferta de UX: 1/10/09",
+                            wrap: 430,
+                            align: "middle"
+                        },
+                        y: 445,
+                        x: 157,
+                        dy: -240,
+                        dx: 0,
+                    }, {
+                        note: {
+                            title: "Primera oferta de Angular: 3/2/14",
+                            wrap: 430,
+                            align: "middle"
+                        },
+                        y: 400,
+                        x: 600,
+                        dy: -240,
+                        dx: 0,
+                    }, {
+                        note: {
+                            title: "Primera oferta de React: 10/2/16",
+                            wrap: 430,
+                            align: "middle"
+                        },
+                        y: 275,
+                        x: 790,
+                        dy: -190,
+                        dx: 0,
+                    }].map(function(l) {
+                        l.note = Object.assign({}, l.note);
+                        l.subject = { radius: 6 };
+                        return l;
+                    });
 
-            svg.append("g").attr("class", "annotation-test").call(makeAnnotations);
+                    window.makeAnnotations = d3.annotation().annotations(labels).type(d3.annotationCalloutCircle).accessors({
+                        x: function x(d) {
+                            return x(d.fecha);
+                        },
+                        y: function y(d) {
+                            return y(d.total);
+                        }
+                    }).accessorsInverse({
+                        fecha: function fecha(d) {
+                            return x.invert(d.x);
+                        },
+                        total: function total(d) {
+                            return y.invert(d.y);
+                        }
+                    }).on('subjectover', function(annotation) {
+                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", false);
+                    }).on('subjectout', function(annotation) {
+                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
+                    });
 
-            svg.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
-        }, 1000)
+                    svg.append("g").attr("class", "annotation-test").call(makeAnnotations);
+
+                    svg.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
+                }, 1000)
+
+            }
 
     }
 
@@ -352,80 +356,160 @@ function centralizame() {
 
 function remote() {
 
-    var svg = d3.select('.dm-job-remote-graph')
-        .attr('class', 'dm-job-remote-chart')
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var width, height
+    var chartWidth, chartHeight
+    var margin
+    var svg = d3.select(".dm-job-remote-graph")
+    var axisLayer = svg.append("g").classed("axisLayer", true)
+    var chartLayer = svg.append("g").classed("chartLayer", true)
+
+    var x = d3.scaleTime()
+    var y = d3.scaleLinear()
 
     var parseTime = d3.timeParse("%d-%b-%y");
 
-    var x = d3.scaleTime().range([0, width]);
-    var y = d3.scaleLinear().range([height, 0]);
 
-    var valueline = d3.line()
-        .x(function(d) { return x(d.fecha); })
-        .y(function(d) { return y(d.total); });
+    d3.csv("csv/data-remoto-mes.csv", cast, main)
 
-    var yAxis = d3.axisLeft(y)
-        .tickSize(-width)
-        .tickFormat(d3.format("d"))
-        .ticks(10);
 
-    d3.csv("csv/data-remoto-mes.csv", function(error, data) {
-        if (error) throw error;
+    function cast(d) {
+        d.fecha = parseTime(d.fecha);
+        d.total = +d.total;
+        return d
+    }
 
-        data.forEach(function(d) {
-            d.fecha = parseTime(d.fecha);
-            d.total = +d.total;
+    function main(data) {
+        update(data)
+        setReSizeEvent(data)
+    }
+
+
+    function update(data) {
+        setSize(data)
+        drawAxis()
+        drawChart(data)
+    }
+
+    function setReSizeEvent(data) {
+        var resizeTimer;
+
+        window.addEventListener('resize', function(event) {
+
+            if (resizeTimer !== false) {
+                clearTimeout(resizeTimer);
+            }
+            resizeTimer = setTimeout(function() {
+                update(data)
+            });
         });
+    }
 
-        x.domain(d3.extent(data, function(d) { return d.fecha; }));
-        y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
-        var path = svg.append("path")
+    function setSize(data) {
+
+        width = document.querySelector(".dm-container-graph").clientWidth
+        height = document.querySelector(".dm-container-graph").clientHeight
+
+        margin = {
+            top: 48,
+            left: 48,
+            bottom: 48,
+            right: 48
+        }
+
+        chartWidth = width - (margin.left + margin.right)
+        chartHeight = height - (margin.top + margin.bottom)
+
+        svg.attr("width", width).attr("height", height)
+        axisLayer.attr("width", width).attr("height", height)
+
+        chartLayer
+            .attr("width", chartWidth)
+            .attr("height", chartHeight)
+            .attr("transform", "translate(" + [margin.left, margin.top] + ")")
+
+        x.domain(d3.extent(data, function(d) { return d.fecha })).range([0, chartWidth])
+        y.domain([0, d3.max(data, function(d) { return d.total })]).range([chartHeight, 0])
+
+    }
+
+    function drawChart(data) {
+
+        svg.append("text")
+            .attr("class", "legend")
+            .attr("transform", "rotate(-90)")
+            .attr("y", "1em")
+            .attr("x", "-15em")
+            .style("text-anchor", "end")
+            .text("Número de ofertas");
+
+        var valueline = d3.line()
+            .x(function(d) { return x(d.fecha); })
+            .y(function(d) { return y(d.total); });
+
+        var selectedLineElm = chartLayer.selectAll(".lines")
             .data([data])
+
+        var newLineElm = selectedLineElm.enter().append("path")
             .attr("class", "lines")
-            .attr("d", valueline)
             .attr("stroke-width", "1.5")
-            .attr("fill", "none");
 
-        var totalLength = path.node().getTotalLength();
+        selectedLineElm.merge(newLineElm)
+            .attr("d", valueline)
 
+        var totalLength = newLineElm.node().getTotalLength();
 
-        path
+        newLineElm
             .attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
             .transition()
             .duration(2500)
             .ease(d3.easeLinear)
-            .attr("stroke-dashoffset", 0);
+            .attr("stroke-dashoffset", 0)
 
-        svg.append("text")
-            .attr("class", "legend")
-            .attr("transform", "rotate(-90)")
-            .attr("y", "-2em")
-            .attr("x", "-15em")
-            .style("text-anchor", "end")
-            .text("Número de ofertas");
+        var dots = chartLayer.selectAll(".circles");
 
-        svg.append("g")
-            .attr("class", "xAxis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-
-        svg.append("g")
-            .attr("class", "yAxis")
-            .call(yAxis);
-
-        svg.selectAll("dot")
+        dots
             .data(data)
             .enter().append("circle")
             .attr("cx", function(d) { return x(d.fecha); })
             .attr("cy", function(d) { return y(d.total); })
             .attr("class", "circles")
-            .attr("r", 3);
+            .attr("r", 3)
+    }
 
-    });
+    function drawAxis() {
+
+        var yAxis = d3.axisLeft(y)
+            .tickSizeInner(-chartWidth)
+            .tickFormat(d3.format("d"))
+            .ticks(10)
+
+        var selectedYAxisElm = axisLayer.selectAll(".y")
+            .data(["dummy"])
+
+        var newYAxisElm = selectedYAxisElm.enter().append("g")
+            .attr("class", "axis y")
+
+        selectedYAxisElm.merge(newYAxisElm)
+            .attr("transform", "translate(" + [margin.left, margin.top] + ")")
+            .call(yAxis);
+
+        var xAxis = d3.axisBottom(x)
+
+        var selectedXAxisElm = axisLayer.selectAll(".x")
+            .data(["dummy"])
+
+        var newXAxisElm = selectedXAxisElm.enter().append("g")
+            .attr("class", "axis x")
+
+        selectedXAxisElm.merge(newXAxisElm)
+            .attr("transform", "translate(" + [margin.left, chartHeight + margin.top] + ")")
+            .call(xAxis);
+
+    }
+
 
 }
 
@@ -506,7 +590,7 @@ function multiple() {
             d3.selectAll('.line').attr("stroke-dasharray", totalLength + " " + totalLength)
                 .attr("stroke-dashoffset", totalLength)
                 .transition()
-                .duration(4000)
+                .duration(1500)
                 .delay(200 * i)
                 .ease(d3.easeExpIn)
                 .attr("stroke-dashoffset", 0)
@@ -826,9 +910,6 @@ function dendogram() {
 
 }
 
-dendogram();
-
-
 //Scrollmagic
 function scrolama() {
     var container = document.querySelector('#scroll');
@@ -881,4 +962,6 @@ function scrolama() {
     init();
 };
 
+dendogram();
+menu();
 scrolama();
