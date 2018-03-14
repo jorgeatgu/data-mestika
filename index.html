@@ -23,19 +23,17 @@
         <span></span>
     </div>
     <nav class="navegacion menu--inola">
-        <a href="#maximas" class="navegacion-btn menu__item"><span class="menu__item-name">GRÁFICAS</span></a>
-        <a href="#heladas" class="navegacion-btn menu__item"><span class="menu__item-name">HELADAS</span></a>
-        <a href="#tropicales" class="navegacion-btn menu__item"><span class="menu__item-name">N. TROPICALES</span></a>
-        <a href="#dias-lluvia-recogida" class="navegacion-btn menu__item"><span class="menu__item-name">LLUVIAS</span></a>
-        <a href="#dias-lluvia-recogida" class="navegacion-btn menu__item"><span class="menu__item-name">TEMP. ANUAL</span></a>
-        <a href="#record-maximas" class="navegacion-btn menu__item"><span class="menu__item-name">MÁXIMAS</span></a>
-        <a href="#record-minimas" class="navegacion-btn menu__item"><span class="menu__item-name">MÍNIMAS</span></a>
-        <a href="#tabla-records" class="navegacion-btn menu__item"><span class="menu__item-name">RECORDS</span></a>
+        <a href="#mes" class="navegacion-btn menu__item"><span class="menu__item-name">MES A MES</span></a>
+        <a href="#descentralizado" class="navegacion-btn menu__item"><span class="menu__item-name">UN PAÍS ¿DESCENTRALIZADO?</span></a>
+        <a href="#dendogram" class="navegacion-btn menu__item"><span class="menu__item-name">OFERTAS POR CIUDAD</span></a>
+        <a href="#remoto" class="navegacion-btn menu__item"><span class="menu__item-name">NO ES PAÍS PARA REMOTOS</span></a>
+        <a href="#multiple" class="navegacion-btn menu__item"><span class="menu__item-name">OFERTAS POR PUESTO</span></a>
+        <a href="#flash" class="navegacion-btn menu__item"><span class="menu__item-name">THOUGHTS ON FLASH</span></a>
     </nav>
     <div class="overlay"></div>
-    <p class="dm-intro">En mi búsqueda de pastos laborales más verdes suelo visitar con cierta frecuencia las ofertas de trabajo publicadas en <strong>Domestika</strong>. Un día me pico la curiosidad y me puse a buscar cuantas ofertas se habían publicado en <strong>Zaragoza</strong> o en <strong>remoto</strong>. La búsqueda no fue fácil. Así que analice todas las ofertas publicadas <strong>desde 2008 hasta el 8 de febrero de 2018</strong>. Y aquí esta el resultado.</p>
+    <p class="dm-intro">En mi búsqueda de pastos laborales más verdes suelo visitar con cierta frecuencia las ofertas de trabajo publicadas en <strong>Domestika</strong>. Un día me pico la curiosidad y me puse a buscar cuantas ofertas se habían publicado en <strong>Zaragoza</strong> o en <strong>remoto</strong>. Así que analice todas las ofertas publicadas <strong>desde 2008 hasta el 8 de febrero de 2018</strong>. Y aquí esta el resultado.</p>
     <section id="scroll">
-        <section data-step='1' class="dm-job-year dm-job-generic">
+        <section id="mes" data-step='1' class="dm-job-year dm-job-generic">
             <div class="dm-container">
                 <h2 class="dm-job-title dm-job-title-year">OFERTAS PUBLICADAS CADA MES</h2>
                 <p class="dm-job-city-dendogram-paragraph">
@@ -46,7 +44,7 @@
                 </article>
             </div>
         </section>
-        <section data-step='2' class="dm-job-city dm-job-generic">
+        <section id="descentralizado" data-step='2' class="dm-job-city dm-job-generic">
             <div class="dm-container">
                 <article class="dm-job-city-header">
                     <div class="dm-job-city-text">
@@ -63,7 +61,7 @@
                 </article>
             </div>
         </section>
-        <section data-step='3' class="dm-job-city-dendogram dm-job-generic">
+        <section id="dendogram" data-step='3' class="dm-job-city-dendogram dm-job-generic">
             <div class="dm-container">
                 <h2 class="dm-job-title dm-job-dendogram-title">OFERTAS POR CIUDAD</h2>
                 <p class="dm-job-city-dendogram-paragraph">
@@ -396,7 +394,7 @@
                 </svg>
             </div>
         </section>
-        <section data-step='4' class="dm-job-remote dm-job-generic">
+        <section id="remoto" data-step='4' class="dm-job-remote dm-job-generic">
             <div class="dm-container">
                 <h2 class="dm-job-title dm-job-remote-title">NO ES PAÍS PARA REMOTOS</h2>
                 <p class="dm-job-remote-paragraph">En España todavía prevalece a cultura de la <strong>presencia</strong>. Según un informe de Addeco(2015) solamente el <strong>7.4%</strong> de trabajadores lo hace en remoto. La media europea esta situada en el <strong>13%</strong>.</p>
@@ -406,7 +404,7 @@
                 </article>
             </div>
         </section>
-        <section data-step='5' class="dm-job-multiple dm-job-generic">
+        <section id="multiple" data-step='5' class="dm-job-multiple dm-job-generic">
             <div class="dm-container">
                 <h2 class="dm-job-title dm-job-title-multiple">OFERTAS POR PUESTO</h2>
                 <p class="dm-job-remote-paragraph">Una gráfica para ver cuales son los puestos más ofertados, y como han ido evolucionando a lo largo de los 10 años de ofertas.</p>
@@ -437,7 +435,7 @@
                 </article>
             </div>
         </section>
-        <section data-step='6' class="dm-job-flash dm-job-generic">
+        <section id="flash" data-step='6' class="dm-job-flash dm-job-generic">
             <div class="dm-container">
                 <h2 class="dm-job-title dm-job-flash-title">THOUGHTS ON FLASH</h2>
                 <p class="dm-job-flash-paragraph">Creado por Macromedia en 1996 y perpetuado por Adobe. Flash marcó una época. Esta época llegará a su fin en 2020. A día de hoy todavía se busca gente con sus conocimientos. Y por desgracia se siguen <a href="https://twitter.com/jorgeATGU/status/963748286690660354" target="_blank">dilapidando impuestos con su enseñanza</a>.</p>
@@ -447,15 +445,17 @@
             </div>
         </section>
     </section>
-    <section class="dm-job-methodology dm-container">
-        <h3 class="dm-job-title">METODOLOGÍA</h3>
-        <p class="dm-job-methodology-text">En diseño por ejemplo he agrupado todas las ofertas que contienen diseño, designer, diseñador. En programadores he agrupado todas las ofertas que contienen programador, desarrolador.</p>
-        <p class="dm-job-methodology-text">Para limpiar y dividir los datos he usado <a href="https://github.com/jorgeatgu/tritura-datos">tritura-datos</a> y la inestimable ayuda de <a href="http://twitter.com/RPallas_92">Ricardo Pallás.</a></p>
-        <p class="dm-job-methodology-text">Dendogram hecho con <a href="DensityDesign">rawgraphs</a> e inspirado por <a href="">DensityDesign</a></p>
-        <h3 class="dm-job-title">CRÉDITOS</h3>
-        <p class="dm-job-methodology-text">El icono que representa a España esta hecho por <a href="https://thenounproject.com/lroussy/">Roussy Lucas</a></p>
-        <p class="dm-job-methodology-text">La fotografía de la portada es de <a href="https://unsplash.com/photos/PkE6yQwE-6Y">Joel Filipe</a>.</p>
-        <p class="dm-job-methodology-text">La paleta de colores esta sacada de <a href="https://wesandersonpalettes.tumblr.com/post/110716093015/ash-should-we-dance">Wes Anderson</a>.</p>
+    <section class="dm-job-methodology">
+        <div class="dm-container">
+            <h3 class="dm-job-title dm-job-title-methodology">METODOLOGÍA</h3>
+            <p class="dm-job-methodology-text">En diseño por ejemplo he agrupado todas las ofertas que contienen diseño, designer, diseñador. En programadores he agrupado todas las ofertas que contienen programador, desarrolador.</p>
+            <p class="dm-job-methodology-text">Para limpiar y dividir los datos he usado <a href="https://github.com/jorgeatgu/tritura-datos">tritura-datos</a> y la inestimable ayuda de <a href="http://twitter.com/RPallas_92">Ricardo Pallás.</a></p>
+            <p class="dm-job-methodology-text">El dendogram esta hecho con <a href="DensityDesign">rawgraphs</a> e inspirado por <a href="">DensityDesign</a></p>
+            <h3 class="dm-job-title dm-job-title-methodology">CRÉDITOS</h3>
+            <p class="dm-job-methodology-text">El icono que representa a España esta hecho por <a href="https://thenounproject.com/lroussy/">Roussy Lucas</a></p>
+            <p class="dm-job-methodology-text">La fotografía de la portada es de <a href="https://unsplash.com/photos/PkE6yQwE-6Y">Joel Filipe</a>.</p>
+            <p class="dm-job-methodology-text">La paleta de colores esta sacada de <a href="https://wesandersonpalettes.tumblr.com/post/110716093015/ash-should-we-dance">Wes Anderson</a>.</p>
+        </div>
 
 
     </section>
