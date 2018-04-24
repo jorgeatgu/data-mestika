@@ -111,7 +111,7 @@ function jobYear() {
             .attr("transform", "translate(" + [margin.left, margin.top] + ")")
 
         x.domain(d3.extent(data, function(d) { return d.fecha })).range([0, chartWidth])
-        y.domain([0, d3.max(data, function(d) { return d.total })]).range([chartHeight, 0])
+        y.domain([0, d3.max(data, function(d) { return d.total + (d.total / 4) })]).range([chartHeight, 0])
 
     }
 
@@ -306,7 +306,7 @@ function centralizame() {
             return a.cantidad - b.cantidad;
         });
 
-        x.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
+        x.domain([0, d3.max(data, function(d) { return d.cantidad + (d.cantidad / 4); })]);
 
         y.domain(data.map(function(d) { return d.ciudad; }))
             .paddingInner(0.2)
@@ -317,7 +317,7 @@ function centralizame() {
             .attr("y", "77%")
             .attr("x", "50%")
             .style("text-anchor", "end")
-            .text("Porcetanje de ofertas");
+            .text("Porcentaje de ofertas");
 
         svg.append("g")
             .attr("class", "xAxis")
@@ -430,7 +430,7 @@ function remote() {
             .attr("transform", "translate(" + [margin.left, margin.top] + ")")
 
         x.domain(d3.extent(data, function(d) { return d.fecha })).range([0, chartWidth])
-        y.domain([0, d3.max(data, function(d) { return d.total })]).range([chartHeight, 0])
+        y.domain([0, d3.max(data, function(d) { return d.total + (d.total / 4) })]).range([chartHeight, 0])
 
     }
 
@@ -544,7 +544,7 @@ function multiple() {
         });
 
         x.domain(d3.extent(data, function(d) { return d.fecha; }));
-        y.domain([0, d3.max(data, function(d) { return d.cantidad; })]);
+        y.domain([0, d3.max(data, function(d) { return d.cantidad + (d.cantidad / 4); })]);
 
         var dataComb = d3.nest()
             .key(function(d) { return d.puesto; })
@@ -596,7 +596,6 @@ function multiple() {
                 .attr("stroke-dashoffset", 0)
                 .style("stroke-width", 2)
         })
-
 
         //d3 mouseover multi-line chart https://bl.ocks.org/larsenmtl/e3b8b7c2ca4787f77d78f58d41c3da91
         var mouseG = svg.append("g")
@@ -710,7 +709,6 @@ function flashJob() {
         d.fecha = parseTime(d.fecha);
         d.total = +d.total;
         return d
-        console.log(d.total)
     }
 
     function main(data) {
@@ -764,7 +762,7 @@ function flashJob() {
             .attr("transform", "translate(" + [margin.left, margin.top] + ")")
 
         x.domain(d3.extent(data, function(d) { return d.fecha })).range([0, chartWidth])
-        y.domain([0, d3.max(data, function(d) { return d.total })]).range([chartHeight, 0])
+        y.domain([0, d3.max(data, function(d) { return d.total + (d.total / 4) })]).range([chartHeight, 0])
 
     }
 
