@@ -172,9 +172,9 @@ function jobYear() {
                             wrap: 430,
                             align: "middle"
                         },
-                        y: 445,
+                        y: 540,
                         x: 157,
-                        dy: -240,
+                        dy: -350,
                         dx: 0,
                     }, {
                         note: {
@@ -182,9 +182,9 @@ function jobYear() {
                             wrap: 430,
                             align: "middle"
                         },
-                        y: 400,
+                        y: 540,
                         x: 600,
-                        dy: -240,
+                        dy: -330,
                         dx: 0,
                     }, {
                         note: {
@@ -192,9 +192,9 @@ function jobYear() {
                             wrap: 430,
                             align: "middle"
                         },
-                        y: 275,
-                        x: 790,
-                        dy: -190,
+                        y: 540,
+                        x: 792,
+                        dy: -390,
                         dx: 0,
                     }].map(function(l) {
                         l.note = Object.assign({}, l.note);
@@ -438,9 +438,8 @@ function remote() {
 
         svg.append("text")
             .attr("class", "legend")
-            .attr("transform", "rotate(-90)")
-            .attr("y", "1em")
-            .attr("x", "-15em")
+            .attr("y", "5em")
+            .attr("x", "120px")
             .style("text-anchor", "end")
             .text("Número de ofertas");
 
@@ -569,9 +568,8 @@ function multiple() {
 
         svg.append("text")
             .attr("class", "legend")
-            .attr("transform", "rotate(-90)")
-            .attr("y", "-2.5em")
-            .attr("x", "-10em")
+            .attr("y", "0em")
+            .attr("x", "80px")
             .style("text-anchor", "end")
             .text("Número de ofertas");
 
@@ -784,9 +782,8 @@ function flashJob() {
 
         svg.append("text")
             .attr("class", "legend")
-            .attr("transform", "rotate(-90)")
-            .attr("y", "1.5em")
-            .attr("x", "-15em")
+            .attr("y", "3em")
+            .attr("x", "120px")
             .style("text-anchor", "end")
             .text("Número de ofertas");
 
@@ -829,7 +826,7 @@ function animateDendogram() {
     var madridTimeline = anime.timeline();
     var madridDuration = 150;
     var madridEasing = 'easeInOutSine';
-    var madridDelay = function(el, i) { return i * 200 };
+    var madridDelay = function(el, i) { return i * 120 };
 
     madridTimeline
         .add({
