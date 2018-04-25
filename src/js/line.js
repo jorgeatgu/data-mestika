@@ -463,7 +463,7 @@ function remote() {
             .attr("stroke-dasharray", totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
             .transition()
-            .duration(2500)
+            .duration(1500)
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
 
