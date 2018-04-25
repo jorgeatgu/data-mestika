@@ -101,3 +101,58 @@ p {
   fill: none;
   pointer-events: all;
 }
+
+.footer {
+    background-color: #E25772;
+    width: 100%;
+    padding: 10vh 0;
+}
+
+.footer-texto {
+    color: var(--black);
+    font-family: var(--roboto);
+    font-size: 1rem;
+}
+
+.footer-links {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.dm-job-methodology {
+    background-color: var(--greyWes);
+    padding: 3rem 0;
+}
+
+.dm-job-methodology-text {
+    font-size: 14px;
+    font-family: var(--adamina);
+    color: var(--black);
+    max-width: 30rem;
+    margin-top: 0;
+}
+
+.dm-job-title-methodology {
+    padding: 1rem 0;
+    &:before {
+        display: none;
+    }
+}
+
+.axis .domain {
+    stroke: none;
+}
+
+.tick {
+    line {
+        fill: none;
+        stroke: #2D3065;
+        stroke-width: 1px;
+        stroke-dasharray: 3px 3px;
+        opacity: .7;
+    }
+    text {
+        font-family: var(--roboto);
+        font-size: 13px;
+    }
+}
