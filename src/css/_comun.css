@@ -23,7 +23,7 @@ p {
 }
 
 .dm-job-title {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: var(--roboto);
     margin: 0;
     padding: 1rem 2rem;
@@ -41,7 +41,7 @@ p {
 }
 
 .dm-job-city-text-title {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: var(--roboto);
     color: var(--goldenWes);
     display: inline-block;
@@ -79,6 +79,7 @@ p {
 .dm-container {
     margin: 0 auto;
     max-width: 64rem;
+    padding: 0 1rem;
 }
 
 .dm-job-generic {
@@ -108,14 +109,14 @@ p {
     padding: 10vh 0;
 }
 
-.footer-texto {
+.footer-texto,
+.footer-links {
     color: var(--black);
     font-family: var(--roboto);
     font-size: 1rem;
 }
 
 .footer-links {
-    font-size: 1rem;
     font-weight: bold;
 }
 
@@ -155,4 +156,17 @@ p {
         font-family: var(--roboto);
         font-size: 13px;
     }
+}
+
+@media only screen and (min-width: 48em) {
+
+    .dm-container {
+        padding: 0;
+    }
+
+    .dm-job-city-text-title,
+    .dm-job-title {
+        font-size: 1.5rem;
+    }
+
 }
