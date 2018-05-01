@@ -166,7 +166,7 @@ p {
 }
 
 .data-viz-container {
-    max-width: 70vw;
+    max-width: 90vw;
     margin: 0 auto;
     text-align: center;
 }
@@ -179,13 +179,10 @@ p {
 }
 
 .data-viz-element {
-    width: 16rem;
+    width: 90%;
     display: inline-block;
     text-decoration: none;
     vertical-align: top;
-    &:not(:last-child) {
-        margin-right: 2rem;
-    }
 }
 
 .data-viz-subtitle {
@@ -221,6 +218,17 @@ p {
     .dm-job-city-text-title,
     .dm-job-title {
         font-size: 1.5rem;
+    }
+
+    .data-viz-container {
+        max-width: 70vw;
+    }
+
+    .data-viz-element {
+        width: 16rem;
+        &:not(:last-child) {
+            margin-right: 2rem;
+        }
     }
 
 }
