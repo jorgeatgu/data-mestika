@@ -80,10 +80,12 @@
             stroke: none;
         }
     }
-    .bar {
-        fill: var(--alternateWes);
-    }
 }
+
+.bar-horizontal {
+    fill: var(--alternateWes);
+}
+
 /* stylelint-enable */
 .tooltip-container {
     position: absolute;

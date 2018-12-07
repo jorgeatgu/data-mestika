@@ -48,50 +48,44 @@
     }
 }
 
-.dm-job-multiple-legend {
-    width: 100%;
-    text-align: center;
-}
-
-.dm-job-multiple-legend-element {
-    display: inline-block;
-    &:not(:last-child) {
-        margin-right: 2rem;
-    }
-}
-
-.dm-job-multiple-legend-element-square {
-    width: 1rem;
-    height: 1rem;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: .5rem;
-}
-
 .dm-job-multiple-legend-element-text {
     display: inline-block;
     vertical-align: middle;
-    font-size: 1rem;
-    font-family: var(--roboto);
-    color: var(--alternateWes);
 }
 
-.dsn {
-    background-color: #b114c0;
-}
+.dm-multiple-container-graph {
+    .multiple-legend {
+        font-size: 1rem;
+        font-family: var(--roboto);
+        color: var(--alternateWes);
+    }
+    .line {
+        stroke-width: 2px;
+        stroke: var(--black);
+        fill: none;
+    }
+    .diseñador {
+        fill: #b114c0;
+        stroke: none;
+    }
 
-.mkt {
-    background-color: var(--blueWes);
-}
+    .marketing {
+        fill: var(--blueWes);
+        stroke: none;
+    }
 
-.frt {
-    background-color: var(--violetWes);
-}
+    .front {
+        fill: var(--violetWes);
+        stroke: none;
+    }
 
-.prg {
-    background-color: var(--redWes);
-}
+    .programador {
+        fill: var(--redWes);
+        stroke: none;
+    }
 
-.ux {
-    background-color: var(--alternateWes);
+    .ux {
+        fill: var(--alternateWes);
+        stroke: none;
+    }
 }
