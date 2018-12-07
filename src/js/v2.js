@@ -1,3 +1,39 @@
+const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+const menu = () => {
+    const overlay = document.querySelector('.overlay');
+    const navigation = document.querySelector('.navegacion');
+    const body = document.querySelector('body');
+    const elementBtn = document.querySelectorAll('.navegacion-btn');
+    const burger = document.querySelector('.burger');
+
+    const classToggle = () => {
+        burger.classList.toggle('clicked');
+        overlay.classList.toggle('show');
+        navigation.classList.toggle('show');
+        body.classList.toggle('overflow');
+    }
+
+    document.querySelector('.burger').addEventListener('click', classToggle);
+    document.querySelector('.overlay').addEventListener('click', classToggle);
+
+    for(i=0; i<elementBtn.length; i++){
+        elementBtn[i].addEventListener("click", function(){
+            removeClass();
+        });
+    }
+
+    const removeClass = () => {
+        overlay.classList.remove("show");
+        navigation.classList.remove("show");
+        burger.classList.remove("clicked");
+
+    }
+}
+
+menu();
+
+//Graphics
 const line = () => {
     //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
     const margin = { top: 24, right: 24, bottom: 24, left: 24 };
@@ -677,3 +713,90 @@ const multipleLines = () => {
 }
 
 multipleLines()
+
+const animateDendogram = () => {
+    const madridTimeline = anime.timeline();
+    const madridDuration = 150;
+    const madridEasing = 'easeInOutSine';
+    const madridDelay = function(el, i) { return i * 120 };
+
+    madridTimeline
+        .add({
+            targets: '#madrid-dendogram .mdl-two',
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        })
+        .add({
+            targets: '#madrid-dendogram .madrid-dendogram-circle-middle',
+            r: [0, 5],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        })
+        .add({
+            targets: '#madrid-dendogram .madrid-dendogram-text-job',
+            opacity: [0, 1],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        })
+        .add({
+            targets: '#madrid-dendogram .mdl-three',
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        })
+        .add({
+            targets: '#madrid-dendogram .madrid-dendogram-circle-final',
+            r: function(el) {
+                return el.getAttribute('mydata:id');
+            },
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        })
+        .add({
+            targets: '#madrid-dendogram .madrid-dendogram-text-percentage',
+            opacity: [0, 1],
+            easing: 'easeInOutSine',
+            delay: madridDelay,
+            duration: madridDuration
+        });
+}
+
+animateDendogram();
+
+const dendogram = () => {
+
+    const dendoMadrid = document.querySelector('#madrid-dendogram');
+    const dendoBarcelona = document.querySelector('#barcelona-dendogram');
+    const dendoRemote = document.querySelector('#remote-dendogram');
+
+    const madridOpacity = () => {
+        lunar.removeClass(dendoMadrid, "dendo-hide");
+        lunar.addClass(dendoBarcelona, 'dendo-hide')
+        lunar.addClass(dendoRemote, 'dendo-hide');
+    }
+
+    const barcelonaOpacity = () => {
+        lunar.removeClass(dendoBarcelona, "dendo-hide");
+        lunar.addClass(dendoMadrid, 'dendo-hide')
+        lunar.addClass(dendoRemote, 'dendo-hide');
+    }
+
+    const remoteOpacity = () => {
+        lunar.removeClass(dendoRemote, "dendo-hide");
+        lunar.addClass(dendoBarcelona, 'dendo-hide')
+        lunar.addClass(dendoMadrid, 'dendo-hide');
+    }
+
+    document.querySelector('.js-dm-job-dendogram-btn-m').addEventListener('click', madridOpacity);
+    document.querySelector('.js-dm-job-dendogram-btn-b').addEventListener('click', barcelonaOpacity);
+    document.querySelector('.js-dm-job-dendogram-btn-r').addEventListener('click', remoteOpacity);
+
+}
+
+dendogram();
