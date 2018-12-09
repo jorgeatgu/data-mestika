@@ -1080,8 +1080,7 @@ p {
     }
 
 .dm-job-year .circles {
-        fill: #2D3065;
-        fill: var(--alternateWes);
+        fill: #9f4776;
     }
 
 .dm-job-title-year {

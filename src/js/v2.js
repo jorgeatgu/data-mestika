@@ -34,7 +34,7 @@ const menu = () => {
 menu();
 
 //Graphics
-const line = () => {
+const lineYear = () => {
     //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
     const margin = { top: 24, right: 24, bottom: 24, left: 24 };
     let width = 0;
@@ -138,9 +138,15 @@ const line = () => {
             .append("circle")
             .attr("class", "circles")
             .attr("fill", "#921d5d")
+            .attr("opacity", 0)
+            .transition()
+            .duration(1800)
+            .ease(d3.easeLinear)
+            .attr("opacity", 1)
 
         layer.merge(newLayer)
             .attr('d', line)
+
 
         dots.merge(dotsLayer)
             .attr("cx", d => scales.count.x(d.fecha))
@@ -149,6 +155,15 @@ const line = () => {
 
         drawAxes(g)
 
+        const totalLength = newLayer.node().getTotalLength();
+
+        newLayer
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(1500)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0)
     }
 
     const resize = () => {
@@ -181,7 +196,6 @@ const line = () => {
 
 }
 
-line();
 
 const barHorizontal = () => {
 
@@ -326,7 +340,6 @@ const barHorizontal = () => {
 
 }
 
-barHorizontal()
 
 const remote = () => {
     //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
@@ -767,7 +780,6 @@ const animateDendogram = () => {
         });
 }
 
-animateDendogram();
 
 const dendogram = () => {
 
@@ -800,3 +812,57 @@ const dendogram = () => {
 }
 
 dendogram();
+
+//Scrollmagic
+const scrolama = () => {
+    let container = document.querySelector('#scroll');
+    let steps = container.querySelectorAll('.dm-job-generic');
+    // initialize the scrollama
+    let scroller = scrollama();
+    // scrollama event handlers
+    const handleStepEnter = (response) => {
+        // response = { element, direction, index }
+        if (response.index === 0 && !response.element.classList.contains('scrollaunch')) {
+            lineYear();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 1 && !response.element.classList.contains('scrollaunch')) {
+            barHorizontal();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 2 && !response.element.classList.contains('scrollaunch')) {
+            animateDendogram();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 3 && !response.element.classList.contains('scrollaunch')) {
+            remote();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 4 && !response.element.classList.contains('scrollaunch')) {
+            multipleLines();
+            response.element.classList.add('scrollaunch');
+        } else if (response.index === 5 && !response.element.classList.contains('scrollaunch')) {
+            flash();
+            response.element.classList.add('scrollaunch');
+        }
+    }
+
+    function init() {
+        // set random padding for different step heights (not required)
+        // steps.forEach(function (step) {
+        //     var v = 100 + Math.floor(Math.random() * window.innerHeight / 4);
+        //     step.style.padding = v + 'px 0px';
+        // });
+        // 1. setup the scroller with the bare-bones options
+        // this will also initialize trigger observations
+        // 3. bind scrollama event handlers (this can be chained like below)
+        scroller.setup({
+                step: '.dm-job-generic',
+                debug: false,
+                offset: 0.2
+            })
+            .onStepEnter(handleStepEnter);
+        // setup resize event
+        window.addEventListener('resize', scroller.resize);
+    }
+    // kick things off
+    init();
+};
+
+scrolama();
