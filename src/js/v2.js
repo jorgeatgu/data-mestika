@@ -865,27 +865,24 @@ const scrolama = () => {
 
 scrolama();
 
-const area = () => { //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
-    const margin = { top: 24, right: 24, bottom: 24, left: 24 };
+const areaStack = () => {
+
+    const margin = { top: 24, right: 24, bottom: 24, left: 48 };
     let width = 0;
     let height = 0;
-    const chart = d3.select('.dm-job-remote-office-graph');
+    const chart = d3.select('.area-stack');
     const svg = chart.select('svg');
     const scales = {};
     let dataz;
-    const getYear = (stringDate) => stringDate.split('-')[2];
-    let puestos = ["presencial", "remoto"];
 
     //Escala para los ejes X e Y
     const setupScales = () => {
 
         const countX = d3.scaleTime()
-            .domain([2008, 2018]);
+            .domain(d3.extent(dataz, d => d.year ))
 
         const countY = d3.scaleLinear()
-            .domain([0,
-            d3.max(dataz, d => d.presencial)]);
-
+            .domain([0, 2000]);
 
         scales.count = { x: countX, y: countY };
 
@@ -894,13 +891,13 @@ const area = () => { //Estructura similar a la que utilizan en algunos proyectos
     //Seleccionamos el contenedor donde irán las escalas y en este caso el area donde se pirntara nuestra gráfica
     const setupElements = () => {
 
-        const g = svg.select('.dm-job-remote-office-graph-container');
+        const g = svg.select('.area-stack-container');
 
         g.append('g').attr('class', 'axis axis-x');
 
         g.append('g').attr('class', 'axis axis-y');
 
-        g.append('g').attr('class', 'dm-job-remote-office-graph-container-bis');
+        g.append('g').attr('class', 'area-stack-container-bis');
 
     }
 
@@ -915,7 +912,7 @@ const area = () => { //Estructura similar a la que utilizan en algunos proyectos
 
         const axisX = d3.axisBottom(scales.count.x)
             .tickFormat(d3.format("d"))
-            .ticks(13)
+            .ticks(5)
 
         g.select(".axis-x")
             .attr("transform", "translate(0," + height + ")")
@@ -923,8 +920,8 @@ const area = () => { //Estructura similar a la que utilizan en algunos proyectos
 
         const axisY = d3.axisLeft(scales.count.y)
             .tickFormat(d3.format("d"))
-            .ticks(5)
             .tickSizeInner(-width)
+            .ticks(5)
 
         g.select(".axis-y")
             .call(axisY)
@@ -943,28 +940,35 @@ const area = () => { //Estructura similar a la que utilizan en algunos proyectos
 
         const translate = "translate(" + margin.left + "," + margin.top + ")";
 
-        const g = svg.select('.dm-job-remote-office-graph-container')
+        const g = svg.select('.area-stack-container')
 
         g.attr("transform", translate)
 
+        const keys = dataz.columns.slice(1)
+
         const area = d3.area()
-            .x(d => scales.count.x(d.fecha))
+            .x((d, i) => scales.count.x(d.data.year))
             .y0(d => scales.count.y(d[0]))
             .y1(d => scales.count.y(d[1]))
             .curve(d3.curveCardinal.tension(0.6));
-        updateScales(width, height);
 
         const stack = d3.stack()
-            .keys(puestos)
-            .offset(d3.stackOffsetSilhouette)
+            .keys(keys)
             .order(d3.stackOrderInsideOut)
 
-        const dataStack = stack(dataz)
+        const stackedData = stack(dataz);
 
-        const container = chart.select('.dm-job-remote-office-graph-container-bis')
+        const color = d3.scaleOrdinal()
+            .domain(keys)
+            .range(['#1DACE6', '#1D366A', '#F24C29', '#E4C3A0',  '#C3CED0'])
 
-        const layer = container.selectAll('path')
-            .data(dataStack);
+
+        updateScales(width, height)
+
+        const container = chart.select('.area-stack-container-bis')
+
+        const layer = container.selectAll('.area')
+            .data(stackedData)
 
         const newLayer = layer.enter()
             .append('path')
@@ -974,7 +978,8 @@ const area = () => { //Estructura similar a la que utilizan en algunos proyectos
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
-            .attr('d', d => area(d))
+            .style("fill", d => color(d.key) )
+            .attr('d', area)
 
         drawAxes(g)
 
@@ -987,15 +992,13 @@ const area = () => { //Estructura similar a la que utilizan en algunos proyectos
     // LOAD THE DATA
     const loadData = () => {
 
-        d3.csv('csv/remoto-presencial.csv', (error, data) => {
+        d3.csv('csv/accidentes.csv', (error, data) => {
             if (error) {
                 console.log(error);
             } else {
-                dataz = data
+                dataz = data;
                 dataz.forEach(d => {
-                    d.fecha = d.fecha;
-                    d.remoto = +d.remoto;
-                    d.presencial = +d.presencial;
+                    d.year = d.year;
                 });
                 setupElements()
                 setupScales()
@@ -1011,4 +1014,4 @@ const area = () => { //Estructura similar a la que utilizan en algunos proyectos
 
 }
 
-area()
+areaStack()
