@@ -1,0 +1,10 @@
+.dm-job-ninja {
+    background-color: var(--grey);
+    .dm-job-ninja-title {
+        background-color: #3a699f;
+        color: var(--grey);
+    }
+    .dm-job-flash-paragraph {
+        display: block;
+    }
+}

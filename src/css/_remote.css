@@ -19,6 +19,7 @@
     display: inline-block;
     max-width: 25rem;
     margin-right: 2rem;
+    margin-bottom: 2rem;
     vertical-align: top;
     &:before {
         content: '';

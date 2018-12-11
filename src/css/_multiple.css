@@ -1,5 +1,10 @@
 .dm-job-multiple {
     background-color: var(--grey);
+    .dm-job-remote-paragraph {
+        &:before {
+            background-color: var(--alternateWes);
+        }
+    }
 }
 
 .dm-job-title-multiple {
@@ -7,85 +12,13 @@
     color: var(--goldenWes);
 }
 
-.dm-job-multiple-chart {
-    .tick {
-        line {
-            fill: none;
-            stroke: var(--alternateWes);
-            stroke-width: 1px;
-            stroke-dasharray: 3px 3px;
-            opacity: .7;
-        }
-        text {
-            font-family: var(--roboto);
-            font-size: 13px;
-        }
-    }
-    .annotation-subject {
-        display: none;
-    }
-    .line {
-        fill: none;
-        stroke-width: 2px;
-    }
-    .circles {
-        fill: var(--alternateWes);
-    }
-    .xAxis,
-    .yAxis {
-        .domain {
-            stroke: none;
-        }
-    }
-    .lengend-circle-text {
+.dm-multiple-graph {
+    .legend-text {
         font-family: var(--roboto);
-        font-size: 13px;
-    }
-    .mouse-line {
-        stroke: var(--black);
-        stroke-width: 1px;
-        opacity: 0;
     }
 }
 
 .dm-job-multiple-legend-element-text {
     display: inline-block;
     vertical-align: middle;
-}
-
-.dm-multiple-container-graph {
-    .multiple-legend {
-        font-size: 1rem;
-        font-family: var(--roboto);
-        color: var(--alternateWes);
-    }
-    .line {
-        stroke-width: 2px;
-        stroke: var(--black);
-        fill: none;
-    }
-    .diseñador {
-        fill: #b114c0;
-        stroke: none;
-    }
-
-    .marketing {
-        fill: var(--blueWes);
-        stroke: none;
-    }
-
-    .front {
-        fill: var(--violetWes);
-        stroke: none;
-    }
-
-    .programador {
-        fill: var(--redWes);
-        stroke: none;
-    }
-
-    .ux {
-        fill: var(--alternateWes);
-        stroke: none;
-    }
 }

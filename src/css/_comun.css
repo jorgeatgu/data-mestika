@@ -209,6 +209,12 @@ p {
     color: #111;
 }
 
+.legend-number {
+    font-family: var(--roboto);
+    fill: var(--goldenWes);
+    font-size: 2rem;
+}
+
 @media only screen and (min-width: 48em) {
 
     .dm-container {
