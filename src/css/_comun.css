@@ -99,7 +99,7 @@ p {
 }
 
 .overlay {
-  fill: none;
+  fill: transparent;
   pointer-events: all;
 }
 
@@ -213,6 +213,20 @@ p {
     font-family: var(--roboto);
     fill: var(--goldenWes);
     font-size: 2rem;
+}
+
+.x-hover-line,
+.y-hover-line {
+    stroke: var(--alternateWes);
+}
+
+.circle-focus {
+    fill: var(--alternateWes);
+}
+
+.text-focus {
+    font-family: var(--roboto);
+    font-size: 14px;
 }
 
 @media only screen and (min-width: 48em) {

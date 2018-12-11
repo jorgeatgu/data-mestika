@@ -43,6 +43,7 @@ const lineYear = () => {
     const scales = {};
     let dataz;
     const parseTime = d3.timeParse("%d-%b-%y");
+    const bisectDate = d3.bisector(d => d.fecha).left;
 
     //Escala para los ejes X e Y
     const setupScales = () => {
@@ -77,6 +78,10 @@ const lineYear = () => {
             .style("text-anchor", "start")
             .text("Número de ofertas");
 
+        g.append('rect').attr('class', 'overlay');
+
+        g.append('g').attr('class', 'focus').style("display", "none");
+
     }
 
     //Actualizando escalas
@@ -101,6 +106,48 @@ const lineYear = () => {
 
         g.select(".axis-y")
             .call(axisY)
+
+        const focus = g.select('.focus');
+
+        const overlay = g.select('.overlay');
+
+        focus.append("line")
+            .attr("class", "x-hover-line hover-line")
+            .attr("y1", 0)
+            .attr("y2", height);
+
+        focus.append("line")
+            .attr("class", "y-hover-line hover-line")
+            .attr("x1", width)
+            .attr("x2", width);
+
+        focus.append("circle")
+            .attr("class", "circle-focus")
+            .attr("r", 2);
+
+        focus.append("text")
+            .attr("class", "text-focus")
+            .attr("x", -10)
+            .attr("y", -30)
+            .attr("dy", ".31em");
+
+        overlay.attr("width", width + margin.left + margin.right )
+            .attr("height", height )
+            .on("mouseover", function() { focus.style("display", null); })
+            .on("mouseout", function() { focus.style("display", "none"); })
+            .on("mousemove", mousemove);
+
+        function mousemove() {
+            const x0 = scales.count.x.invert(d3.mouse(this)[0]),
+                i = bisectDate(dataz, x0, 1),
+                d0 = dataz[i - 1],
+                d1 = dataz[i],
+                d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
+            focus.attr("transform", "translate(" + scales.count.x(d.fecha) + "," + scales.count.y(d.total) + ")");
+            focus.select("text").text(d.total);
+            focus.select('.x-hover-line').attr("y2", height - scales.count.y(d.total));
+            focus.select('.y-hover-line').attr('x1', 0 - scales.count.x(d.fecha));
+        }
     }
 
     const updateChart = (dataz) => {
@@ -184,8 +231,9 @@ const lineYear = () => {
                 } else {
                       dataz = data
                       dataz.forEach(d => {
-                          d.fecha = parseTime(d.fecha);
-                         d.total = +d.total;
+                        d.fecha = parseTime(d.fecha);
+                        d.total = +d.total;
+
                       });
                       setupElements()
                       setupScales()
@@ -510,8 +558,8 @@ const remote = () => {
                 } else {
                       dataz = data
                       dataz.forEach(d => {
-                          d.fecha = parseTime(d.fecha);
-                         d.total = +d.total;
+                        d.fecha = parseTime(d.fecha);
+                        d.total = +d.total;
                       });
                       setupElements()
                       setupScales()

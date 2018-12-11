@@ -584,7 +584,7 @@ p {
 }
 
 .overlay {
-  fill: none;
+  fill: transparent;
   pointer-events: all;
 }
 
@@ -709,6 +709,23 @@ p {
     fill: #F8DFAB;
     fill: var(--goldenWes);
     font-size: 2rem;
+}
+
+.x-hover-line,
+.y-hover-line {
+    stroke: #2D3065;
+    stroke: var(--alternateWes);
+}
+
+.circle-focus {
+    fill: #2D3065;
+    fill: var(--alternateWes);
+}
+
+.text-focus {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--roboto);
+    font-size: 14px;
 }
 
 @media only screen and (min-width: 48em) {
