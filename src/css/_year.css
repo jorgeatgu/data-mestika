@@ -34,6 +34,7 @@
 }
 
 .dm-job-year-graph {
+    position: relative;
     .axis {
         .domain {
             stroke: none;

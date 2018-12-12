@@ -34,12 +34,16 @@
 
 /* stylelint-disable */
 .dm-job-remote-graph {
+    position: relative;
     .lines {
         stroke: var(--black);
         fill: none;
     }
     .circles {
         fill: var(--goldenWes);
+    }
+    .x-hover-line, .y-hover-line {
+        stroke: var(--goldenWes);
     }
 }
 /* stylelint-enable */

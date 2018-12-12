@@ -576,9 +576,9 @@ p {
 }
 
 .legend {
-    font-size: 14px;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-family: var(--roboto);
+    font-size: .75rem;
+    font-family: 'Adamina', serif;
+    font-family: var(--adamina);
     color: #111;
     color: var(--black);
 }
@@ -722,16 +722,41 @@ p {
     fill: var(--alternateWes);
 }
 
-.text-focus {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-family: var(--roboto);
-    font-size: 14px;
+.tooltip-remote,
+.tooltip-jobs {
+    top: 10%;
+    left: 20%;
+    position: absolute;
+    background-color: #162350;
+    color: #F8DFAB;
+    color: var(--goldenWes);
+    height: auto;
+    min-width: 10rem;
+    margin-left: 0;
+    padding: .5rem;
+    border-radius: 4px;
 }
+
+.tooltip-text {
+    margin: 0;
+    font-family: 'Adamina', serif;
+    font-family: var(--adamina);
+    font-size: .75rem;
+}
+
+.tooltip-text + p {
+        display: none;
+    }
+
+.dm-job-ux-ui .dm-job-remote-paragraph:before {
+            background-color: #2D3065;
+            background-color: var(--alternateWes);
+        }
 
 @media only screen and (min-width: 48em) {
 
     .dm-container {
-        padding: 0;
+        padding: 0 2rem;
     }
 
     .dm-job-city-text-title,
@@ -749,6 +774,17 @@ p {
         .data-viz-element:not(:last-child) {
             margin-right: 2rem;
         }
+
+    .tooltip-remote,
+    .tooltip-jobs {
+        padding: 1rem;
+        min-width: 20rem;
+        left: 30%;
+    }
+
+    .tooltip-text {
+        font-size: 1rem;
+    }
 
 }
 
@@ -800,8 +836,7 @@ p {
 }
 
 .annotation path {
-    stroke: #9C1B12;
-    stroke: var(--redWes);
+    stroke: #273b1e;
     fill: none;
 }
 
@@ -809,11 +844,11 @@ p {
 .title text,
 .annotation text,
 .annotation.callout.circle .annotation-subject path {
-    fill: #9C1B12;
-    fill: var(--redWes);
+    fill: #273b1e;
     font-family: 'Roboto Condensed', sans-serif;
     font-family: var(--roboto);
-    font-size: 14px;
+    font-size: 1rem;
+    font-weight: normal !important;
 }
 
 .annotation-subject path {
@@ -912,8 +947,8 @@ p {
 ========================================== */
 
 .navegacion {
-  background-color: #9C1B12;
-  background-color: var(--redWes);
+  background-color: #2D3065;
+  background-color: var(--alternateWes);
   position: fixed;
   z-index: 9;
   top: 0;
@@ -1115,6 +1150,10 @@ p {
     color: var(--goldenWes);
 }
 
+.dm-job-year-graph {
+    position: relative;
+}
+
 .dm-job-year-graph .axis .domain {
             stroke: none;
         }
@@ -1165,7 +1204,6 @@ p {
     display: inline-block;
     vertical-align: middle;
     max-width: 25rem;
-    margin-left: 2rem;
 }
 
 .dm-job-city-text-paragraph:after,
@@ -1394,6 +1432,10 @@ p {
 
 /* stylelint-disable */
 
+.dm-job-remote-graph {
+    position: relative;
+}
+
 .dm-job-remote-graph .lines {
         stroke: #111;
         stroke: var(--black);
@@ -1403,6 +1445,11 @@ p {
 .dm-job-remote-graph .circles {
         fill: #F8DFAB;
         fill: var(--goldenWes);
+    }
+
+.dm-job-remote-graph .x-hover-line, .dm-job-remote-graph .y-hover-line {
+        stroke: #F8DFAB;
+        stroke: var(--goldenWes);
     }
 
 /* stylelint-enable */
@@ -1447,7 +1494,7 @@ p {
     font-family: var(--adamina);
     color: #2D3065;
     color: var(--alternateWes);
-    display: inline-block;
+    display: block;
     vertical-align: middle;
     max-width: 25rem;
 }

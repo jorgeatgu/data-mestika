@@ -36,7 +36,6 @@
     display: inline-block;
     vertical-align: middle;
     max-width: 25rem;
-    margin-left: 2rem;
     &:after,
     &:before {
         content: '';
