@@ -325,7 +325,7 @@ const lineYear = () => {
 
 const centralizame = () => {
 
-    const margin = { top: 24, right: 24, bottom: 48, left: 152 };
+    const margin = { top: 48, right: 24, bottom: 48, left: 152 };
     let width = 0;
     let height = 0;
     const chart = d3.select('.dm-job-city-graph');
@@ -372,7 +372,7 @@ const centralizame = () => {
 
         g.append("text")
             .attr("class", "legend")
-            .attr("y", "94%")
+            .attr("y", "90%")
             .style("text-anchor", "start")
             .text("Porcentaje de ofertas por ciudad");
 
