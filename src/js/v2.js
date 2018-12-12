@@ -927,16 +927,6 @@ const areaStack = () => {
 
         drawAxes(g)
 
-        /* const totalLength = newLayer.node().getTotalLength();
-
-         newLayer
-             .attr("stroke-dasharray", totalLength + " " + totalLength)
-             .attr("stroke-dashoffset", totalLength)
-             .transition()
-             .duration(1500)
-             .ease(d3.easeLinear)
-             .attr("stroke-dashoffset", 0)*/
-
     }
 
     const resize = () => {
@@ -1324,14 +1314,6 @@ const scrolama = () => {
     }
 
     function init() {
-        // set random padding for different step heights (not required)
-        // steps.forEach(function (step) {
-        //     var v = 100 + Math.floor(Math.random() * window.innerHeight / 4);
-        //     step.style.padding = v + 'px 0px';
-        // });
-        // 1. setup the scroller with the bare-bones options
-        // this will also initialize trigger observations
-        // 3. bind scrollama event handlers (this can be chained like below)
         scroller.setup({
                 step: '.dm-job-generic',
                 debug: false,
