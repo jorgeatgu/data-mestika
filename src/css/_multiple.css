@@ -1,5 +1,10 @@
 .dm-job-multiple {
     background-color: var(--grey);
+    .dm-job-remote-paragraph {
+        &:before {
+            background-color: var(--alternateWes);
+        }
+    }
 }
 
 .dm-job-title-multiple {
@@ -7,91 +12,13 @@
     color: var(--goldenWes);
 }
 
-.dm-job-multiple-chart {
-    .tick {
-        line {
-            fill: none;
-            stroke: var(--alternateWes);
-            stroke-width: 1px;
-            stroke-dasharray: 3px 3px;
-            opacity: .7;
-        }
-        text {
-            font-family: var(--roboto);
-            font-size: 13px;
-        }
-    }
-    .annotation-subject {
-        display: none;
-    }
-    .line {
-        fill: none;
-        stroke-width: 2px;
-    }
-    .circles {
-        fill: var(--alternateWes);
-    }
-    .xAxis,
-    .yAxis {
-        .domain {
-            stroke: none;
-        }
-    }
-    .lengend-circle-text {
+.dm-multiple-graph {
+    .legend-text {
         font-family: var(--roboto);
-        font-size: 13px;
     }
-    .mouse-line {
-        stroke: var(--black);
-        stroke-width: 1px;
-        opacity: 0;
-    }
-}
-
-.dm-job-multiple-legend {
-    width: 100%;
-    text-align: center;
-}
-
-.dm-job-multiple-legend-element {
-    display: inline-block;
-    &:not(:last-child) {
-        margin-right: 2rem;
-    }
-}
-
-.dm-job-multiple-legend-element-square {
-    width: 1rem;
-    height: 1rem;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: .5rem;
 }
 
 .dm-job-multiple-legend-element-text {
     display: inline-block;
     vertical-align: middle;
-    font-size: 1rem;
-    font-family: var(--roboto);
-    color: var(--alternateWes);
-}
-
-.dsn {
-    background-color: #b114c0;
-}
-
-.mkt {
-    background-color: var(--blueWes);
-}
-
-.frt {
-    background-color: var(--violetWes);
-}
-
-.prg {
-    background-color: var(--redWes);
-}
-
-.ux {
-    background-color: var(--alternateWes);
 }

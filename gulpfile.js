@@ -7,19 +7,15 @@ selector = require('postcss-custom-selectors')
 customProperties = require("postcss-custom-properties")
 sorting = require('postcss-sorting');
 nested = require('postcss-nested');
-pxtorem = require('postcss-pxtorem');
 reporter = require('postcss-reporter');
 imagemin = require('gulp-imagemin');
-uglify = require('gulp-uglify');
 newer = require('gulp-newer');
 nano = require('gulp-cssnano');
+terser = require('gulp-terser');
 notify = require('gulp-notify');
 stylelint = require('stylelint');
 browserSync = require('browser-sync');
-inlinesource = require('gulp-inline-source');
-uncss = require('gulp-uncss');
-webp = require('gulp-webp');
-// responsive = require('gulp-responsive');
+babel = require('gulp-babel');
 
 var paths = {
   js: 'src/js',
@@ -48,12 +44,26 @@ var watch = {
   ]
 };
 
+gulp.task('babel', () =>
+    gulp.src(watch.js)
+        .pipe(newer(paths.js))
+        .pipe(babel({
+            presets: ["@babel/preset-env"]
+        }))
+        .on("error", errorAlertJS)
+        .pipe(gulp.dest(paths.buildJs))
+        .pipe(notify({
+            message: 'JavaScript complete'
+        }))
+);
+
 gulp.task("browserSync", function() {
     browserSync({
         server: {
             baseDir: "./",
             reloadDelay: 2000
-        }
+        },
+        online: true
     })
 });
 
@@ -81,13 +91,13 @@ function errorAlertPost(error) {
 
 /* Comprimiendo JavaScript */
 gulp.task('compress', function() {
-    return gulp.src(watch.js)
-        .pipe(uglify())
-        .on("error", errorAlertJS)
-        .pipe(gulp.dest(paths.buildJs))
-        .pipe(notify({
-            message: 'JavaScript complete'
-        }));
+   return gulp.src(watch.js)
+     .pipe(terser())
+     .on("error", errorAlertJS)
+     .pipe(gulp.dest(paths.buildJs))
+     .pipe(notify({
+         message: 'JavaScript complete'
+     }))
 });
 
 /* ==========================================================================
@@ -115,19 +125,12 @@ gulp.task('css', function() {
         nested,
         customProperties,
         selector,
-        pxtorem({
-            root_value: 16,
-            unit_precision: 2,
-            prop_white_list: ['font', 'font-size', 'line-height', 'letter-spacing', 'margin', 'padding'],
-            replace: true,
-            media_query: false
-        }),
         sorting({
             "sort-order": "csscomb"
         }),
         autoprefixer
     ];
-    return gulp.src('./src/css/styles.css')
+    return gulp.src('src/css/styles.css')
 
     .pipe(sourcemaps.init())
         .pipe(postcss(processors))
@@ -174,80 +177,16 @@ gulp.task('images', function() {
 });
 
 
-gulp.task('inline', function() {
-    return gulp.src('./*.html')
-        .pipe(inlinesource())
-        .pipe(gulp.dest('./inline/'))
-        .pipe(notify({
-            message: 'CSSnano + remove CSS + inline CSS'
-        }));
-});
-
-gulp.task('removecss', function() {
-    return gulp.src('./css/styles.css')
-        .pipe(uncss({
-            html: ['./*.html']
-        }))
-        .pipe(nano())
-        .pipe(gulp.dest(paths.buildCss))
-        .pipe(notify({
-            message: 'CSSnano & remove CSS task complete'
-        }));
-});
-
-gulp.task('webp', () =>
-    gulp.src('img/*.jpg')
-        .pipe(webp())
-        .pipe(gulp.dest(paths.buildImages))
-);
-
-// gulp.task('imgrwd', function () {
-//   return gulp.src('src/img/*.{png,jpg}')
-//     .pipe(responsive({
-//       '*.png': [{
-//         width: 300,
-//         rename: {
-//           suffix: '-300px',
-//           extname: '.jpg',
-//         },
-//         format: 'jpeg',
-//       }, {
-//         width: 600,
-//         rename: {
-//           suffix: '-600px',
-//           extname: '.jpg',
-//         },
-//       }, {
-//         width: 1200,
-//         rename: {
-//           suffix: '-1200px',
-//           extname: '.jpg',
-//         }
-//       }],
-//     }, {
-//       quality: 75,
-//       progressive: true,
-//       withMetadata: false,
-//       errorOnEnlargement: false,
-//     }))
-//     .pipe(gulp.dest('img'));
-// });
 
 /* Tarea por defecto para compilar CSS y comprimir imagenes */
 gulp.task('default', ["browserSync"], function() {
     //Add interval to watcher!
     gulp.watch(watch.css, { interval: 300 }, ['css']);
     gulp.watch(watch.images, { interval: 300 }, ['images']);
-    gulp.watch(watch.js, { interval: 300 }, ['compress']);
+    gulp.watch(watch.js, { interval: 300 }, ['babel', 'compress']);
     gulp.watch(["./*.html", "css/*.css", "js/*.js"]).on("change", browserSync.reload);
 });
 
-/* Tarea final para comprimir CSS y JavaScript. Eliminar el CSS sin usar e incluirlo en línea en el HTML
-    Por último creamos las imágenes con diferentes tamaños y las pasamos a WebP.
-*/
 
 // Build para un proyecto sin imágenes
-gulp.task('build', ['minify', 'compress', 'removecss', 'inline']);
-
-//Build para un proyecto con imágenes
-gulp.task('buildimg', ['minify', 'compress', 'removecss', 'inline' , 'imgrwd' , 'webp']);
+gulp.task('build', ['minify', 'compress']);

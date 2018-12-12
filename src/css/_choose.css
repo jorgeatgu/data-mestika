@@ -12,6 +12,7 @@
 .dm-job-city-graph {
     width: 100%;
     display: inline-block;
+    position: relative;
 }
 
 .dm-job-city-text {
@@ -35,7 +36,6 @@
     display: inline-block;
     vertical-align: middle;
     max-width: 25rem;
-    margin-left: 2rem;
     &:after,
     &:before {
         content: '';
@@ -80,10 +80,12 @@
             stroke: none;
         }
     }
-    .bar {
-        fill: var(--alternateWes);
-    }
 }
+
+.bar-horizontal {
+    fill: var(--alternateWes);
+}
+
 /* stylelint-enable */
 .tooltip-container {
     position: absolute;

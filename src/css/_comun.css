@@ -93,13 +93,13 @@ p {
 }
 
 .legend {
-    font-size: 14px;
-    font-family: var(--roboto);
+    font-size: .75rem;
+    font-family: var(--adamina);
     color: var(--black);
 }
 
 .overlay {
-  fill: none;
+  fill: transparent;
   pointer-events: all;
 }
 
@@ -209,10 +209,56 @@ p {
     color: #111;
 }
 
+.legend-number {
+    font-family: var(--roboto);
+    fill: var(--goldenWes);
+    font-size: 2rem;
+}
+
+.x-hover-line,
+.y-hover-line {
+    stroke: var(--alternateWes);
+}
+
+.circle-focus {
+    fill: var(--alternateWes);
+}
+
+.tooltip-remote,
+.tooltip-jobs {
+    top: 10%;
+    left: 20%;
+    position: absolute;
+    background-color: #162350;
+    color: var(--goldenWes);
+    height: auto;
+    min-width: 10rem;
+    margin-left: 0;
+    padding: .5rem;
+    border-radius: 4px;
+}
+
+.tooltip-text {
+    margin: 0;
+    font-family: var(--adamina);
+    font-size: .75rem;
+    + p {
+        display: none;
+    }
+}
+
+.dm-job-ux-ui {
+    .dm-job-remote-paragraph {
+        &:before {
+            background-color: var(--alternateWes);
+        }
+    }
+}
+
 @media only screen and (min-width: 48em) {
 
     .dm-container {
-        padding: 0;
+        padding: 0 2rem;
     }
 
     .dm-job-city-text-title,
@@ -229,6 +275,17 @@ p {
         &:not(:last-child) {
             margin-right: 2rem;
         }
+    }
+
+    .tooltip-remote,
+    .tooltip-jobs {
+        padding: 1rem;
+        min-width: 20rem;
+        left: 30%;
+    }
+
+    .tooltip-text {
+        font-size: 1rem;
     }
 
 }

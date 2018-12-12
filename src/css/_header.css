@@ -42,7 +42,7 @@
 }
 
 .annotation path {
-    stroke: var(--redWes);
+    stroke: #273b1e;
     fill: none;
 }
 
@@ -50,9 +50,10 @@
 .title text,
 .annotation text,
 .annotation.callout.circle .annotation-subject path {
-    fill: var(--redWes);
+    fill: #273b1e;
     font-family: var(--roboto);
-    font-size: 14px;
+    font-size: 1rem;
+    font-weight: normal !important;
 }
 
 .annotation-subject path {
@@ -145,7 +146,7 @@
 /*  .navegacion
 ========================================== */
 .navegacion {
-  background-color: var(--redWes);
+  background-color: var(--alternateWes);
   position: fixed;
   z-index: 9;
   top: 0;
