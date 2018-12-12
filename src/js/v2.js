@@ -17,8 +17,8 @@ const menu = () => {
     document.querySelector('.burger').addEventListener('click', classToggle);
     document.querySelector('.overlay').addEventListener('click', classToggle);
 
-    for(i=0; i<elementBtn.length; i++){
-        elementBtn[i].addEventListener("click", function(){
+    for (i = 0; i < elementBtn.length; i++) {
+        elementBtn[i].addEventListener("click", function() {
             removeClass();
         });
     }
@@ -44,20 +44,23 @@ const lineYear = () => {
     let dataz;
     const parseTime = d3.timeParse("%d-%b-%y");
     const bisectDate = d3.bisector(d => d.fecha).left;
+    const tooltipJobs = chart.append("div")
+        .attr("class", "tooltip tooltip-jobs")
+        .style("opacity", 0);
 
     //Escala para los ejes X e Y
     const setupScales = () => {
 
         const countX = d3.scaleTime()
-            .domain(d3.extent(dataz, d => d.fecha ));
+            .domain(d3.extent(dataz, d => d.fecha));
 
         const countY = d3.scaleLinear()
-            .domain([0, d3.max(dataz, d => d.total + (d.total / 4) )]);
+            .domain([0, d3.max(dataz, d => d.total + (d.total / 4))]);
 
 
 
 
-        scales.count = { x: countX,  y: countY };
+        scales.count = { x: countX, y: countY };
 
     }
 
@@ -80,7 +83,9 @@ const lineYear = () => {
 
         g.append('rect').attr('class', 'overlay');
 
-        g.append('g').attr('class', 'focus').style("display", "none");
+        g.append('g')
+            .attr('class', 'focus')
+            .style("display", "none");
 
     }
 
@@ -125,28 +130,97 @@ const lineYear = () => {
             .attr("class", "circle-focus")
             .attr("r", 2);
 
-        focus.append("text")
-            .attr("class", "text-focus")
-            .attr("x", -10)
-            .attr("y", -30)
-            .attr("dy", ".31em");
-
-        overlay.attr("width", width + margin.left + margin.right )
-            .attr("height", height )
+        overlay.attr("width", width + margin.left + margin.right)
+            .attr("height", height)
             .on("mouseover", function() { focus.style("display", null); })
-            .on("mouseout", function() { focus.style("display", "none"); })
+            .on("mouseout", function() {
+                focus.style("display", "none")
+                tooltipJobs.style("opacity", 0)
+            })
             .on("mousemove", mousemove);
 
-        function mousemove() {
-            const x0 = scales.count.x.invert(d3.mouse(this)[0]),
-                i = bisectDate(dataz, x0, 1),
-                d0 = dataz[i - 1],
-                d1 = dataz[i],
-                d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
-            focus.attr("transform", "translate(" + scales.count.x(d.fecha) + "," + scales.count.y(d.total) + ")");
-            focus.select("text").text(d.total);
-            focus.select('.x-hover-line').attr("y2", height - scales.count.y(d.total));
-            focus.select('.y-hover-line').attr('x1', 0 - scales.count.x(d.fecha));
+       function mousemove() {
+           const x0 = scales.count.x.invert(d3.mouse(this)[0]);
+           const i = bisectDate(dataz, x0, 1);
+           const d0 = dataz[i - 1];
+           const d1 = dataz[i];
+           const d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
+           focus.attr("transform", `translate(${scales.count.x(d.fecha)},${scales.count.y(d.total)})`);
+           tooltipJobs.style("opacity", 1)
+               .html(`<p class="tooltip-text">En ${d.mes} de ${d.year} se publicaron ${d.total} ofertas.<p/>`)
+           focus.select('.x-hover-line').attr("y2", height - scales.count.y(d.total));
+           focus.select('.y-hover-line').attr('x1', 0 - scales.count.x(d.fecha));
+       }
+
+        if (width > 767) {
+
+            setTimeout(function() {
+
+                //Add annotations
+                const labels = [{
+                        data: { fecha: "1-oct-09", total: 32 },
+                        dy: -150,
+                        dx: 52,
+                        note: {
+                            title: "1.ª oferta de UX: 1/10/09",
+                            wrap: 430,
+                            align: "middle"
+                        }
+                    },
+                    {
+                        data: { fecha: "1-feb-14", total: 80 },
+                        dy: -165,
+                        dx: 0,
+                        note: {
+                            title: "1.ª oferta de Angular: 3/2/14",
+                            wrap: 430,
+                            align: "middle"
+                        }
+                    },
+                    {
+                        data: { fecha: "1-oct-16", total: 140 },
+                        dy: -90,
+                        dx: 50,
+                        note: {
+                            title: "1.ª oferta de React: 10/2/16",
+                            wrap: 430,
+                            align: "middle"
+                        }
+                    }
+                ].map(l => {
+                    l.subject = { radius: 4 }
+                    return l
+                })
+
+                const timeFormat = d3.timeFormat("%d-%b-%y")
+
+                window.makeAnnotations = d3.annotation()
+                    .annotations(labels)
+                    .type(d3.annotationCalloutCircle)
+                    .accessors({
+                        x: d => scales.count.x(parseTime(d.fecha)),
+                        y: d => scales.count.y(d.total)
+                    })
+                    .accessorsInverse({
+                        fecha: d => timeFormat(scales.count.x.invert(d.x)),
+                        total: d => scales.count.y.invert(d.y)
+                    })
+                    .on('subjectover', function(annotation) {
+                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+                            .classed("hidden", false)
+                    })
+                    .on('subjectout', function(annotation) {
+                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+                            .classed("hidden", true)
+                    })
+
+                svg.append("g")
+                    .attr("class", "annotation-test")
+                    .call(makeAnnotations)
+
+                svg.selectAll("g.annotation-connector, g.annotation-note")
+            })
+
         }
     }
 
@@ -176,12 +250,12 @@ const lineYear = () => {
         const container = chart.select('.dm-job-year-graph-container-bis')
 
         const layer = container.selectAll('.line')
-               .data([dataz])
+            .data([dataz])
 
         const newLayer = layer.enter()
-                .append('path')
-                .attr('class', 'line')
-                .attr('stroke-width', '1.5')
+            .append('path')
+            .attr('class', 'line')
+            .attr('stroke-width', '1.5')
 
         const dots = container.selectAll('.circles')
             .data(dataz)
@@ -226,19 +300,19 @@ const lineYear = () => {
     const loadData = () => {
 
         d3.csv('csv/data-ofertas-anyo.csv', (error, data) => {
-                if (error) {
-                      console.log(error);
-                } else {
-                      dataz = data
-                      dataz.forEach(d => {
-                        d.fecha = parseTime(d.fecha);
-                        d.total = +d.total;
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data
+                dataz.forEach(d => {
+                    d.fecha = parseTime(d.fecha);
+                    d.total = +d.total;
 
-                      });
-                      setupElements()
-                      setupScales()
-                      updateChart(dataz)
-                }
+                });
+                setupElements()
+                setupScales()
+                updateChart(dataz)
+            }
 
         });
     }
@@ -249,10 +323,9 @@ const lineYear = () => {
 
 }
 
-
 const centralizame = () => {
 
-    const margin = { top: 48, right: 24, bottom: 24, left: 152 };
+    const margin = { top: 24, right: 24, bottom: 48, left: 152 };
     let width = 0;
     let height = 0;
     const chart = d3.select('.dm-job-city-graph');
@@ -272,16 +345,17 @@ const centralizame = () => {
         const countX = d3.scaleLinear()
             .domain(
                 [0,
-                d3.max(dataz, d => d.cantidad)]
-        );
+                    d3.max(dataz, d => d.cantidad)
+                ]
+            );
 
         const countY = d3.scaleBand()
-            .domain(dataz.map( d => d.ciudad))
+            .domain(dataz.map(d => d.ciudad))
             .paddingInner(0.2)
             .paddingOuter(0.5);
 
 
-        scales.count = { x: countX,  y: countY };
+        scales.count = { x: countX, y: countY };
 
     }
 
@@ -298,7 +372,7 @@ const centralizame = () => {
 
         g.append("text")
             .attr("class", "legend")
-            .attr("x", "30%")
+            .attr("y", "94%")
             .style("text-anchor", "start")
             .text("Porcentaje de ofertas por ciudad");
 
@@ -318,7 +392,7 @@ const centralizame = () => {
             .tickSize(-height)
 
         g.select(".axis-x")
-            .attr("transform", "translate(0," + height  + ")")
+            .attr("transform", "translate(0," + height + ")")
             .call(axisX)
 
         const axisY = d3.axisLeft(scales.count.y)
@@ -350,23 +424,22 @@ const centralizame = () => {
         const container = chart.select('.dm-job-city-graph-container-bis')
 
         const layer = container.selectAll('.bar-horizontal')
-               .data(dataz)
+            .data(dataz)
 
         const newLayer = layer.enter()
-                .append('rect')
-                .attr('class', 'bar-horizontal')
-                .on("mouseover", d => {
-                    tooltip.transition().duration(300).style("opacity", 1);
-                    tooltip
-                        .html('<p class="tooltip-centralizame">Ofertas de trabajo en ' + '<span class="tooltip-contralizame-ciudad">' + d.ciudad + ' </span>' + d.ofertas + '<p/>')
-                })
+            .append('rect')
+            .attr('class', 'bar-horizontal')
+            .on("mouseover", d => {
+                tooltip.transition().duration(300).style("opacity", 1);
+                tooltip
+                    .html(`<p class="tooltip-centralizame">Ofertas de trabajo en <span class="tooltip-contralizame-ciudad">${d.ciudad} </span>${d.ofertas}<p/>`)
+            })
 
 
         layer.merge(newLayer)
             .attr("x", 0)
             .attr("y", d => scales.count.y(d.ciudad))
             .attr("height", scales.count.y.bandwidth())
-
             .transition()
             .duration(1500)
             .ease(d3.easePolyInOut)
@@ -384,21 +457,21 @@ const centralizame = () => {
     const loadData = () => {
 
         d3.csv('csv/data-ciudades-porcentaje.csv', (error, data) => {
-                if (error) {
-                      console.log(error);
-                } else {
-                      dataz = data
-                      dataz.forEach(d => {
-                          d.ciudad = d.ciudad;
-                          d.cantidad = +d.cantidad;
-                      });
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data
+                dataz.forEach(d => {
+                    d.ciudad = d.ciudad;
+                    d.cantidad = +d.cantidad;
+                });
 
-                      dataz.sort((a, b) => a.cantidad - b.cantidad);
+                dataz.sort((a, b) => a.cantidad - b.cantidad);
 
-                      setupElements()
-                      setupScales()
-                      updateChart(dataz)
-                }
+                setupElements()
+                setupScales()
+                updateChart(dataz)
+            }
 
         });
     }
@@ -408,7 +481,6 @@ const centralizame = () => {
     loadData()
 
 }
-
 
 const remote = () => {
     //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
@@ -420,17 +492,21 @@ const remote = () => {
     const scales = {};
     let dataz;
     const parseTime = d3.timeParse("%d-%b-%y");
+    const bisectDate = d3.bisector(d => d.fecha).left;
+    const tooltipRemote = chart.append("div")
+        .attr("class", "tooltip tooltip-remote")
+        .style("opacity", 0);
 
     //Escala para los ejes X e Y
     const setupScales = () => {
 
         const countX = d3.scaleTime()
-            .domain(d3.extent(dataz, d => d.fecha ));
+            .domain(d3.extent(dataz, d => d.fecha));
 
         const countY = d3.scaleLinear()
-            .domain([0, d3.max(dataz, d => d.total + (d.total / 4) )]);
+            .domain([0, d3.max(dataz, d => d.total + (d.total / 4))]);
 
-        scales.count = { x: countX,  y: countY };
+        scales.count = { x: countX, y: countY };
 
     }
 
@@ -445,11 +521,23 @@ const remote = () => {
 
         g.append('g').attr('class', 'dm-job-remote-graph-container-bis');
 
+        g.append('rect').attr('class', 'overlay');
+
         g.append("text")
             .attr("class", "legend")
             .attr("y", "2rem")
             .style("text-anchor", "start")
             .text("Número de ofertas");
+
+        g.append('g')
+            .attr('class', 'focus')
+            .style("display", "none")
+            .append("line")
+            .attr("class", "x-hover-line hover-line")
+            .attr("y1", 0);
+
+        g.select('.focus').append("text")
+            .attr("class", "text-focus");
 
     }
 
@@ -475,6 +563,40 @@ const remote = () => {
 
         g.select(".axis-y")
             .call(axisY)
+
+        const focus = g.select('.focus');
+
+        const overlay = g.select('.overlay');
+
+        focus.select(".x-hover-line").attr("y2", height);
+
+        overlay.attr("width", width + margin.left + margin.right)
+            .attr("height", height)
+            .on("mouseover", function() {
+                focus.style("display", null);
+            })
+            .on("mouseout", function() {
+                focus.style("display", "none")
+                tooltipRemote.style("opacity", 0)
+            })
+            .on("mousemove", mousemove);
+
+        function mousemove() {
+            const w = chart.node().offsetWidth;
+            const x0 = scales.count.x.invert(d3.mouse(this)[0]);
+            const i = bisectDate(dataz, x0, 1);
+            const d0 = dataz[i - 1];
+            const d1 = dataz[i];
+            const d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
+
+                tooltipRemote.style("opacity", 1)
+                    .html(`<p class="tooltip-text">En ${d.mes} de ${d.year} se publicaron ${d.total} ofertas.<p/>`)
+
+                focus.select(".x-hover-line")
+                    .attr("transform",
+                        `translate(${scales.count.x(d.fecha)},${0})`);
+
+        }
     }
 
     const updateChart = (dataz) => {
@@ -503,12 +625,12 @@ const remote = () => {
         const container = chart.select('.dm-job-remote-graph-container-bis')
 
         const layer = container.selectAll('.lines')
-               .data([dataz])
+            .data([dataz])
 
         const newLayer = layer.enter()
-                .append('path')
-                .attr('class', 'lines')
-                .attr('stroke-width', '1.5')
+            .append('path')
+            .attr('class', 'lines')
+            .attr('stroke-width', '1.5')
 
         const dots = container.selectAll('.circles')
             .data(dataz)
@@ -553,18 +675,20 @@ const remote = () => {
     const loadData = () => {
 
         d3.csv('csv/data-remoto-mes.csv', (error, data) => {
-                if (error) {
-                      console.log(error);
-                } else {
-                      dataz = data
-                      dataz.forEach(d => {
-                        d.fecha = parseTime(d.fecha);
-                        d.total = +d.total;
-                      });
-                      setupElements()
-                      setupScales()
-                      updateChart(dataz)
-                }
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data
+                dataz.forEach(d => {
+                    d.fecha = parseTime(d.fecha);
+                    d.total = +d.total;
+                    d.mes = d.mes;
+                    d.year = d.year;
+                });
+                setupElements()
+                setupScales()
+                updateChart(dataz)
+            }
 
         });
     }
@@ -574,8 +698,6 @@ const remote = () => {
     loadData()
 
 }
-
-
 
 const animateDendogram = () => {
     const madridTimeline = anime.timeline();
@@ -663,8 +785,6 @@ const dendogram = () => {
 
 dendogram();
 
-
-
 const areaStack = () => {
 
     const margin = { top: 24, right: 24, bottom: 24, left: 48 };
@@ -682,7 +802,7 @@ const areaStack = () => {
     const setupScales = () => {
 
         const countX = d3.scaleTime()
-            .domain(d3.extent(dataz, d => d.year ))
+            .domain(d3.extent(dataz, d => d.year))
 
         const countY = d3.scaleLinear()
             .domain([0, 2000]);
@@ -763,23 +883,23 @@ const areaStack = () => {
 
         const color = d3.scaleOrdinal()
             .domain(keys)
-            .range(['#1DACE6', '#1D366A', '#F24C29', '#E4C3A0',  '#C3CED0'])
+            .range(['#1DACE6', '#1D366A', '#F24C29', '#E4C3A0', '#C3CED0'])
 
         const legend = svg.selectAll(".label")
-                .data(color.domain())
-                .enter()
-                .append("g")
-                .attr("class", "label")
-                .attr("transform", (d,i) => "translate(0, " + (i * 24) + ")");
+            .data(color.domain())
+            .enter()
+            .append("g")
+            .attr("class", "label")
+            .attr("transform", (d, i) => "translate(0, " + (i * 24) + ")");
 
-          legend.append("rect")
+        legend.append("rect")
             .attr("x", margin.left + 20)
             .attr("y", margin.left - 8)
             .attr("width", 16)
             .attr("height", 16)
             .style("fill", color)
 
-          legend.append("text")
+        legend.append("text")
             .attr("class", "legend-text")
             .attr("x", margin.left + 45)
             .attr("y", margin.left)
@@ -802,20 +922,20 @@ const areaStack = () => {
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
-            .style("fill", d => color(d.key) )
+            .style("fill", d => color(d.key))
             .attr('d', area)
 
         drawAxes(g)
 
-       /* const totalLength = newLayer.node().getTotalLength();
+        /* const totalLength = newLayer.node().getTotalLength();
 
-        newLayer
-            .attr("stroke-dasharray", totalLength + " " + totalLength)
-            .attr("stroke-dashoffset", totalLength)
-            .transition()
-            .duration(1500)
-            .ease(d3.easeLinear)
-            .attr("stroke-dashoffset", 0)*/
+         newLayer
+             .attr("stroke-dasharray", totalLength + " " + totalLength)
+             .attr("stroke-dashoffset", totalLength)
+             .transition()
+             .duration(1500)
+             .ease(d3.easeLinear)
+             .attr("stroke-dashoffset", 0)*/
 
     }
 
@@ -852,7 +972,7 @@ const areaStack = () => {
 
 const uxuiuxui = () => {
 
-    const margin = { top: 24, right: 24, bottom: 24, left: 40 };
+    const margin = { top: 24, right: 24, bottom: 48, left: 40 };
     let width = 0;
     let height = 0;
     const chart = d3.select('.dm-ux-ui-graph');
@@ -868,16 +988,17 @@ const uxuiuxui = () => {
         const countX = d3.scaleLinear()
             .domain(
                 [0,
-                d3.max(dataz, d => d.cantidad)]
-        );
+                    d3.max(dataz, d => d.cantidad)
+                ]
+            );
 
         const countY = d3.scaleBand()
-            .domain(dataz.map( d => d.puesto))
+            .domain(dataz.map(d => d.puesto))
             .paddingInner(0.2)
             .paddingOuter(0.5);
 
 
-        scales.count = { x: countX,  y: countY };
+        scales.count = { x: countX, y: countY };
 
     }
 
@@ -894,6 +1015,7 @@ const uxuiuxui = () => {
 
         g.append("text")
             .attr("class", "legend")
+            .attr("y", "94%")
             .style("text-anchor", "start")
             .text("Porcentaje de ofertas");
 
@@ -907,14 +1029,14 @@ const uxuiuxui = () => {
         g.append("text")
             .attr("class", "legend-number")
             .attr("x", "2rem")
-            .attr("y", "48.05%")
+            .attr("y", "46%")
             .style("text-anchor", "start")
             .text("209");
 
         g.append("text")
             .attr("class", "legend-number")
             .attr("x", "2rem")
-            .attr("y", "72%")
+            .attr("y", "69%")
             .style("text-anchor", "start")
             .text("88");
 
@@ -934,7 +1056,7 @@ const uxuiuxui = () => {
             .tickSize(-height)
 
         g.select(".axis-x")
-            .attr("transform", "translate(0," + height  + ")")
+            .attr("transform", "translate(0," + height + ")")
             .call(axisX)
 
         const axisY = d3.axisLeft(scales.count.y)
@@ -966,11 +1088,11 @@ const uxuiuxui = () => {
         const container = chart.select('.dm-ux-ui-graph-container-bis')
 
         const layer = container.selectAll('.bar-horizontal')
-               .data(dataz)
+            .data(dataz)
 
         const newLayer = layer.enter()
-                .append('rect')
-                .attr('class', 'bar-horizontal')
+            .append('rect')
+            .attr('class', 'bar-horizontal')
 
 
         layer.merge(newLayer)
@@ -994,21 +1116,21 @@ const uxuiuxui = () => {
     const loadData = () => {
 
         d3.csv('csv/ux-ui-uxui.csv', (error, data) => {
-                if (error) {
-                      console.log(error);
-                } else {
-                      dataz = data
-                      dataz.forEach(d => {
-                          d.puesto = d.puesto;
-                          d.cantidad = +d.cantidad;
-                      });
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data
+                dataz.forEach(d => {
+                    d.puesto = d.puesto;
+                    d.cantidad = +d.cantidad;
+                });
 
-                      dataz.sort((a, b) => a.cantidad - b.cantidad);
+                dataz.sort((a, b) => a.cantidad - b.cantidad);
 
-                      setupElements()
-                      setupScales()
-                      updateChart(dataz)
-                }
+                setupElements()
+                setupScales()
+                updateChart(dataz)
+            }
 
         });
     }
@@ -1034,15 +1156,15 @@ const flash = () => {
     const setupScales = () => {
 
         const countX = d3.scaleTime()
-            .domain(d3.extent(dataz, d => d.fecha ));
+            .domain(d3.extent(dataz, d => d.fecha));
 
         const countY = d3.scaleLinear()
-            .domain([0, d3.max(dataz, d => d.total + (d.total / 4) )]);
+            .domain([0, d3.max(dataz, d => d.total + (d.total / 4))]);
 
 
 
 
-        scales.count = { x: countX,  y: countY };
+        scales.count = { x: countX, y: countY };
 
     }
 
@@ -1114,7 +1236,7 @@ const flash = () => {
         const container = chart.select('.dm-job-flash-graph-container-bis')
 
         const layer = container.selectAll('.line')
-               .data([dataz])
+            .data([dataz])
 
         const newLayer = layer.enter()
             .append('path')
@@ -1146,18 +1268,18 @@ const flash = () => {
     const loadData = () => {
 
         d3.csv('csv/data-flash-mes.csv', (error, data) => {
-                if (error) {
-                      console.log(error);
-                } else {
-                      dataz = data
-                      dataz.forEach(d => {
-                          d.fecha = parseTime(d.fecha);
-                         d.total = +d.total;
-                      });
-                      setupElements()
-                      setupScales()
-                      updateChart(dataz)
-                }
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data
+                dataz.forEach(d => {
+                    d.fecha = parseTime(d.fecha);
+                    d.total = +d.total;
+                });
+                setupElements()
+                setupScales()
+                updateChart(dataz)
+            }
 
         });
     }
@@ -1221,6 +1343,6 @@ const scrolama = () => {
     }
     // kick things off
     init();
-};
+}
 
 scrolama();
