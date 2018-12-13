@@ -152,76 +152,6 @@ const lineYear = () => {
            focus.select('.y-hover-line').attr('x1', 0 - scales.count.x(d.fecha));
        }
 
-        if (width > 767) {
-
-            setTimeout(function() {
-
-                //Add annotations
-                const labels = [{
-                        data: { fecha: "1-oct-09", total: 32 },
-                        dy: -150,
-                        dx: 52,
-                        note: {
-                            title: "1.ª oferta de UX: 1/10/09",
-                            wrap: 430,
-                            align: "middle"
-                        }
-                    },
-                    {
-                        data: { fecha: "1-feb-14", total: 80 },
-                        dy: -165,
-                        dx: 0,
-                        note: {
-                            title: "1.ª oferta de Angular: 3/2/14",
-                            wrap: 430,
-                            align: "middle"
-                        }
-                    },
-                    {
-                        data: { fecha: "1-oct-16", total: 140 },
-                        dy: -90,
-                        dx: 50,
-                        note: {
-                            title: "1.ª oferta de React: 10/2/16",
-                            wrap: 430,
-                            align: "middle"
-                        }
-                    }
-                ].map(l => {
-                    l.subject = { radius: 4 }
-                    return l
-                })
-
-                const timeFormat = d3.timeFormat("%d-%b-%y")
-
-                window.makeAnnotations = d3.annotation()
-                    .annotations(labels)
-                    .type(d3.annotationCalloutCircle)
-                    .accessors({
-                        x: d => scales.count.x(parseTime(d.fecha)),
-                        y: d => scales.count.y(d.total)
-                    })
-                    .accessorsInverse({
-                        fecha: d => timeFormat(scales.count.x.invert(d.x)),
-                        total: d => scales.count.y.invert(d.y)
-                    })
-                    .on('subjectover', function(annotation) {
-                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
-                            .classed("hidden", false)
-                    })
-                    .on('subjectout', function(annotation) {
-                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
-                            .classed("hidden", true)
-                    })
-
-                svg.append("g")
-                    .attr("class", "annotation-test")
-                    .call(makeAnnotations)
-
-                svg.selectAll("g.annotation-connector, g.annotation-note")
-            })
-
-        }
     }
 
     const updateChart = (dataz) => {
@@ -290,6 +220,77 @@ const lineYear = () => {
             .duration(1500)
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
+
+        if (width > 767) {
+
+            setTimeout(function() {
+
+                //Add annotations
+                const labels = [{
+                        data: { fecha: "1-oct-09", total: 32 },
+                        dy: -150,
+                        dx: 52,
+                        note: {
+                            title: "1.ª oferta de UX: 1/10/09",
+                            wrap: 430,
+                            align: "middle"
+                        }
+                    },
+                    {
+                        data: { fecha: "1-feb-14", total: 80 },
+                        dy: -165,
+                        dx: 0,
+                        note: {
+                            title: "1.ª oferta de Angular: 3/2/14",
+                            wrap: 430,
+                            align: "middle"
+                        }
+                    },
+                    {
+                        data: { fecha: "1-oct-16", total: 140 },
+                        dy: -100,
+                        dx: 50,
+                        note: {
+                            title: "1.ª oferta de React: 10/2/16",
+                            wrap: 430,
+                            align: "middle"
+                        }
+                    }
+                ].map(l => {
+                    l.subject = { radius: 4 }
+                    return l
+                })
+
+                const timeFormat = d3.timeFormat("%d-%b-%y")
+
+                window.makeAnnotations = d3.annotation()
+                    .annotations(labels)
+                    .type(d3.annotationCalloutCircle)
+                    .accessors({
+                        x: d => scales.count.x(parseTime(d.fecha)),
+                        y: d => scales.count.y(d.total)
+                    })
+                    .accessorsInverse({
+                        fecha: d => timeFormat(scales.count.x.invert(d.x)),
+                        total: d => scales.count.y.invert(d.y)
+                    })
+                    .on('subjectover', function(annotation) {
+                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+                            .classed("hidden", false)
+                    })
+                    .on('subjectout', function(annotation) {
+                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+                            .classed("hidden", true)
+                    })
+
+                svg.append("g")
+                    .attr("class", "annotation-test")
+                    .call(makeAnnotations)
+
+                svg.selectAll("g.annotation-connector, g.annotation-note")
+            })
+
+        }
     }
 
     const resize = () => {
@@ -1316,7 +1317,7 @@ const scrolama = () => {
     function init() {
         scroller.setup({
                 step: '.dm-job-generic',
-                debug: false,
+                debug: true,
                 offset: 0.2
             })
             .onStepEnter(handleStepEnter);
