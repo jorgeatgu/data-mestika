@@ -3,15 +3,15 @@
 }
 
 .dm-header {
-    background-color: #fff;
-    max-height: 100vh;
+    background-color: var(--white);
+    max-height: 85vh;
     position: relative;
     display: flex;
 }
 
 .dm-header-container {
     position: absolute;
-    top: 10rem;
+    top: 7rem;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -20,7 +20,7 @@
     padding: 1rem 1rem 0;
     width: 100%;
     object-fit: cover;
-    height: 100vh;
+    height: 85vh;
 }
 
 .dm-header-title {
