@@ -1317,7 +1317,7 @@ const scrolama = () => {
     function init() {
         scroller.setup({
                 step: '.dm-job-generic',
-                debug: true,
+                debug: false,
                 offset: 0.2
             })
             .onStepEnter(handleStepEnter);
