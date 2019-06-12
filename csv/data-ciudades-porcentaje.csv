@@ -1,29 +1,31 @@
-ciudad,cantidad,ofertas
-Madrid,36.93,6742
-Barcelona,28.07,5124
-En remoto,6.88,1256
-Valencia,3.43,627
-Sevilla,1.00,183
-Alcobendas,0.86,157
-Las Rozas,0.83,152
-Sant Cugat del Vallès,0.83,151
-Málaga,0.67,123
-Bilbao,0.66,120
-Murcia,0.58,105
-Pozuelo de Alarcón,0.56,102
-Alacant,0.52,95
-Zaragoza,0.44,81
-Granada,0.44,80
-Palma,0.41,74
-A Coruña,0.35,63
-Tordera,0.29,53
-Sabadell,0.28,52
-San Sebastián de los Reyes,0.28,52
-Ciudad de México,0.26,47
-Granollers,0.26,47
-Elche,0.25,46
-Mataró,0.25,46
-Valladolid,0.25,45
-Santander,0.22,41
-Badalona,0.22,41
-Donostia,0.22,40
+ciudad,ofertas,cantidad
+Madrid,7467,36.62
+Barcelona,5660,27.76
+En remoto,1497,7.34
+Valencia,693,3.39
+Sevilla,209,1.02
+Sant Cugat del Vallès,189,0.92
+Alcobendas,187,0.91
+Las Rozas,176,0.86
+Málaga,138,0.67
+Pozuelo de Alarcón,120,0.58
+Murcia,118,0.57
+Granada,89,0.43
+Zaragoza,84,0.41
+Bilbo,81,0.39
+Palma,75,0.36
+A Coruña,63,0.30
+Bilbao,62,0.30
+Alacant,62,0.30
+San Sebastián de los Reyes,60,0.29
+Sabadell,57,0.27
+Tordera,56,0.27
+Ciudad de México,55,0.26
+Mataró,54,0.26
+Marbella,53,0.25
+Elche,53,0.25
+Granollers,52,0.25
+Badalona,51,0.25
+Valladolid,50,0.24
+Santander,47,0.23
+Vigo,44,0.21
