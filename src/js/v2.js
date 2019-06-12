@@ -972,21 +972,21 @@ const uxuiuxui = () => {
             .attr('x', '2rem')
             .attr('y', '23%')
             .style('text-anchor', 'start')
-            .text('257');
+            .text('361');
 
         g.append('text')
             .attr('class', 'legend-number')
             .attr('x', '2rem')
             .attr('y', '46%')
             .style('text-anchor', 'start')
-            .text('209');
+            .text('296');
 
         g.append('text')
             .attr('class', 'legend-number')
             .attr('x', '2rem')
             .attr('y', '69%')
             .style('text-anchor', 'start')
-            .text('88');
+            .text('112');
     };
 
     const updateScales = (width, height) => {
